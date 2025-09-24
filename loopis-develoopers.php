@@ -34,9 +34,9 @@ add_action('admin_menu', 'loopis_dev_menu');
 function loopis_dev_menu() {
     //Render top level menu item
     add_menu_page(
-        'LOOPIS Dev',              // Page Title
-        'LOOPIS Dev',              // Menu Title
-        'manage_options',             // Capability
+        'LOOPIS Develoopers',      // Page Title
+        'LOOPIS Dev.',              // Menu Title
+        'manage_options',          // Capability
         'loopis_dev',              // Menu Slug
         'loopis_dev_page',         // Function to display the page (change if submenus included)
         LOOPIS_DEV_URL . 'assets/img/develoopers-dashboard-icon.png'   // Develoopers Icon 

@@ -1,5 +1,5 @@
 # 🧑‍💻 LOOPIS Develoopers
-"LOOPIS Develoopers" is a WordPress plugin providing tools for developers working on the LOOPIS components.<br>
+"LOOPIS Develoopers" is a WordPress plugin providing tools for developers working with LOOPIS.<br>
 
 ## 💡 Status
 This project is currently being developed by volunteers under the name "develoopers".<br>
@@ -9,7 +9,7 @@ This project is currently being developed by volunteers under the name "develoop
 init commit with basic plugin structure<br>
 
 ## 💾 Installation/Update
-Upload the zipped folder "loopis-config.zip" using **WP Admin > Plugins > Add Plugin > Upload Plugin**.
+Upload the zipped folder "loopis-develoopers.zip" using **WP Admin > Plugins > Add Plugin > Upload Plugin**.
 
 ## 👤 Contributors
 Johan Hagvil<br>
