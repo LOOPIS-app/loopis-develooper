@@ -3,7 +3,7 @@
 Plugin Name: LOOPIS Develoopers
 Plugin URI: https://github.com/LOOPIS-app/loopis-develoopers
 Description: Plugin providing tools for the developers of LOOPIS.app
-Version: 0.0
+Version: 0.1
 Author: develoopers
 Author URI: https://loopis.org
 */
@@ -14,7 +14,7 @@ if (!defined('ABSPATH')) {
 }
 
 // Define plugin version
-define('LOOPIS_DEV_VERSION', '0.0');
+define('LOOPIS_DEV_VERSION', '0.1');
 
 // Define plugin folder path constants
 define('LOOPIS_DEV_DIR', plugin_dir_path(__FILE__)); // Server-side path to /wp-content/plugins/loopis-develoopers/
