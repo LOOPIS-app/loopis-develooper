@@ -21,7 +21,7 @@ function loopis_dev_page() {
     ?>
     <div class="wrap">
         <!-- Page title and description-->
-        <h1>🧑‍💻 LOOPIS Dev</h1>
+        <h1>🧑‍💻 LOOPIS Develoopers</h1>
         <p class="description">💡 Verktyg för utvecklare av LOOPIS.</p>
 
         <!-- Page content-->

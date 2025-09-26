@@ -5,6 +5,9 @@
 This project is currently being developed by volunteers under the name "develoopers".<br>
 
 ## 📋 Changelog
+**0.1 (2025-09-26)**<br>
+Added folder with images for sample posts<br>
+
 **0.0 (2025-09-24)**<br>
 init commit with basic plugin structure<br>
 
