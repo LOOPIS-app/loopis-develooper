@@ -17,8 +17,8 @@ if (!defined('ABSPATH')) {
 define('LOOPIS_DEV_VERSION', '0.2');
 
 // Define plugin folder path constants
-define('LOOPIS_DEV_DIR', plugin_dir_path(__FILE__)); // Server-side path to /wp-content/plugins/loopis-develoopers/
-define('LOOPIS_DEV_URL', plugin_dir_url(__FILE__)); // Client-side path to https://site.com/wp-content/plugins/loopis-develoopers/
+define('LOOPIS_DEV_DIR', plugin_dir_path(__FILE__)); // Server-side path to /wp-content/plugins/loopis-develooper/
+define('LOOPIS_DEV_URL', plugin_dir_url(__FILE__)); // Client-side path to https://site.com/wp-content/plugins/loopis-develooper/
 
 // Include pages
 require_once LOOPIS_DEV_DIR . 'pages/develooper_plugins.php';
