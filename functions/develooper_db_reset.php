@@ -19,7 +19,7 @@ require_once LOOPIS_DEV_DIR . 'functions/db-reset/loopis_users_delete.php';
 require_once LOOPIS_DEV_DIR . 'functions/db-reset/loopis_plugins_delete.php';
 
 // Define the function
-function loopis_db_reset() {
+function develooper_db_reset() {
 
     // Access WordPress database object
     global $wpdb;
