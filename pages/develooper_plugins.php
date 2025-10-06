@@ -1,0 +1,30 @@
+<?php
+/**
+ * WP Admin page for develooper tools.
+ * 
+ * @package LOOPIS_Dev
+ * @subpackage Admin-page
+ */
+
+// Prevent direct access
+if (!defined('ABSPATH')) { 
+    exit; 
+}
+
+// Function to render the page
+function develooper_plugins_page() {
+    ?>
+    <div class="wrap">
+        <!-- Page title and description-->
+        <h1>🧩 Plugins</h1>
+        <p class="description">💡 Useful plugins for LOOPIS developers.</p>
+
+        <!-- Page content-->
+        <h2>Recommended plugins</h2>
+        <p><i>[Add list of recommended plugins + button to install them.]</i></p>
+
+        <h2>Installed plugins</h2>
+        <p><i>[Add list of the recommended plugins installed + button to update them.]</i></p>
+    </div>
+<?php
+}
