@@ -10,7 +10,7 @@
  * @subpackage Dev-tools
  */
 
-require_once LOOPIS_DEV_DIR . 'functions/develooper_logger.php'; // Include logger functions
+
 require_once(ABSPATH.'wp-admin/includes/user.php');
 
 // Prevent direct access

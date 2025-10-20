@@ -18,7 +18,7 @@ if (!defined('ABSPATH')) {
  * 
  * @return void
  */
-function loopis_plugins_delete() {
+/*function loopis_plugins_delete() {
     
     loopis_elog_function_start('loopis_plugins_delete');
 
@@ -52,4 +52,4 @@ function loopis_plugins_delete() {
         }
     }
     loopis_elog_function_end_success('loopis_plugins_delete');
-}
+}*/
