@@ -25,6 +25,7 @@ require_once LOOPIS_DEV_DIR . 'pages/develooper_plugins.php';
 require_once LOOPIS_DEV_DIR . 'pages/develooper_posts.php';
 require_once LOOPIS_DEV_DIR . 'pages/develooper_roles.php';
 require_once LOOPIS_DEV_DIR . 'pages/develooper_db_reset.php';
+require_once LOOPIS_DEV_DIR . 'pages/develooper_users.php';
 
 // Admin menu hook
 add_action('admin_menu', 'loopis_dev_menu');
@@ -42,6 +43,16 @@ function loopis_dev_menu() {
     );
     
     // Add submenus
+
+    add_submenu_page(
+        'loopis_dev_main',         // Parent slug
+        'Sample Users',            // Page title
+        'Sample Users',            // Menu title
+        'manage_options',          // Capability
+        'develooper_users',        // Menu slug
+        'develooper_users_page'    // Function
+    );
+
     add_submenu_page(
         'loopis_dev_main',         // Parent slug
         'Sample Posts',            // Page title
