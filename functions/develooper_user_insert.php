@@ -9,7 +9,6 @@
  * @subpackage Dev-tools
  */
 
-require_once LOOPIS_DEV_DIR . 'functions/develooper_set_roles.php'; // Include user insert function
 
 if (!defined('ABSPATH')) {
     exit; // Exit if accessed directly
