@@ -1,6 +1,6 @@
 <?php
 /**
- * WP Admin page for develooper tools.
+ * WP Admin page for configuring sample posts.
  * 
  * @package LOOPIS_Dev
  * @subpackage Admin-page
@@ -12,12 +12,12 @@ if (!defined('ABSPATH')) {
 }
 
 // Function to render the page
-function develooper_posts_page() {
+function develooper_sample_posts_page() {
     ?>
     <div class="wrap">
         <!-- Page title and description-->
         <h1>🎁 Sample Posts</h1>
-        <p class="description">💡 Sample posts for LOOPIS developers.</p>
+        <p class="description">💡 Configure sample posts for testing during development.</p>
 
         <!-- Page content-->
         <h2>Insert sample posts</h2>

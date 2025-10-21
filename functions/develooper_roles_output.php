@@ -2,7 +2,7 @@
 /**
  * Functions for listing user roles and capabilities.
  * 
- * @package LOOPIS_Dev
+ * @package LOOPIS_Develooper
  * @subpackage Dev-tools
  */
 
