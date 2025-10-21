@@ -1,15 +1,13 @@
 <?php
 /**
- * Inserts sample users into the WordPress database.
- * References from LOOPIS_Config plugin.
- * Referenced file name: loopis_user_insert.php
- * Credits: Johan Linger, Hubert Hilton and Johan Hagvil.
+ * Function to create LOOPIS sample users in the WordPress database.
+ * 
+ * This file is included from the WP admin page with the same name.
  * 
  * @package LOOPIS_Develooper
  * @subpackage Dev-tools
  */
 
-require_once LOOPIS_DEV_DIR . 'functions/develooper_set_roles.php'; // Include user insert function
 
 if (!defined('ABSPATH')) {
     exit; // Exit if accessed directly
@@ -20,15 +18,14 @@ if (!defined('ABSPATH')) {
  * 
  * @return void
  */
-function develooper_user_insert() {
+function develooper_users_insert() {
 
-    loopis_user_roles_set(); // Ensure roles are set up
     // Access WordPress database object
     global $wpdb;
 
     $inserted_users = []; // Array to hold details of inserted users
     
-    $base_user = [
+    $sample_user = [
         [
             'user_login'    => 'gabby-giver',
             'user_nicename' => 'gabby-giver',
@@ -75,13 +72,13 @@ function develooper_user_insert() {
             'user_email'    => 'monica-manager@loopis.app',
             'user_pass'     => 'manag3r',
             'role'          => ['manager'],
-            'display_name'  => 'MonicaManager',
+            'display_name'  => 'Monica-Manager',
             'first_name'    => 'Monica',
             'last_name'     => 'Manager',
         ],
     ];
 
-    foreach ($base_user as $user) {
+    foreach ($sample_user as $user) {
 
         // Check if user already exists
         if (username_exists($user['user_login'])) {
@@ -99,12 +96,12 @@ function develooper_user_insert() {
             'last_name'     => $user['last_name']
         ]);
 
-        /*if (is_wp_error($user_id)) {
+        if (is_wp_error($user_id)) {
             loopis_elog_first_level('Failed to create user ' . $user['user_login'] . ': ' . $user_id->get_error_message());
             continue;
-        }*/
+        }
 
-        // Add admin capabilities
+        // Set roles
         $user_id = new WP_User($user_id);
         foreach($user['role'] as $role){
             $user_id->set_role($role);

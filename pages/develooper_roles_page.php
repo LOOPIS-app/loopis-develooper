@@ -1,6 +1,6 @@
 <?php
 /**
- * WP Admin page for develooper tools.
+ * WP Admin page for viewing current user roles.
  * 
  * @package LOOPIS_Dev
  * @subpackage Admin-page
@@ -12,7 +12,7 @@ if (!defined('ABSPATH')) {
 }
 
 // Include page functions
-require_once LOOPIS_DEV_DIR . 'functions/develooper_roles.php';
+require_once LOOPIS_DEV_DIR . 'functions/develooper_roles_output.php';
 
 // Function to render the page
 function develooper_roles_page() {
