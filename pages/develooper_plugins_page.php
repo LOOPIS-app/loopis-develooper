@@ -1,6 +1,6 @@
 <?php
 /**
- * WP Admin page for develooper tools.
+ * WP Admin page for configuring developer plugins.
  * 
  * @package LOOPIS_Dev
  * @subpackage Admin-page
@@ -21,10 +21,10 @@ function develooper_plugins_page() {
 
         <!-- Page content-->
         <h2>Recommended plugins</h2>
-        <p><i>[Add list of recommended plugins + button to install them.]</i></p>
+        <p><i>[Add list of recommended plugins + button to install/update.]</i></p>
 
         <h2>Installed plugins</h2>
-        <p><i>[Add list of the recommended plugins installed + button to update them.]</i></p>
+        <p><i>[Add list of recommended plugins installed + button to delete.]</i></p>
     </div>
 <?php
 }
