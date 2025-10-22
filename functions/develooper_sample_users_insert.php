@@ -20,6 +20,7 @@ if (!defined('ABSPATH')) {
  */
 function develooper_users_insert() {
 
+    loopis_elog_function_start('develooper_sample_user_insert');
     // Access WordPress database object
     global $wpdb;
 
@@ -115,9 +116,9 @@ function develooper_users_insert() {
                 'role'         => $user['role']
             ];
         } else {
-            error_log('Failed to assign role to user ' . $user['user_login'] . ': ' . $user_id->get_error_message());
+            loopis_elog_first_level('Failed to assign role to user ' . $user['user_login'] . ': ' . $user_id->get_error_message());
         }
     }
 
-    return $inserted_users; // Return details of inserted users
+    loopis_elog_function_end_success('develooper_sample_user_insert');
 }
