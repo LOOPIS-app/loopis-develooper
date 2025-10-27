@@ -1,35 +1,66 @@
 <?php
 /**
- * Function to create LOOPIS sample posts in the WordPress database.
+ * Sample collections for sample users and sample posts.
  * 
- * This file is included from the WP admin page with the same name.
- * 
- * @package LOOPIS_Develooper
- * @subpackage Dev-tools
  */
 
-if (! defined('ABSPATH')) {
-    exit;
+function get_sample_users() {
+    return [
+        [
+            'user_login'    => 'gabby-giver',
+            'user_nicename' => 'gabby-giver',
+            'user_email'    => 'gabby-giver@loopis.app',
+            'user_pass'     => 'memb3r',
+            'role'          => ['member'],
+            'display_name'  => 'Gabby-Giver',
+            'first_name'    => 'Gabby',
+            'last_name'     => 'Giver',
+        ],
+        [
+            'user_login'    => 'fred-fetcher',
+            'user_nicename' => 'fred-fetcher',
+            'user_email'    => 'fred-fetcher@loopis.app',
+            'user_pass'     => 'memb3r',
+            'role'          => ['member'],
+            'display_name'  => 'Fred-Fetcher',
+            'first_name'    => 'Fred',
+            'last_name'     => 'Fetcher',
+        ],
+        [
+            'user_login'    => 'rebecca-raffle',
+            'user_nicename' => 'rebecca-raffle',
+            'user_email'    => 'rebecca-raffle@loopis.app',
+            'user_pass'     => 'memb3r',
+            'role'          => ['member'],
+            'display_name'  => 'Rebecca-Raffle',
+            'first_name'    => 'Rebecca',
+            'last_name'     => 'Raffle',
+        ],
+        [
+            'user_login'    => 'jessica-joiner',
+            'user_nicename' => 'jessica-joiner',
+            'user_email'    => 'jessica-joiner@loopis.app',
+            'user_pass'     => 'memb3r',
+            'role'          => ['member'],
+            'display_name'  => 'Jessica-Joiner',
+            'first_name'    => 'Jessica',
+            'last_name'     => 'Joiner',
+        ],
+        [
+            'user_login'    => 'monica-manager',
+            'user_nicename' => 'monica-manager',
+            'user_email'    => 'monica-manager@loopis.app',
+            'user_pass'     => 'manag3r',
+            'role'          => ['manager'],
+            'display_name'  => 'Monica-Manager',
+            'first_name'    => 'Monica',
+            'last_name'     => 'Manager',
+        ],
+    ];
 }
 
-if ( ! function_exists( 'post_exists' ) ) {
-    require_once ABSPATH . 'wp-admin/includes/post.php';
-}
-if ( ! function_exists('get_user_by') ) {
-    require_once ABSPATH . 'wp-includes/pluggable.php';
-}
-/**
- * Insert posts into wp_posts
- * 
- * @return void
- */
-function develooper_sample_posts_insert() {
-
-    loopis_elog_function_start('develooper_sample_post_insert');
-
-    global $wpdb;
-
-    $sample_posts = [
+function get_sample_posts() {
+    return [
         [
             'post_author' => 'gabby-giver',
             'post_date' => '2023-10-22 17:00:00',
@@ -140,104 +171,4 @@ Det finns en tjock och en tunn spets på varje penna. De tunna har torkat men de
             'feature_image' => 'post-13',            
         ],
     ];
-
-    foreach($sample_posts as $post) {
-
-        //1. if post is already exist, skip it.
-        if (post_exists($post['post_title'], $post['post_content'], $post['post_date'])) {
-            continue;
-        };
-
-        //2. fetch author (users).
-        $user_id = get_user_by('login', $post['post_author']);
-
-        //3. check if the user exists, if not, skip.
-        if (! username_exists($user_id->user_login)) {
-            error_log( 'The user' . $post['post_author'] . 'does not exist');
-            continue; 
-        }
-
-
-        //4. insert post.
-        $post_id = wp_insert_post([
-            'post_author' => $user_id->ID,
-            'post_date' => $post['post_date'],
-            'post_title' => $post['post_title'],
-            'post_content' => $post['post_content'],
-            'post_name' => $post['post_name'],
-            'comment_status' => 'open',
-            'ping_status' => 'closed',
-            'post_type' => 'post',
-            'post_status' => 'publish'
-        ]);
-
-        //5. if the error occur in post insertion, throw error_log and skip.
-        if (is_wp_error($post_id)) {
-            loopis_elog_first_level('Failed to create post ' . $post['post_title'] . ': ' . $post_id->get_error_message());
-            continue;
-        }
-
-        //6. retrieve local image file.
-        $img_path = plugin_dir_path( __FILE__ ) . "..\\assets\\img\\sample_posts\\{$post['feature_image']}.jpg";
-
-        //7. find if the file exist
-        if (file_exists($img_path)) { 
-            //7.1. if yes, insert image to the post.
-            $attached_img = develooper_add_image_to_inserted_post($post_id, $img_path);
-
-            if (is_wp_error($attached_img)) {
-                loopis_elog_first_level('Failed to attach image to post ' . $post['post_title'] . ': ' . $attached_img->get_error_message());
-            } else {
-                // Set the featured image
-                set_post_thumbnail($post_id, $attached_img);
-            }
-
-        } else {
-            //7.2. or else throw error_log.
-            error_log("File \"{$post['feature_image']}\" does not exist");
-        }
-
-    }
-
-    loopis_elog_function_end_success('develooper_sample_post_insert');
-}
-
-/**
- * Function to add image to the inserted post
- * 
- * @param int $post_id
- * @param string $image_url
- * @return int|WP_Error Attachment ID on success, WP_Error on failure
- */
-function develooper_add_image_to_inserted_post($post_id, $image_url) {
-    
-
-        // Include required files for handling uploads
-    require_once ABSPATH . 'wp-admin/includes/image.php';
-    require_once ABSPATH . 'wp-admin/includes/file.php';
-    require_once ABSPATH . 'wp-admin/includes/media.php';
-
-    
-    // Create a temp copy in PHP's temp dir
-    $tmp_dir = sys_get_temp_dir();
-    $tmp_name = wp_unique_filename( $tmp_dir, wp_basename( $image_url ) );
-    $tmp_path = trailingslashit( $tmp_dir ) . $tmp_name;
-
-    if ( ! copy( $image_url, $tmp_path ) ) {
-        return new WP_Error( 'copy_failed', 'Failed to copy plugin file to tmp location.' );
-    }
-
-    // Upload and attach image to post
-    $attachment_id = media_handle_sideload(
-        array(
-        'name'     => basename($image_url),
-        'tmp_name' => $tmp_path,
-    ), $post_id);
-
-    // If error occurred during upload, return error.
-    if (is_wp_error($attachment_id)) {
-        return new WP_Error( 'upload_failed', "Error uploading image: " . $attachment_id->get_error_message() );
-    } else {
-        return $attachment_id;
-    }
 }
