@@ -15,11 +15,7 @@ function develooper_admin_menu() {
         'manage_options',           // Capability
         'loopis_dev_main',          // Menu Slug
         'develooper_posts_page',    // Function - redirect to first submenu
-<<<<<<< Updated upstream
-       LOOPIS_DEVELOOPER_URL . 'assets/img/develooper-dashboard-icon.png'   // Custom Icon
-=======
         LOOPIS_DEVELOOPER_URL . 'assets/img/develooper-dashboard-icon.png'   // Custom Icon
->>>>>>> Stashed changes
     );
     
     // Add submenus

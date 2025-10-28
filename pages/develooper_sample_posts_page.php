@@ -11,19 +11,9 @@ if (!defined('ABSPATH')) {
     exit; 
 }
 
-<<<<<<< Updated upstream
-require_once LOOPIS_DEV_DIR . 'functions/develooper_sample_posts_insert.php'; // Include post insert function
-require_once LOOPIS_DEV_DIR . 'functions/develooper_sample_posts_delete.php'; // Include post delete function
-
-//include_once(ABSPATH . 'wp-includes/pluggable.php'); // Include pluggable functions for post management
-
-$inserted_post = [];
-$remove_post = null;
-=======
 // Include functions
 require_once LOOPIS_DEVELOOPER_DIR . 'functions/develooper_sample_posts_insert.php';
 require_once LOOPIS_DEVELOOPER_DIR . 'functions/develooper_sample_posts_delete.php';
->>>>>>> Stashed changes
 
 // Handle form submissions
 if (isset($_POST['insert_sample_posts'])) {

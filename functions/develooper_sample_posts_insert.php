@@ -221,26 +221,12 @@ function develooper_sample_posts_insert() {
  */
 function develooper_add_image_to_inserted_post($post_id, $image_path) {
     
-<<<<<<< Updated upstream
-
-        // Include required files for handling uploads
-    require_once ABSPATH . 'wp-admin/includes/image.php';
-    require_once ABSPATH . 'wp-admin/includes/file.php';
-    require_once ABSPATH . 'wp-admin/includes/media.php';
-
-    
-    // Create a temp copy in PHP's temp dir
-    $tmp_dir = sys_get_temp_dir();
-    $tmp_name = wp_unique_filename( $tmp_dir, wp_basename( $image_url ) );
-    $tmp_path = trailingslashit( $tmp_dir ) . $tmp_name;
-=======
     require_once ABSPATH . 'wp-admin/includes/image.php';
     require_once ABSPATH . 'wp-admin/includes/file.php';
 
     if (!file_exists($image_path)) {
         return new WP_Error('file_not_found', 'Image file does not exist: ' . $image_path);
     }
->>>>>>> Stashed changes
 
     // Temporarily disable organized uploads (no year/month folders)
     add_filter('upload_dir', function($upload_dir) {
@@ -277,12 +263,7 @@ function develooper_add_image_to_inserted_post($post_id, $image_path) {
     ), $new_file_path, $post_id);
 
     if (is_wp_error($attachment_id)) {
-<<<<<<< Updated upstream
-        return new WP_Error( 'upload_failed', "Error uploading image: " . $attachment_id->get_error_message() );
-    } else {
-=======
         @unlink($new_file_path);
->>>>>>> Stashed changes
         return $attachment_id;
     }
 

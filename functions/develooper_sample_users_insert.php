@@ -26,12 +26,7 @@ require_once(ABSPATH.'wp-admin/includes/user.php');
  */
 function develooper_users_insert() {
 
-<<<<<<< Updated upstream
-    // Access WordPress database object
-    global $wpdb;
-=======
     loopis_elog_function_start('develooper_sample_user_insert');
->>>>>>> Stashed changes
 
     $inserted_users = []; // Array to hold details of inserted users
     
