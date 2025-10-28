@@ -30,6 +30,15 @@ function develooper_sample_posts_insert() {
     loopis_elog_function_start('develooper_sample_post_insert');
 
     global $wpdb;
+    global $wp_rewrite;
+    if (!$wp_rewrite) {
+        $wp_rewrite = new WP_Rewrite();
+    }
+
+    global $wp_query;
+    if ( ! $wp_query ) {
+        $wp_query = new WP_Query();
+    }
 
     $sample_posts = [
         [
@@ -160,6 +169,21 @@ Det finns en tjock och en tunn spets på varje penna. De tunna har torkat men de
         }
 
 
+        /*$post_arr = [
+            'post_author' => $user_id->ID,
+            'post_date' => $post['post_date'],
+            'post_title' => $post['post_title'],
+            'post_content' => $post['post_content'],
+            'post_name' => $post['post_name'],
+            'comment_status' => 'open',
+            'ping_status' => 'closed',
+            'post_type' => 'post',
+            'post_status' => 'publish'
+        ];*/
+
+        //$post_id = safe_wp_insert_post( $post_arr );
+
+
         //4. insert post.
         $post_id = wp_insert_post([
             'post_author' => $user_id->ID,
@@ -244,4 +268,15 @@ function develooper_add_image_to_inserted_post($post_id, $image_url) {
     } else {
         return $attachment_id;
     }
+}
+
+function safe_wp_insert_post( $postarr ) {
+    if ( empty( $GLOBALS['wp_rewrite'] ) || ! is_object( $GLOBALS['wp_rewrite'] ) ) {
+        // instantiate and init a rewrite object (only if necessary)
+        require_once ABSPATH . WPINC . '/class-wp-rewrite.php';
+        $GLOBALS['wp_rewrite'] = new WP_Rewrite();
+        // init only if rewrite rules are needed; safe to call
+        $GLOBALS['wp_rewrite']->init();
+    }
+    return wp_insert_post( $postarr );
 }
