@@ -11,11 +11,7 @@ if (!defined('ABSPATH')) {
     exit; 
 }
 
-<<<<<<< Updated upstream
-// Include page functions
-=======
 // Include functions
->>>>>>> Stashed changes
 require_once LOOPIS_DEVELOOPER_DIR . 'functions/develooper_roles_output.php';
 
 // Function to render the page

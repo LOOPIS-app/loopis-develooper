@@ -277,12 +277,7 @@ function develooper_add_image_to_inserted_post($post_id, $image_path) {
     ), $new_file_path, $post_id);
 
     if (is_wp_error($attachment_id)) {
-<<<<<<< Updated upstream
-        return new WP_Error( 'upload_failed', "Error uploading image: " . $attachment_id->get_error_message() );
-    } else {
-=======
         @unlink($new_file_path);
->>>>>>> Stashed changes
         return $attachment_id;
     }
 
