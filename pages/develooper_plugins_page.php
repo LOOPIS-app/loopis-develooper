@@ -2,7 +2,7 @@
 /**
  * WP Admin page for configuring developer plugins.
  * 
- * @package LOOPIS_Dev
+ * @package LOOPIS_Develooper
  * @subpackage Admin-page
  */
 
@@ -16,7 +16,7 @@ function develooper_plugins_page() {
     ?>
     <div class="wrap">
         <!-- Page title and description-->
-        <h1>🧩 Plugins</h1>
+        <h1>🧩 Plugins <span class="h1-right">Version <?php echo esc_html(LOOPIS_DEVELOOPER_VERSION); ?></span></h1>
         <p class="description">💡 Useful plugins for LOOPIS developers.</p>
 
         <!-- Page content-->

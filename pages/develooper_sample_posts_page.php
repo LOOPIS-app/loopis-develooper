@@ -2,7 +2,7 @@
 /**
  * WP Admin page for configuring sample posts.
  * 
- * @package LOOPIS_Dev
+ * @package LOOPIS_Develooper
  * @subpackage Admin-page
  */
 
@@ -31,7 +31,7 @@ function develooper_sample_posts_page() {
     ?>
     <div class="wrap">
         <!-- Page title and description-->
-        <h1>🎁 Sample Posts</h1>
+        <h1>🎁 Sample Posts <span class="h1-right">Version <?php echo esc_html(LOOPIS_DEVELOOPER_VERSION); ?></span></h1>
         <p class="description">💡 Configure sample posts for testing during development.</p>
 
         <!-- Page content-->

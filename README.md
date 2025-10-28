@@ -24,4 +24,4 @@ init commit with basic plugin structure<br>
 Upload the zipped folder "loopis-develooper.zip" using **WP Admin > Plugins > Add Plugin > Upload Plugin**.
 
 ## 👤 Contributors
-Johan Hagvil, Hubert Hilborn, Johan Linger, Kritsadakorn Moonmai.<br>
+Johan Hagvil, Johan Linger, Kritsadakorn Moonmai.<br>
