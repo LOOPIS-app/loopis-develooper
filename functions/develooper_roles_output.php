@@ -2,6 +2,8 @@
 /**
  * Functions for listing user roles and capabilities.
  * 
+ * This file is included from the WP admin page with the same name.
+ * 
  * @package LOOPIS_Develooper
  * @subpackage Dev-tools
  */

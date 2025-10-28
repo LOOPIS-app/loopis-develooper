@@ -8,11 +8,13 @@
  * @subpackage Dev-tools
  */
 
-if ( ! defined('ABSPATH')) {
+// Prevent direct access
+if (!defined('ABSPATH')) {
     exit;
 }
 
-require_once LOOPIS_DEV_DIR .'functions/sample.php';
+// Include functions
+require_once LOOPIS_DEVELOOPER_DIR .'functions/sample.php';
 
 /**
  * Delete sample posts from wp_posts
@@ -25,19 +27,32 @@ function develooper_sample_posts_delete() {
     $sample_posts_info = get_sample_posts();
     
     global $wpdb;
-    // Get posts
+    
+    // Get and delete posts with their attachments
     foreach ($sample_posts_info as $sample_post) {
         $post_name = $sample_post['post_name'];
         $post = get_page_by_path($post_name, OBJECT, 'post');
+        
         if ($post) {
-            wp_delete_post($post->ID, true);
-            error_log("Deleted post: " . $post_name);
+            // Get all attachments (images) for this post
+            $attachments = get_attached_media('image', $post->ID);
+            
+            // Delete each attachment
+            foreach ($attachments as $attachment) {
+                wp_delete_attachment($attachment->ID, true); // true = force delete, bypass trash
+                loopis_elog_first_level('Deleted attachment: ' . $attachment->post_title . ' (ID: ' . $attachment->ID . ')');
+            }
+            
+            // Delete the post itself
+            wp_delete_post($post->ID, true); // true = force delete, bypass trash
+            loopis_elog_first_level('Deleted post: ' . $post_name . ' (ID: ' . $post->ID . ')');
         } else {
-            error_log("Post not found: " . $post_name);
+            loopis_elog_first_level('Post not found: ' . $post_name);
         }
     }
 
-    // Resets post count
+    // Reset post count
     $wpdb->query("ALTER TABLE {$wpdb->posts} AUTO_INCREMENT = 1");
+    
     loopis_elog_function_end_success('develooper_sample_posts_delete');
 }

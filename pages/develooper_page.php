@@ -37,6 +37,6 @@ function develooper_page() {
             </select>
             <button class="button button-primary" type="submit" name="insert_develooper" value="1">Insert</button>
         </form>
-        <p><i>[Not yet implemented... Select your name from the dropdown to quickly create your user account?]</i></p>
+        <p><i>[Not yet implemented... Select your name from the dropdown to quickly create your own user account?]</i></p>
     <?php
     }
