@@ -15,7 +15,7 @@ function develooper_admin_menu() {
         'manage_options',           // Capability
         'loopis_dev_main',          // Menu Slug
         'develooper_posts_page',    // Function - redirect to first submenu
-        LOOPIS_DEV_URL . 'assets/img/develooper-dashboard-icon.png'   // Custom Icon
+        LOOPIS_DEVELOOPER_URL . 'assets/img/develooper-dashboard-icon.png'   // Custom Icon
     );
     
     // Add submenus
@@ -62,15 +62,6 @@ function develooper_admin_menu() {
         'manage_options',          // Capability
         'develooper_roles',        // Menu slug
         'develooper_roles_page'    // Function
-    );
-
-    add_submenu_page(
-        'loopis_dev_main',         // Parent slug
-        'Database Reset',          // Page title
-        'Database Reset',          // Menu title
-        'manage_options',          // Capability
-        'develooper_db_reset',     // Menu slug
-        'develooper_db_reset_page' // Function
     );
     
     // Hide the main menu page (but keep the icon and submenus)

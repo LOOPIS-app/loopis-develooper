@@ -2,24 +2,22 @@
 /**
  * Function to delete LOOPIS users in the WordPress database.
  *
- * This function is called by main function 'loopis_db_cleanup'.
- * 
- * Deletes all LOOPIS users in 'wp_users' created by function 'loopis_users_insert'.
- * 
- * Old file name: 'loopis_users_delete.php'
+ * This file is included from the WP admin page with the same name. (When implemented)
  *
  * @package LOOPIS_Config
  * @subpackage Dev-tools
  */
 
-
-require_once(ABSPATH.'wp-admin/includes/user.php');
-require_once LOOPIS_DEV_DIR .'functions/sample.php';
-
 // Prevent direct access
 if (!defined('ABSPATH')) {
     exit;
 }
+
+// Include functions
+require_once LOOPIS_DEVELOOPER_DIR .'functions/sample.php';
+
+// Include WP functions
+require_once(ABSPATH.'wp-admin/includes/user.php');
 
 /**
  * Delete all LOOPIS users but admin from wp_users

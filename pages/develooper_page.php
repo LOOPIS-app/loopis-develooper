@@ -6,15 +6,17 @@
  * @subpackage Admin-page
  */
 
-if (!defined('ABSPATH')) {
-    exit; // Exit if accessed directly
+// Prevent direct access
+if (!defined('ABSPATH')) { 
+    exit; 
 }
 
+// Function to render the page
 function develooper_page() {
     ?>
     <div class="wrap">
         <!-- Page title and description-->
-        <h1>🧑‍💻 LOOPIS Develooper</h1>
+        <h1>🧑‍💻 LOOPIS Develooper <span class="h1-right">Version <?php echo esc_html(LOOPIS_DEVELOOPER_VERSION); ?></span></h1>
         <p class="description">💡 Insert develooper user for testing and development.</p>
 
         <!-- Page content-->
@@ -35,6 +37,6 @@ function develooper_page() {
             </select>
             <button class="button button-primary" type="submit" name="insert_develooper" value="1">Insert</button>
         </form>
-        <p><i>[Not yet implemented... Select your name from the dropdown to quickly create your user account?]</i></p>
+        <p><i>[Not yet implemented... Select your name from the dropdown to quickly create your own user account?]</i></p>
     <?php
     }

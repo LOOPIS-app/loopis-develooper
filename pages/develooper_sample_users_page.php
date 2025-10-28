@@ -6,12 +6,15 @@
  * @subpackage Admin-page
  */
 
-if (!defined('ABSPATH')) {
-    exit; // Exit if accessed directly
+// Prevent direct access
+if (!defined('ABSPATH')) { 
+    exit; 
 }
 
-require_once LOOPIS_DEV_DIR . 'functions/develooper_sample_users_insert.php'; // Include user insert function
-// require_once LOOPIS_DEV_DIR . 'functions/develooper_users_delete.php'; // Include user delete function, not yet created
+// Include functions
+require_once LOOPIS_DEVELOOPER_DIR . 'functions/develooper_sample_users_insert.php';
+
+// Include WP functions
 include_once(ABSPATH . 'wp-includes/pluggable.php'); // Include pluggable functions for user management
 
 // Handle button click
@@ -26,26 +29,31 @@ if (isset($_POST['delete_sample_users'])) {
     $deleted_users = loopis_users_delete();
 }
 
-
+// Function to render the page
 function develooper_sample_users_page() {
     ?>
     <div class="wrap">
         <!-- Page title and description-->
-        <h1>👥 Sample Users</h1>
-        
+        <h1>👥 Sample Users <span class="h1-right">Version <?php echo esc_html(LOOPIS_DEVELOOPER_VERSION); ?></span></h1>
         <p class="description">💡 Configure sample users for testing during development.</p>
 
         <!-- Page content-->
-        <h2>Configure sample users</h2>
-        <p><form method="POST"><button class="button button-primary" type="submit" name="insert_sample_users">Insert</button></form>
-        <i>[Should be greyed out if sample users are already inserted.]</i></p>
-        <i>[Add confirmation when completed: X users inserted.]</i></p>
+        <h2>Configuration of sample users</h2>
 
-        <p><form method="POST"><button class="button button-primary" type="submit" name="reset_sample_users">Reset</button></form>
-        <i>[Should be greyed out if no sample users are inserted.]</i></p>
+        <p><form method="POST">
+            <button class="button button-primary" type="submit" name="insert_sample_users">Insert</button>
+        </form></p>
+        <p><i>[Fix: Greyed out if users are already inserted.]</i></p>
 
-        <p><form method="POST"><button class="button button-primary" type="submit" name="delete_sample_users">Delete</button></form>
-        <i>[Should be greyed out if no sample users are inserted.]</i></p>
+        <p><form method="POST">
+            <button class="button button-primary" type="submit" name="reset_sample_users" disabled>Reset</button>
+        </form></p>
+        <p><i>[Function not yet created.]</i></p>
+
+        <p><form method="POST">
+            <button class="button button-primary" type="submit" name="delete_sample_users" disabled>Delete</button>
+        </form></p>
+        <p><i>[Fix: Greyed out if users are already inserted.]</i></p>
     </div>
 
     <?php

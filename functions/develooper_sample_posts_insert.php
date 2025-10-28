@@ -8,38 +8,35 @@
  * @subpackage Dev-tools
  */
 
-if (! defined('ABSPATH')) {
+// Prevent direct access
+if (!defined('ABSPATH')) {
     exit;
 }
 
+// Include WP functions
 if ( ! function_exists( 'post_exists' ) ) {
     require_once ABSPATH . 'wp-admin/includes/post.php';
 }
 if ( ! function_exists('get_user_by') ) {
     require_once ABSPATH . 'wp-includes/pluggable.php';
 }
+
 /**
  * Insert posts into wp_posts
  * 
  * @return void
  */
-
-
 function develooper_sample_posts_insert() {
 
-    loopis_elog_function_start('develooper_sample_post_insert');
+    loopis_elog_function_start('develooper_sample_posts_insert');
 
-    global $wpdb;
+    // Ensure WordPress rewrite rules are initialized
     global $wp_rewrite;
     if (!$wp_rewrite) {
         $wp_rewrite = new WP_Rewrite();
     }
 
-    global $wp_query;
-    if ( ! $wp_query ) {
-        $wp_query = new WP_Query();
-    }
-
+    // Define sample posts
     $sample_posts = [
         [
             'post_author' => 'gabby-giver',
@@ -117,9 +114,7 @@ function develooper_sample_posts_insert() {
             'post_author' => 'gabby-giver',
             'post_date' => '2025-10-21 14:03:00',
             'post_title' => 'Papplåda',
-            'post_content' => 'Hopfällbar kartong klädd med mörkgrå yta, förutom i botten. Lite skavanker men hel och ren.
-
-30x30x30 cm.',
+            'post_content' => 'Hopfällbar kartong klädd med mörkgrå yta, förutom i botten. Lite skavanker men hel och ren. 30x30x30 cm.',
             'post_name' => 'papplada',  
             'feature_image' => 'post-10',          
         ],
@@ -127,8 +122,7 @@ function develooper_sample_posts_insert() {
             'post_author' => 'gabby-giver',
             'post_date' => '2025-10-22 00:01:00',
             'post_title' => 'Pennfodral',
-            'post_content' => 'Praktiskt och ihopfällbart med dragkedja.
-Plats för 40 pennor 2 sudd – men de på bilden ingår ej. 🙂',
+            'post_content' => 'Praktiskt och ihopfällbart med dragkedja. Plats för 40 pennor 2 sudd – men de på bilden ingår ej. 🙂',
             'post_name' => 'pennfodral', 
             'feature_image' => 'post-11',           
         ],
@@ -136,9 +130,7 @@ Plats för 40 pennor 2 sudd – men de på bilden ingår ej. 🙂',
             'post_author' => 'gabby-giver',
             'post_date' => '2025-10-22 00:02:00',
             'post_title' => 'Tuschpennor',
-            'post_content' => '18 stycken av ganska fin kvalité.
-
-Det finns en tjock och en tunn spets på varje penna. De tunna har torkat men de tjocka funkar fint!',
+            'post_content' => '18 stycken av ganska fin kvalité. Det finns en tjock och en tunn spets på varje penna. De tunna har torkat men de tjocka funkar fint!',
             'post_name' => 'tuschpennor',
             'feature_image' => 'post-12',            
         ],
@@ -154,37 +146,22 @@ Det finns en tjock och en tunn spets på varje penna. De tunna har torkat men de
 
     foreach($sample_posts as $post) {
 
-        //1. if post is already exist, skip it.
+        // 1. If post is already exist, skip it.
         if (post_exists($post['post_title'], $post['post_content'], $post['post_date'])) {
+            loopis_elog_first_level('Post already exists: ' . $post['post_title']);
             continue;
-        };
+        }
 
-        //2. fetch author (users).
+        // 2. Fetch post author.
         $user_id = get_user_by('login', $post['post_author']);
 
-        //3. check if the user exists, if not, skip.
-        if (! username_exists($user_id->user_login)) {
-            error_log( 'The user' . $post['post_author'] . 'does not exist');
+        // 3. Check if the user exists, if not, skip.
+        if (!$user_id) {
+            loopis_elog_first_level('User does not exist: ' . $post['post_author']);
             continue; 
         }
 
-
-        /*$post_arr = [
-            'post_author' => $user_id->ID,
-            'post_date' => $post['post_date'],
-            'post_title' => $post['post_title'],
-            'post_content' => $post['post_content'],
-            'post_name' => $post['post_name'],
-            'comment_status' => 'open',
-            'ping_status' => 'closed',
-            'post_type' => 'post',
-            'post_status' => 'publish'
-        ];*/
-
-        //$post_id = safe_wp_insert_post( $post_arr );
-
-
-        //4. insert post.
+        // 4. Insert post.
         $post_id = wp_insert_post([
             'post_author' => $user_id->ID,
             'post_date' => $post['post_date'],
@@ -197,86 +174,102 @@ Det finns en tjock och en tunn spets på varje penna. De tunna har torkat men de
             'post_status' => 'publish'
         ]);
 
-        //5. if the error occur in post insertion, throw error_log and skip.
+        // 5. If an error occurs in post insertion, throw error_log and skip.
         if (is_wp_error($post_id)) {
-            loopis_elog_first_level('Failed to create post ' . $post['post_title'] . ': ' . $post_id->get_error_message());
+            loopis_elog_first_level('Failed to create post "' . $post['post_title'] . '": ' . $post_id->get_error_message());
             continue;
+        } else {
+            loopis_elog_first_level('Successfully created post "' . $post['post_title'] . '" (ID: ' . $post_id . ')');
         }
 
-        //6. retrieve local image file.
-        $img_path = plugin_dir_path( __FILE__ ) . "..\\assets\\img\\sample_posts\\{$post['feature_image']}.jpg";
+        // 6. Retrieve local image file.
+        $img_path = LOOPIS_DEVELOOPER_DIR . "assets/img/sample_posts/{$post['feature_image']}.jpg";
 
-        //7. find if the file exist
+        // 7. Check if the file exists
         if (file_exists($img_path)) { 
-            //7.1. if yes, insert image to the post.
+            loopis_elog_first_level('Found image file: ' . basename($img_path));
+            
+            // 7.1. If yes, add image to the post.
             $attached_img = develooper_add_image_to_inserted_post($post_id, $img_path);
 
             if (is_wp_error($attached_img)) {
-                loopis_elog_first_level('Failed to attach image to post ' . $post['post_title'] . ': ' . $attached_img->get_error_message());
+                loopis_elog_first_level('Failed to attach image to post "' . $post['post_title'] . '": ' . $attached_img->get_error_message());
             } else {
                 // Set the featured image
                 set_post_thumbnail($post_id, $attached_img);
+                loopis_elog_first_level('Successfully set featured image for post "' . $post['post_title'] . '" (Attachment ID: ' . $attached_img . ')');
             }
 
         } else {
-            //7.2. or else throw error_log.
-            error_log("File \"{$post['feature_image']}\" does not exist");
+            // 7.2. Otherwise, throw error_log.
+            loopis_elog_first_level('Image file does not exist: ' . $img_path);
         }
-
     }
 
-    loopis_elog_function_end_success('develooper_sample_post_insert');
+    // Flush rewrite rules after inserting posts
+    flush_rewrite_rules(false);
+
+    loopis_elog_function_end_success('develooper_sample_posts_insert');
 }
 
 /**
  * Function to add image to the inserted post
  * 
  * @param int $post_id
- * @param string $image_url
+ * @param string $image_path Local file path to the image
  * @return int|WP_Error Attachment ID on success, WP_Error on failure
  */
-function develooper_add_image_to_inserted_post($post_id, $image_url) {
+function develooper_add_image_to_inserted_post($post_id, $image_path) {
     
-    // Include required files for handling uploads
     require_once ABSPATH . 'wp-admin/includes/image.php';
-    require_once ABSPATH . 'wp-admin/includes/file.php'; 
-    require_once ABSPATH . 'wp-admin/includes/media.php';
+    require_once ABSPATH . 'wp-admin/includes/file.php';
 
-
-    // Create a temp copy in PHP's temp dir
-    $tmp_path = wp_tempnam( $image_url );
-
-    if ( ! $tmp_path ) {
-        return new WP_Error( 'tmp_failed', 'Could not create temp file' );
+    if (!file_exists($image_path)) {
+        return new WP_Error('file_not_found', 'Image file does not exist: ' . $image_path);
     }
 
-    if ( ! copy( $image_url, $tmp_path ) ) {
-        return new WP_Error( 'copy_failed', 'Failed to copy plugin file to tmp location.' );
+    // Temporarily disable organized uploads (no year/month folders)
+    add_filter('upload_dir', function($upload_dir) {
+        $upload_dir['subdir'] = '';
+        $upload_dir['path'] = $upload_dir['basedir'];
+        $upload_dir['url'] = $upload_dir['baseurl'];
+        return $upload_dir;
+    });
+
+    // Get upload directory (with filter applied)
+    $upload_dir = wp_upload_dir();
+    
+    // Remove the filter immediately after getting the directory
+    remove_all_filters('upload_dir');
+    
+    // Generate unique filename
+    $filename = wp_unique_filename($upload_dir['path'], basename($image_path));
+    $new_file_path = $upload_dir['path'] . '/' . $filename;
+
+    // Copy to uploads
+    if (!copy($image_path, $new_file_path)) {
+        return new WP_Error('copy_failed', 'Failed to copy to uploads: ' . $new_file_path);
     }
 
-    // Upload and attach image to post
-    $attachment_id = media_handle_sideload(
-        array(
-        'name'     => basename($image_url),
-        'tmp_name' => $tmp_path,
-    ), $post_id);
+    // Get mime type
+    $filetype = wp_check_filetype($filename, null);
 
-    // If error occurred during upload, return error.
+    // Insert attachment
+    $attachment_id = wp_insert_attachment(array(
+        'post_mime_type' => $filetype['type'],
+        'post_title'     => preg_replace('/\.[^.]+$/', '', $filename),
+        'post_content'   => '',
+        'post_status'    => 'inherit'
+    ), $new_file_path, $post_id);
+
     if (is_wp_error($attachment_id)) {
-        @unlink($tmp_path);
-        return new WP_Error( 'upload_failed', "Error uploading image: " . $attachment_id->get_error_message() );
-    } else {
+        @unlink($new_file_path);
         return $attachment_id;
     }
-}
 
-function safe_wp_insert_post( $postarr ) {
-    if ( empty( $GLOBALS['wp_rewrite'] ) || ! is_object( $GLOBALS['wp_rewrite'] ) ) {
-        // instantiate and init a rewrite object (only if necessary)
-        require_once ABSPATH . WPINC . '/class-wp-rewrite.php';
-        $GLOBALS['wp_rewrite'] = new WP_Rewrite();
-        // init only if rewrite rules are needed; safe to call
-        $GLOBALS['wp_rewrite']->init();
-    }
-    return wp_insert_post( $postarr );
+    // Generate metadata
+    $attach_data = wp_generate_attachment_metadata($attachment_id, $new_file_path);
+    wp_update_attachment_metadata($attachment_id, $attach_data);
+
+    return $attachment_id;
 }
