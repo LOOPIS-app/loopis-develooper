@@ -5,6 +5,8 @@
  * This function is called by main function 'loopis_db_cleanup'.
  * 
  * Deletes all LOOPIS users in 'wp_users' created by function 'loopis_users_insert'.
+ * 
+ * Old file name: 'loopis_users_delete.php'
  *
  * @package LOOPIS_Config
  * @subpackage Dev-tools
@@ -12,6 +14,7 @@
 
 
 require_once(ABSPATH.'wp-admin/includes/user.php');
+require_once LOOPIS_DEV_DIR .'functions/sample.php';
 
 // Prevent direct access
 if (!defined('ABSPATH')) {
@@ -25,6 +28,8 @@ if (!defined('ABSPATH')) {
  */
 function loopis_users_delete() {
     loopis_elog_function_start('loopis_users_delete');
+
+    $sample_users = get_sample_users();
     global $wpdb;
     // Get all users except user 1(admin)
     $users = get_users(['exclude' => [1]]);

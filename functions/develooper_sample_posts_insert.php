@@ -23,6 +23,8 @@ if ( ! function_exists('get_user_by') ) {
  * 
  * @return void
  */
+
+
 function develooper_sample_posts_insert() {
 
     loopis_elog_function_start('develooper_sample_post_insert');
@@ -211,17 +213,18 @@ Det finns en tjock och en tunn spets på varje penna. De tunna har torkat men de
  */
 function develooper_add_image_to_inserted_post($post_id, $image_url) {
     
-
-        // Include required files for handling uploads
+    // Include required files for handling uploads
     require_once ABSPATH . 'wp-admin/includes/image.php';
-    require_once ABSPATH . 'wp-admin/includes/file.php';
+    require_once ABSPATH . 'wp-admin/includes/file.php'; 
     require_once ABSPATH . 'wp-admin/includes/media.php';
 
-    
+
     // Create a temp copy in PHP's temp dir
-    $tmp_dir = sys_get_temp_dir();
-    $tmp_name = wp_unique_filename( $tmp_dir, wp_basename( $image_url ) );
-    $tmp_path = trailingslashit( $tmp_dir ) . $tmp_name;
+    $tmp_path = wp_tempnam( $image_url );
+
+    if ( ! $tmp_path ) {
+        return new WP_Error( 'tmp_failed', 'Could not create temp file' );
+    }
 
     if ( ! copy( $image_url, $tmp_path ) ) {
         return new WP_Error( 'copy_failed', 'Failed to copy plugin file to tmp location.' );
@@ -236,6 +239,7 @@ function develooper_add_image_to_inserted_post($post_id, $image_url) {
 
     // If error occurred during upload, return error.
     if (is_wp_error($attachment_id)) {
+        @unlink($tmp_path);
         return new WP_Error( 'upload_failed', "Error uploading image: " . $attachment_id->get_error_message() );
     } else {
         return $attachment_id;
