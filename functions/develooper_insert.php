@@ -2,7 +2,7 @@
 /**
  * Function to create a LOOPIS develooper user in the WordPress database.
  *
- * This function is called from WP admin page 'develooper_users.php'. (When implemented)
+ * This file is included from the WP admin page with the same name. (When implemented)
  *
  * @package LOOPIS_Develooper
  * @subpackage Dev-tools
@@ -12,6 +12,7 @@
 if (!defined('ABSPATH')) {
     exit;
 }
+
 /**
  * Inserts users into wp_users
  * 
@@ -19,9 +20,6 @@ if (!defined('ABSPATH')) {
  */
 function develooper_insert() {    
     loopis_elog_function_start('develooper_insert');
-
-    // Access WordPress database object
-    global $wpdb;
 
     // Choose one user...
     $dev_users = [

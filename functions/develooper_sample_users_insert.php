@@ -8,10 +8,16 @@
  * @subpackage Dev-tools
  */
 
-
+// Prevent direct access
 if (!defined('ABSPATH')) {
-    exit; // Exit if accessed directly
+    exit;
 }
+
+// Include functions
+require_once LOOPIS_DEVELOOPER_DIR .'functions/sample.php';
+
+// Include WP functions
+require_once(ABSPATH.'wp-admin/includes/user.php');
 
 /**
  * Inserts users into wp_users
@@ -20,8 +26,12 @@ if (!defined('ABSPATH')) {
  */
 function develooper_users_insert() {
 
+<<<<<<< Updated upstream
     // Access WordPress database object
     global $wpdb;
+=======
+    loopis_elog_function_start('develooper_sample_user_insert');
+>>>>>>> Stashed changes
 
     $inserted_users = []; // Array to hold details of inserted users
     
