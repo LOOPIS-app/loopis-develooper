@@ -12,7 +12,7 @@ if (!defined('ABSPATH')) {
 }
 
 // Include functions
-require_once LOOPIS_DEVELOOPER_DIR . 'functions/db-setup/develooper_sample_users_insert.php';
+require_once LOOPIS_DEVELOOPER_DIR . 'functions/develooper_sample_users_insert.php';
 
 // Include WP functions
 require_once(ABSPATH . 'wp-includes/pluggable.php'); // neccesary for user management

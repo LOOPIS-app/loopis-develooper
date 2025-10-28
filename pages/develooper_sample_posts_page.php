@@ -13,7 +13,7 @@ if (!defined('ABSPATH')) {
 
 require_once LOOPIS_DEV_DIR . 'functions/develooper_sample_posts_insert.php'; // Include post insert function
 require_once LOOPIS_DEV_DIR . 'functions/develooper_sample_posts_delete.php'; // Include post delete function
-// require_once LOOPIS_DEV_DIR . 'functions/develooper_posts_delete.php'; // Include user delete function, not yet created
+
 //include_once(ABSPATH . 'wp-includes/pluggable.php'); // Include pluggable functions for post management
 
 $inserted_post = [];
