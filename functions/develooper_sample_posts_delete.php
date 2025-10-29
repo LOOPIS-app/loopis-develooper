@@ -24,6 +24,8 @@ require_once LOOPIS_DEVELOOPER_DIR .'functions/sample.php';
 function develooper_sample_posts_delete() {
 
     loopis_elog_function_start('develooper_sample_posts_delete');
+
+    // Fetch sample posts from sample.php
     $sample_posts_info = get_sample_posts();
     
     global $wpdb;

@@ -13,6 +13,7 @@ if (!defined('ABSPATH')) {
 
 // Include functions
 require_once LOOPIS_DEVELOOPER_DIR . 'functions/develooper_sample_users_insert.php';
+require_once LOOPIS_DEVELOOPER_DIR . 'functions/develooper_sample_users_delete.php';
 
 // Include WP functions
 include_once(ABSPATH . 'wp-includes/pluggable.php'); // Include pluggable functions for user management
@@ -51,7 +52,7 @@ function develooper_sample_users_page() {
         <p><i>[Function not yet created.]</i></p>
 
         <p><form method="POST">
-            <button class="button button-primary" type="submit" name="delete_sample_users" disabled>Delete</button>
+            <button class="button button-primary" type="submit" name="delete_sample_users">Delete</button>
         </form></p>
         <p><i>[Fix: Greyed out if users are already inserted.]</i></p>
     </div>

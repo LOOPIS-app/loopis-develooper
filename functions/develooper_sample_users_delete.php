@@ -13,7 +13,7 @@ if (!defined('ABSPATH')) {
     exit;
 }
 
-// Include functions
+// Import sample lists
 require_once LOOPIS_DEVELOOPER_DIR .'functions/sample.php';
 
 // Include WP functions
@@ -27,13 +27,22 @@ require_once(ABSPATH.'wp-admin/includes/user.php');
 function loopis_users_delete() {
     loopis_elog_function_start('loopis_users_delete');
 
+    // Fetch sample users from sample.php
     $sample_users = get_sample_users();
+
     global $wpdb;
-    // Get all users except user 1(admin)
-    $users = get_users(['exclude' => [1]]);
-    foreach ($users as $user) {
-        // Delete each user
-        wp_delete_user($user->ID);
+    foreach ($sample_users as $sample_user) {
+        // Get user by login
+        $users = get_user_by('login', $sample_user['user_login']);
+
+        // If user exists, delete
+        if (!empty($users)) {
+            // Delete each user
+            wp_delete_user($users->ID);
+            loopis_elog_first_level('Deleted user: ' . $sample_user['user_login'] . ' (ID: ' . $users->ID . ')');
+        } else {
+            loopis_elog_first_level('User not found: ' . $sample_user['user_login']);
+        }
     }
     // Resets user count
     $wpdb->query("ALTER TABLE {$wpdb->users} AUTO_INCREMENT = 1");
