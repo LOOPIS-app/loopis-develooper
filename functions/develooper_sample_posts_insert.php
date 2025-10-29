@@ -21,7 +21,7 @@ if ( ! function_exists('get_user_by') ) {
     require_once ABSPATH . 'wp-includes/pluggable.php';
 }
 
-require_once LOOPIS_DEVELOOPER_DIR . 'functions/sample.php';
+require_once LOOPIS_DEVELOOPER_DIR . 'functions/labels/sample-posts.php';
 
 /**
  * Insert posts into wp_posts
@@ -38,7 +38,7 @@ function develooper_sample_posts_insert() {
         $wp_rewrite = new WP_Rewrite();
     }
 
-    // Fetch sample posts from sample.php
+    // Fetch sample posts from sample-posts.php
     $sample_posts = get_sample_posts();
 
     $current_time = new DateTime(current_time('mysql'));
@@ -46,7 +46,7 @@ function develooper_sample_posts_insert() {
     foreach($sample_posts as $post) {
 
         // 1. If post is already exist, skip it.
-        if (post_exists($post['post_title'], $post['post_content'], $post['post_date'])) {
+        if (post_exists($post['post_title'], $post['post_content'])) {
             loopis_elog_first_level('Post already exists: ' . $post['post_title']);
             continue;
         }
@@ -87,6 +87,10 @@ function develooper_sample_posts_insert() {
         } else {
             loopis_elog_first_level('Successfully created post "' . $post['post_title'] . '" (ID: ' . $post_id . ')');
         }
+
+        // Set taxonomies (post tags and categories)
+        wp_set_post_tags($post_id, $post['post_tags'], false);
+        develooper_insert_sample_posts_category($post_id, $post['post_categories']);
 
         // 6. Retrieve local image file.
         $img_path = LOOPIS_DEVELOOPER_DIR . "assets/img/sample_posts/{$post['feature_image']}.jpg";
@@ -178,4 +182,19 @@ function develooper_add_image_to_inserted_post($post_id, $image_path) {
     wp_update_attachment_metadata($attachment_id, $attach_data);
 
     return $attachment_id;
+}
+
+
+function develooper_insert_sample_posts_category($post_id, $categories) {
+
+    foreach ($categories as $category) {
+        
+        $category_term = get_term_by( 'slug', $category, 'category' );
+
+        if ( ! is_wp_error( $category_term ) && term_exists( $category_term->term_id, 'category' ) ) {
+            wp_set_post_categories( $post_id, [ $category_term->term_id ], false );
+        } else {
+            loopis_elog_first_level('Category does not exist: ' . $category);
+        }
+    }
 }

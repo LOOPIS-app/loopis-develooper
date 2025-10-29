@@ -14,7 +14,7 @@ if (!defined('ABSPATH')) {
 }
 
 // Import sample lists
-require_once LOOPIS_DEVELOOPER_DIR .'functions/sample.php';
+require_once LOOPIS_DEVELOOPER_DIR .'functions/labels/sample-users.php';
 
 // Include WP functions
 require_once(ABSPATH.'wp-admin/includes/user.php');
@@ -27,7 +27,7 @@ require_once(ABSPATH.'wp-admin/includes/user.php');
 function loopis_users_delete() {
     loopis_elog_function_start('loopis_users_delete');
 
-    // Fetch sample users from sample.php
+    // Fetch sample users from sample-users.php
     $sample_users = get_sample_users();
 
     global $wpdb;

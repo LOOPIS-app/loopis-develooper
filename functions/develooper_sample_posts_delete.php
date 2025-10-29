@@ -14,7 +14,7 @@ if (!defined('ABSPATH')) {
 }
 
 // Include functions
-require_once LOOPIS_DEVELOOPER_DIR .'functions/sample.php';
+require_once LOOPIS_DEVELOOPER_DIR .'functions/labels/sample-posts.php';
 
 /**
  * Delete sample posts from wp_posts
@@ -25,7 +25,7 @@ function develooper_sample_posts_delete() {
 
     loopis_elog_function_start('develooper_sample_posts_delete');
 
-    // Fetch sample posts from sample.php
+    // Fetch sample posts from sample-posts.php
     $sample_posts_info = get_sample_posts();
     
     global $wpdb;

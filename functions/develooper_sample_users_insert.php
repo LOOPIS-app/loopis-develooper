@@ -14,7 +14,7 @@ if (!defined('ABSPATH')) {
 }
 
 // Import sample lists
-require_once LOOPIS_DEVELOOPER_DIR .'functions/sample.php';
+require_once LOOPIS_DEVELOOPER_DIR .'functions/labels/sample-users.php';
 
 // Include WP functions
 require_once(ABSPATH.'wp-admin/includes/user.php');
@@ -30,7 +30,7 @@ function develooper_users_insert() {
 
     $inserted_users = []; // Array to hold details of inserted users
 
-    // Fetch sample users from sample.php
+    // Fetch sample users from sample-users.php
     $sample_users = get_sample_users();
 
     foreach ($sample_users as $user) {
