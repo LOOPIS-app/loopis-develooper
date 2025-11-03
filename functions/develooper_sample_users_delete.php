@@ -14,7 +14,7 @@ if (!defined('ABSPATH')) {
 }
 
 // Import sample lists
-require_once LOOPIS_DEVELOOPER_DIR .'functions/labels/sample-users.php';
+require_once LOOPIS_DEVELOOPER_DIR .'assets/sample_users/labels/sample-users.php';
 
 // Include WP functions
 require_once(ABSPATH.'wp-admin/includes/user.php');
@@ -30,6 +30,7 @@ function loopis_users_delete() {
     // Fetch sample users from sample-users.php
     $sample_users = get_sample_users();
 
+    // Access to the database
     global $wpdb;
     foreach ($sample_users as $sample_user) {
         // Get user by login
@@ -41,6 +42,7 @@ function loopis_users_delete() {
             wp_delete_user($users->ID);
             loopis_elog_first_level('Deleted user: ' . $sample_user['user_login'] . ' (ID: ' . $users->ID . ')');
         } else {
+            // else report non-existence
             loopis_elog_first_level('User not found: ' . $sample_user['user_login']);
         }
     }

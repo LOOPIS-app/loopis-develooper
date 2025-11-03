@@ -21,7 +21,8 @@ if ( ! function_exists('get_user_by') ) {
     require_once ABSPATH . 'wp-includes/pluggable.php';
 }
 
-require_once LOOPIS_DEVELOOPER_DIR . 'functions/labels/sample-posts.php';
+// Import sample-post lists
+require_once LOOPIS_DEVELOOPER_DIR . 'assets/sample_posts/labels/sample-posts.php';
 
 /**
  * Insert posts into wp_posts
@@ -41,13 +42,14 @@ function develooper_sample_posts_insert() {
     // Fetch sample posts from sample-posts.php
     $sample_posts = get_sample_posts();
 
+    // Current time for post date calculations
     $current_time = new DateTime(current_time('mysql'));
 
     foreach($sample_posts as $post) {
 
         // 1. If post is already exist, skip it.
-        if (post_exists($post['post_title'], $post['post_content'])) {
-            loopis_elog_first_level('Post already exists: ' . $post['post_title']);
+        if (post_exists($post['post_name'])) {
+            loopis_elog_first_level('Post already exists: ' . $post['post_title'] . ' (Slug: ' . $post['post_name'] . ')');
             continue;
         }
 
@@ -60,12 +62,16 @@ function develooper_sample_posts_insert() {
             continue; 
         }
 
+        // Prepare post date and time
         $post_date = clone $current_time; 
+        // if post_date is specified, modify it, else use current date
         if ($post['post_date'] != '') {
             $post_date->modify($post['post_date']);
         }
+        // divide post_time value into hour, minute, second from hh:mm:ss.
         list($hour, $minute, $second) = explode(':', $post['post_time']);
 
+        // set time
         $post_date->setTime((int)$hour, (int)$minute, (int)$second);
         // 4. Insert post.
         $post_id = wp_insert_post([
@@ -85,6 +91,7 @@ function develooper_sample_posts_insert() {
             loopis_elog_first_level('Failed to create post "' . $post['post_title'] . '": ' . $post_id->get_error_message());
             continue;
         } else {
+            // report success
             loopis_elog_first_level('Successfully created post "' . $post['post_title'] . '" (ID: ' . $post_id . ')');
         }
 
@@ -93,7 +100,7 @@ function develooper_sample_posts_insert() {
         develooper_insert_sample_posts_category($post_id, $post['post_categories']);
 
         // 6. Retrieve local image file.
-        $img_path = LOOPIS_DEVELOOPER_DIR . "assets/img/sample_posts/{$post['feature_image']}.jpg";
+        $img_path = LOOPIS_DEVELOOPER_DIR . "assets/sample_posts/img/{$post['feature_image']}.jpg";
 
         // 7. Check if the file exists
         if (file_exists($img_path)) { 
@@ -102,6 +109,7 @@ function develooper_sample_posts_insert() {
             // 7.1. If yes, add image to the post.
             $attached_img = develooper_add_image_to_inserted_post($post_id, $img_path);
 
+            // if $attached_img is WP_Error, show error log and skip adding featured image
             if (is_wp_error($attached_img)) {
                 loopis_elog_first_level('Failed to attach image to post "' . $post['post_title'] . '": ' . $attached_img->get_error_message());
             } else {
@@ -119,6 +127,7 @@ function develooper_sample_posts_insert() {
     // Flush rewrite rules after inserting posts
     flush_rewrite_rules(false);
 
+    // final log
     loopis_elog_function_end_success('develooper_sample_posts_insert');
 }
 
@@ -131,9 +140,11 @@ function develooper_sample_posts_insert() {
  */
 function develooper_add_image_to_inserted_post($post_id, $image_path) {
     
+    // Include required WP files for handling media
     require_once ABSPATH . 'wp-admin/includes/image.php';
     require_once ABSPATH . 'wp-admin/includes/file.php';
 
+    // Check if file exists
     if (!file_exists($image_path)) {
         return new WP_Error('file_not_found', 'Image file does not exist: ' . $image_path);
     }
@@ -172,6 +183,7 @@ function develooper_add_image_to_inserted_post($post_id, $image_path) {
         'post_status'    => 'inherit'
     ), $new_file_path, $post_id);
 
+    //unlink on error
     if (is_wp_error($attachment_id)) {
         @unlink($new_file_path);
         return $attachment_id;
@@ -184,15 +196,25 @@ function develooper_add_image_to_inserted_post($post_id, $image_path) {
     return $attachment_id;
 }
 
-
+/**
+ * Function to assign categories to the inserted post
+ * 
+ * @param int $post_id
+ * @param array $categories Array of category slugs
+ * @return void
+ */
 function develooper_insert_sample_posts_category($post_id, $categories) {
 
+    // Assign categories to the post
     foreach ($categories as $category) {
         
+        // get category term by slug
         $category_term = get_term_by( 'slug', $category, 'category' );
 
+        // if term exists, assign to post
         if ( ! is_wp_error( $category_term ) && term_exists( $category_term->term_id, 'category' ) ) {
             wp_set_post_categories( $post_id, [ $category_term->term_id ], false );
+            // else report non-existence
         } else {
             loopis_elog_first_level('Category does not exist: ' . $category);
         }

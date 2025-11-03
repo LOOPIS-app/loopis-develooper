@@ -14,7 +14,7 @@ if (!defined('ABSPATH')) {
 }
 
 // Import sample lists
-require_once LOOPIS_DEVELOOPER_DIR .'functions/labels/sample-users.php';
+require_once LOOPIS_DEVELOOPER_DIR .'assets/sample_users/labels/sample-users.php';
 
 // Include WP functions
 require_once(ABSPATH.'wp-admin/includes/user.php');
@@ -26,6 +26,7 @@ require_once(ABSPATH.'wp-admin/includes/user.php');
  */
 function develooper_users_insert() {
 
+    // Start logging
     loopis_elog_function_start('develooper_sample_user_insert');
 
     $inserted_users = []; // Array to hold details of inserted users
@@ -33,6 +34,7 @@ function develooper_users_insert() {
     // Fetch sample users from sample-users.php
     $sample_users = get_sample_users();
 
+    // Loop through each sample user and insert into the database
     foreach ($sample_users as $user) {
 
         // Check if user already exists
@@ -51,6 +53,7 @@ function develooper_users_insert() {
             'last_name'     => $user['last_name']
         ]);
 
+        // Check for errors. If user creation failed, log the error and skip.
         if (is_wp_error($user_id)) {
             loopis_elog_first_level('Failed to create user ' . $user['user_login'] . ': ' . $user_id->get_error_message());
             continue;
@@ -62,6 +65,7 @@ function develooper_users_insert() {
             $user_id->set_role($role);
         }
 
+        // if user role assignment succeeded, insert into the log (for diplaying result?)
         if (!is_wp_error($user_id)) {
             $inserted_users[] = [
                 'user_login'   => $user['user_login'],
@@ -70,9 +74,11 @@ function develooper_users_insert() {
                 'role'         => $user['role']
             ];
         } else {
+            // else report error
             loopis_elog_first_level('Failed to assign role to user ' . $user['user_login'] . ': ' . $user_id->get_error_message());
         }
     }
 
+    //final log
     loopis_elog_function_end_success('develooper_sample_user_insert');
 }
