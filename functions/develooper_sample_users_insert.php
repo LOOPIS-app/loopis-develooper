@@ -22,14 +22,18 @@ require_once(ABSPATH.'wp-admin/includes/user.php');
 /**
  * Inserts users into wp_users
  * 
- * @return void
+ * @return array $inserted_users Details of inserted users
  */
 function develooper_users_insert() {
 
     // Start logging
     loopis_elog_function_start('develooper_sample_user_insert');
 
-    $inserted_users = []; // Array to hold details of inserted users
+    $inserted_users = [
+        'inserted' => [],
+        'failed'   => [],
+        'existed'=> [],
+    ]; // Array to hold details of inserted users
 
     // Fetch sample users from sample-users.php
     $sample_users = get_sample_users();
@@ -39,6 +43,8 @@ function develooper_users_insert() {
 
         // Check if user already exists
         if (username_exists($user['user_login'])) {
+            loopis_elog_first_level('User already exists: ' . $user['user_login']);
+            $inserted_users['existed'][] = $user['user_login'];
             continue; // Skip existing users
         }
 
@@ -56,7 +62,10 @@ function develooper_users_insert() {
         // Check for errors. If user creation failed, log the error and skip.
         if (is_wp_error($user_id)) {
             loopis_elog_first_level('Failed to create user ' . $user['user_login'] . ': ' . $user_id->get_error_message());
+            $inserted_users['failed'][] = $user['user_login'];
             continue;
+        } else {
+            $inserted_users['inserted'][] = $user['user_login'];
         }
 
         // Set roles
@@ -65,14 +74,9 @@ function develooper_users_insert() {
             $user_id->set_role($role);
         }
 
-        // if user role assignment succeeded, insert into the log (for diplaying result?)
+        // if user role assignment succeeded, report log 
         if (!is_wp_error($user_id)) {
-            $inserted_users[] = [
-                'user_login'   => $user['user_login'],
-                'user_email'   => $user['user_email'],
-                'display_name' => $user['display_name'],
-                'role'         => $user['role']
-            ];
+            loopis_elog_first_level('Assigned role to user: ' . $user['user_login']);
         } else {
             // else report error
             loopis_elog_first_level('Failed to assign role to user ' . $user['user_login'] . ': ' . $user_id->get_error_message());
@@ -81,4 +85,7 @@ function develooper_users_insert() {
 
     //final log
     loopis_elog_function_end_success('develooper_sample_user_insert');
+
+
+    return $inserted_users;
 }

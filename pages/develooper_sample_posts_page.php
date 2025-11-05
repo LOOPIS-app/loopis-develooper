@@ -52,6 +52,7 @@ function develooper_sample_posts_page() {
         <!-- Page content-->
         <h2>Configuration of sample posts</h2>
 
+        <!--Insert sample post button-->
         <p><form method="POST">
             <button class="button button-primary" type="submit" name="insert_sample_posts">Insert</button>
         </form></p>
@@ -62,6 +63,7 @@ function develooper_sample_posts_page() {
         </form></p>
         <p><i>[Function not yet created.]</i></p>
 
+        <!--Delete sample post button-->
         <p><form method="POST">
             <button class="button button-primary" type="submit" name="delete_sample_posts">Delete</button>
         </form></p>

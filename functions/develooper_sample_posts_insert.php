@@ -39,6 +39,12 @@ function develooper_sample_posts_insert() {
         $wp_rewrite = new WP_Rewrite();
     }
 
+    // Wordpress WP_Query to prevent running too early
+    global $wp_query;
+    if ( ! $wp_query ) {
+        $wp_query = new WP_Query();
+    }
+
     // Fetch sample posts from sample-posts.php
     $sample_posts = get_sample_posts();
 
@@ -47,8 +53,11 @@ function develooper_sample_posts_insert() {
 
     foreach($sample_posts as $post) {
 
-        // 1. If post is already exist, skip it.
-        if (post_exists($post['post_name'])) {
+        // 1. Fetch existing post by slug.
+        $post_name = $post['post_name'];
+        $existed_post = get_page_by_path($post_name, OBJECT, 'post');
+        // If post is already exist, skip it.
+        if ($existed_post) {
             loopis_elog_first_level('Post already exists: ' . $post['post_title'] . ' (Slug: ' . $post['post_name'] . ')');
             continue;
         }

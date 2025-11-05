@@ -22,10 +22,16 @@ require_once(ABSPATH.'wp-admin/includes/user.php');
 /**
  * Delete all LOOPIS users but admin from wp_users
  * 
- * @return void
+ * @return array
  */
 function loopis_users_delete() {
     loopis_elog_function_start('loopis_users_delete');
+
+    //Deleted user collection for message display
+    $delete_user_list = [
+        'deleted' => [],
+        'nonexisted' => [],
+    ];
 
     // Fetch sample users from sample-users.php
     $sample_users = get_sample_users();
@@ -40,13 +46,16 @@ function loopis_users_delete() {
         if (!empty($users)) {
             // Delete each user
             wp_delete_user($users->ID);
+            $delete_user_list['deleted'][] = $sample_user['user_login'];
             loopis_elog_first_level('Deleted user: ' . $sample_user['user_login'] . ' (ID: ' . $users->ID . ')');
         } else {
             // else report non-existence
+            $delete_user_list['nonexisted'][] = $sample_user['user_login'];
             loopis_elog_first_level('User not found: ' . $sample_user['user_login']);
         }
     }
     // Resets user count
     $wpdb->query("ALTER TABLE {$wpdb->users} AUTO_INCREMENT = 1");
     loopis_elog_function_end_success('loopis_users_delete');
+    return $delete_user_list;
 }
