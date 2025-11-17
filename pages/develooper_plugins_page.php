@@ -11,6 +11,16 @@ if (!defined('ABSPATH')) {
     exit; 
 }
 
+if (isset($_POST['develooper_plugins_install'])) {
+    require_once LOOPIS_DEVELOOPER_DIR . 'functions/develooper_plugins_install.php';
+    develooper_plugins_install();
+
+    set_transient('plugin installation confirmations', $inserted_users, 30);
+
+    wp_redirect(add_query_arg('action', 'installed', wp_get_referer()));
+    exit;
+}
+
 // Function to render the page
 function develooper_plugins_page() {
     ?>
@@ -21,6 +31,9 @@ function develooper_plugins_page() {
 
         <!-- Page content-->
         <h2>Plugins recommended</h2>
+        <form method="POST">
+            <button class="button button-primary" type="submit" name="develooper_plugins_install">Install</button>
+        </form>
         <p><i>[Add list of recommended plugins + button to install/update.]</i></p>
 
         <h2>Installed plugins</h2>
