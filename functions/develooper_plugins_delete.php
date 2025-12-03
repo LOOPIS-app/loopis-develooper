@@ -13,43 +13,73 @@ if (!defined('ABSPATH')) {
     exit; 
 }
 
+require_once LOOPIS_DEVELOOPER_DIR . 'assets/plugins/labels/plugin_list.php';
+
 /**
  * Delete all develooper-installed plugins from wp-content/plugins/
  * 
  * @return void
  */
-/*function loopis_plugins_delete() {
+function develooper_plugins_delete() {
     
-    loopis_elog_function_start('loopis_plugins_delete');
+    loopis_elog_function_start('develooper_plugins_delete');
 
     // Plugin main file in /wp-content/plugins
-    $installed_plugins = [
-        'post-smtp/postman-smtp.php',
-        'wp-statistics/wp-statistics.php',
-        'wp-user-manager/wp-user-manager.php',
-        'ewww-image-optimizer/ewww-image-optimizer.php',
-    ];
+    $plugins = plugin_list();
+
 
     // For each item in list deactivate and delete
-    foreach ($installed_plugins as $plugin) {
+    foreach ($plugins as $plugin) {
 
+        $plugin_slug = $plugin['slug'];
+        $plugin_main = $plugin['main'];
         // Deactivate if active
-        if (is_plugin_active($plugin)) {
-            deactivate_plugins($plugin);
+        if (is_plugin_active($plugin_main)) {
+            deactivate_plugins($plugin_main);
         }
 
         // Delete plugin if exists
-        $plugin_path = WP_PLUGIN_DIR . '/' . $plugin; 
+        $plugin_path = WP_PLUGIN_DIR . '/' . $plugin_slug; 
         if (file_exists($plugin_path)) {
             // Delete plugin
-            $result = @delete_plugins([$plugin]);
+            $result = @delete_plugins([$plugin_main]);
             // Handle Error
             if (is_wp_error($result)) {
-                loopis_elog_first_level(" Failed to uninstall $plugin: " . $result->get_error_message());
+                loopis_elog_first_level(" Failed to uninstall $plugin_slug: " . $result->get_error_message());
             } else {
-                loopis_elog_first_level(" Successfully uninstalled $plugin");
+                loopis_elog_first_level(" Successfully uninstalled $plugin_slug");
             }
+        } else {
+            loopis_elog_first_level(" File " . $plugin_path .  " does not exist ");
         }
     }
-    loopis_elog_function_end_success('loopis_plugins_delete');
-}*/
+    loopis_elog_function_end_success('develooper_plugins_delete');
+}
+
+function develooper_plugin_delete($slug, $main) {
+    
+    loopis_elog_function_start('develooper_plugin_delete');
+
+    // Deactivate if active
+    if (is_plugin_active($main)) {
+        deactivate_plugins($main);
+    }
+
+    // Delete plugin if exists
+    $plugin_path = WP_PLUGIN_DIR . '/' . $slug; 
+    if (file_exists($plugin_path)) {
+        loopis_elog_first_level(" File exist ");
+        // Delete plugin
+        $result = @delete_plugins([$main]);
+        // Handle Error
+        if (is_wp_error($result)) {
+            loopis_elog_first_level(" Failed to uninstall $slug: " . $result->get_error_message());
+        } else {
+            loopis_elog_first_level(" Successfully uninstalled $slug");
+        }
+    } else {
+        loopis_elog_first_level(" File " . $plugin_path .  " does not exist ");
+    }
+    
+    loopis_elog_function_end_success('develooper_plugin_delete');
+}
