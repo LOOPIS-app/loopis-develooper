@@ -14,7 +14,7 @@ if (!defined('ABSPATH')) {
 }
 
 // Include functions
-require_once LOOPIS_DEVELOOPER_DIR .'assets/sample_posts/labels/sample-posts.php';
+require_once LOOPIS_DEVELOOPER_DIR .'assets/samples/posts.php';
 
 /**
  * Delete sample posts from wp_posts
@@ -53,7 +53,7 @@ function develooper_sample_posts_delete() {
             wp_delete_post($post->ID, true); // true = force delete, bypass trash
             loopis_elog_first_level('Deleted post: ' . $post_name . ' (ID: ' . $post->ID . ')');
         } else {
-            //report non-existence
+            // Report non-existence
             loopis_elog_first_level('Post not found: ' . $post_name);
         }
     }
@@ -61,6 +61,6 @@ function develooper_sample_posts_delete() {
     // Reset post count
     $wpdb->query("ALTER TABLE {$wpdb->posts} AUTO_INCREMENT = 1");
     
-    //final log
+    // Final log
     loopis_elog_function_end_success('develooper_sample_posts_delete');
 }

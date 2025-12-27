@@ -15,35 +15,26 @@ function develooper_admin_menu() {
         'manage_options',           // Capability
         'loopis_dev_main',          // Menu Slug
         'develooper_posts_page',    // Function - redirect to first submenu
-        LOOPIS_DEVELOOPER_URL . 'assets/develooper-dashboard-icon.png'   // Custom Icon
+        LOOPIS_DEVELOOPER_URL . 'assets/img/develooper-dashboard-icon.png'   // Custom Icon
     );
     
     // Add submenus
     add_submenu_page(
-        'loopis_dev_main',          // Parent slug
-        'Develooper',               // Page title
-        'Develooper',               // Menu title
-        'manage_options',           // Capability
-        'develooper',               // Menu slug
-        'develooper_page'           // Function
+        'loopis_dev_main',         // Parent slug
+        'Develooper',              // Page title
+        'Develooper',              // Menu title
+        'manage_options',          // Capability
+        'develooper',              // Menu slug
+        'develooper_page'          // Function
     );
 
     add_submenu_page(
         'loopis_dev_main',         // Parent slug
-        'Sample Users',            // Page title
-        'Sample Users',            // Menu title
+        'Samples',                 // Page title
+        'Samples',                 // Menu title
         'manage_options',          // Capability
-        'develooper_sample_users',        // Menu slug
-        'develooper_sample_users_page'    // Function
-    );
-
-    add_submenu_page(
-        'loopis_dev_main',         // Parent slug
-        'Sample Posts',            // Page title
-        'Sample Posts',            // Menu title
-        'manage_options',          // Capability
-        'develooper_sample_posts',        // Menu slug
-        'develooper_sample_posts_page'    // Function
+        'develooper_samples',      // Menu slug
+        'develooper_samples_page'  // Function
     );
     
     add_submenu_page(

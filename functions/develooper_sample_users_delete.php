@@ -14,7 +14,7 @@ if (!defined('ABSPATH')) {
 }
 
 // Import sample lists
-require_once LOOPIS_DEVELOOPER_DIR .'assets/sample_users/labels/sample-users.php';
+require_once LOOPIS_DEVELOOPER_DIR .'assets/samples/users.php';
 
 // Include WP functions
 require_once(ABSPATH.'wp-admin/includes/user.php');

@@ -14,7 +14,7 @@ if (!defined('ABSPATH')) {
 }
 
 // Import sample lists
-require_once LOOPIS_DEVELOOPER_DIR .'assets/sample_users/labels/sample-users.php';
+require_once LOOPIS_DEVELOOPER_DIR .'assets/samples/users.php';
 
 // Include WP functions
 require_once(ABSPATH.'wp-admin/includes/user.php');
@@ -83,7 +83,7 @@ function develooper_users_insert() {
         }
     }
 
-    //final log
+    // Final log
     loopis_elog_function_end_success('develooper_sample_user_insert');
 
 

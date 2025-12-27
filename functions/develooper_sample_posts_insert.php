@@ -22,7 +22,7 @@ if ( ! function_exists('get_user_by') ) {
 }
 
 // Import sample-post lists
-require_once LOOPIS_DEVELOOPER_DIR . 'assets/sample_posts/labels/sample-posts.php';
+require_once LOOPIS_DEVELOOPER_DIR . 'assets/samples/posts.php';
 
 /**
  * Insert posts into wp_posts
@@ -109,7 +109,7 @@ function develooper_sample_posts_insert() {
         develooper_insert_sample_posts_category($post_id, $post['post_categories']);
 
         // 6. Retrieve local image file.
-        $img_path = LOOPIS_DEVELOOPER_DIR . "assets/sample_posts/img/{$post['feature_image']}.jpg";
+        $img_path = LOOPIS_DEVELOOPER_DIR . "assets/samples/img/{$post['feature_image']}.jpg";
 
         // 7. Check if the file exists
         if (file_exists($img_path)) { 

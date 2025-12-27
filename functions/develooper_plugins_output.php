@@ -6,7 +6,7 @@ if (!defined('ABSPATH')) {
     exit; 
 }
 
-require_once LOOPIS_DEVELOOPER_DIR . 'assets/plugins/labels/plugin_list.php';
+require_once LOOPIS_DEVELOOPER_DIR . 'assets/plugins/plugin_list.php';
 
 if (isset($_POST['develooper_plugin_install'])) {
     if ( ! current_user_can('activate_plugins') ) {

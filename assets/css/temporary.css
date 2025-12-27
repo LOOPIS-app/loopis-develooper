@@ -1,0 +1,76 @@
+/**
+ * All CSS for the WP Admin area of LOOPIS.app should be located in "loopis-wp-admin.css" (plugin "LOOPIS Admin").
+ * You can temporarily add CSS here as suggestions.
+ */
+
+ /* Kritsadakorns plugin buttons */
+.bunch-action-btn {
+    margin: 0.2% !important;
+    width: 3% !important;
+    font-size: 0% !important;
+    height: 3% !important;
+    white-space: nowrap !important;
+    transition: width 0.5s ease-in-out !important;
+}
+
+.bunch-action-btn:hover { 
+    width: 10% !important;
+    overflow: hidden !important;
+    font-size: inherit !important;
+}
+
+.cancel-btn {
+    background-color: red !important;
+    border-color: red !important;
+    display: inline-block;
+    padding: 5px 10px;
+}
+
+.submit-btn {
+    background-color: #2271b1;
+    border-color: #2271b1;
+    display: inline-block;
+    padding: 5px 10px;
+}
+
+.activate-btn {
+    background-color: green !important;
+    border-color: green !important;
+    display: inline-block;
+    padding: 5px 10px;
+}
+
+.deactivate-btn {
+    background-color: orange !important;
+    border-color: orange !important;
+    display: inline-block;
+    padding: 5px 10px;
+}
+
+.cancel-btn:hover,
+.submit-btn:hover,
+.activate-btn:hover,
+.deactivate-btn:hover {
+    background-image: linear-gradient(rgb(0 0 0/40%) 0 0) !important;
+}
+
+/* HTML: <div class="loader"></div> */
+.loader {
+    width: 30px;
+    height: 30px;
+    border: 5px solid;
+    border-color: #FF3D00 transparent;
+    border-radius: 50%;
+    display: none;
+    box-sizing: border-box;
+    animation: rotation 1s linear infinite;
+}
+
+@keyframes rotation {
+    0% {
+        transform: rotate(0deg);
+    }
+    100% {
+        transform: rotate(360deg);
+    }
+}
