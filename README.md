@@ -1,10 +1,14 @@
 # 🧑‍💻 LOOPIS Develooper
-"LOOPIS Develooper" is a WordPress plugin providing tools for developers working with LOOPIS.app<br>
+WordPress plugin providing tools for developing LOOPIS.app<br>
 
 ## 💡 Status
-This plugin is currently being developed by volunteers under the name "The Develoopers".<br>
+New tools and content are added here when needed, aiming to facilitate the testing and development of LOOPIS.app<br>
 
 ## 📋 Changelog
+**0.5 (2025-12-27)**<br>
+Configuration of sample posts and users merged to one page<br>
+Configuration of plugins (work in process)<br>
+
 **0.4 (2025-10-28)**<br>
 Sample posts inserted in `wp_posts`<br>
 
@@ -24,7 +28,7 @@ Added folder with images for sample posts<br>
 init commit with basic plugin structure<br>
 
 ## 💾 Installation/Update
-Upload the zipped folder "loopis-develooper.zip" using **WP Admin > Plugins > Add Plugin > Upload Plugin**.
+Managed by plugin "LOOPIS Config".
 
 ## 👤 Contributors
 Johan Hagvil, Kritsadakorn Moonmai, Johan Linger

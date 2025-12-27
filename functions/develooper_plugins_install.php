@@ -20,7 +20,7 @@ require_once ABSPATH . 'wp-admin/includes/file.php';
 require_once ABSPATH . 'wp-admin/includes/misc.php';
 
 // Import plugin list
-require_once LOOPIS_DEVELOOPER_DIR . 'assets/plugins/labels/plugin_list.php';
+require_once LOOPIS_DEVELOOPER_DIR . 'assets/plugins/plugin_list.php';
 
 /**
  * Installs plugins in wp-content/plugins/

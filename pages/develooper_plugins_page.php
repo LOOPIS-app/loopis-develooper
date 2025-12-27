@@ -14,8 +14,7 @@ if (!defined('ABSPATH')) {
 require_once LOOPIS_DEVELOOPER_DIR . 'functions/develooper_plugins_output.php';
 require_once LOOPIS_DEVELOOPER_DIR . 'functions/develooper_roles_output.php';
 require_once LOOPIS_DEVELOOPER_DIR . 'functions/develooper_plugins_activations.php';
-require_once LOOPIS_DEVELOOPER_DIR . 'style/button_style.php';
-require_once LOOPIS_DEVELOOPER_DIR . 'scripts/loader.php';
+require_once LOOPIS_DEVELOOPER_DIR . 'assets/scripts/loader.php';
 
 setup();
 
@@ -24,7 +23,7 @@ function develooper_plugins_page() {
     ?>
     <div class="wrap">
         <!-- Page title and description-->
-        <h1>🧩 Plugins <span class="h1-right">Version <?php echo esc_html(LOOPIS_DEVELOOPER_VERSION); ?></span></h1>
+        <h1>🧩 Develooper plugins <span class="h1-right">Version <?php echo esc_html(LOOPIS_DEVELOOPER_VERSION); ?></span></h1>
         <p class="description">💡 Useful plugins for develoopers.</p>
 
         <?php
@@ -42,8 +41,8 @@ function develooper_plugins_page() {
         }
         default_button_color_style();
         ?>
+
         <!-- Page content-->
-        <h3>🐙 LOOPIS plugins</h3>
         <?php
         echo '<form id="plugin-form" method="POST">';
         $is_all_installed = false;
@@ -51,7 +50,7 @@ function develooper_plugins_page() {
         $is_all_activated = false;
         $is_all_deactivated = true;
 
-        require_once LOOPIS_DEVELOOPER_DIR . 'assets/plugins/labels/plugin_list.php';
+        require_once LOOPIS_DEVELOOPER_DIR . 'assets/plugins/plugin_list.php';
 
         $plugins = plugin_list();
 

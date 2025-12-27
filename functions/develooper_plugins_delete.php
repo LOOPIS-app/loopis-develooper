@@ -13,7 +13,7 @@ if (!defined('ABSPATH')) {
     exit; 
 }
 
-require_once LOOPIS_DEVELOOPER_DIR . 'assets/plugins/labels/plugin_list.php';
+require_once LOOPIS_DEVELOOPER_DIR . 'assets/plugins/plugin_list.php';
 
 /**
  * Delete all develooper-installed plugins from wp-content/plugins/
