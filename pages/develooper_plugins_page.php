@@ -75,10 +75,10 @@ function develooper_plugins_page() {
         }
 
 
-        echo '<button ' . $disable_install . ' class="button button-primary bunch-action-btn submit-btn" type="submit" name="develooper_plugins_install">Install all plugins</button>';
-        echo '<button ' . $disable_uninstall . ' class="button button-primary bunch-action-btn cancel-btn" type="submit" name="develooper_plugins_delete">Uninstall all plugins</button>';
-        echo '<button ' . $disable_activate . ' class="button button-primary bunch-action-btn activate-btn" type="submit" name="develooper_plugins_activate_all">Activate all plugins</button>';
-        echo '<button ' . $disable_deactivate . ' class="button button-primary bunch-action-btn deactivate-btn" type="submit" name="develooper_plugins_deactivate_all">Deactivate all plugins</button>';
+        echo '<button ' . $disable_install . ' class="button button-primary bunch-action-btn loading-btn submit-btn" type="submit" name="develooper_plugins_install">Install all plugins</button>';
+        echo '<button ' . $disable_uninstall . ' class="button button-primary bunch-action-btn loading-btn cancel-btn" type="submit" name="develooper_plugins_delete">Uninstall all plugins</button>';
+        echo '<button ' . $disable_activate . ' class="button button-primary bunch-action-btn loading-btn activate-btn" type="submit" name="develooper_plugins_activate_all">Activate all plugins</button>';
+        echo '<button ' . $disable_deactivate . ' class="button button-primary bunch-action-btn loading-btn deactivate-btn" type="submit" name="develooper_plugins_deactivate_all">Deactivate all plugins</button>';
         echo '<div class ="loader" id="loader"></div>';
         echo '</form>';
         
@@ -87,8 +87,7 @@ function develooper_plugins_page() {
         plugin_table_style();
 
         render_loopis_plugins_table();
-        activate_loader('.bunch-action-btn', 'loader', 'plugin-form');
-        activate_loader('.seperate-action-btn', 'loader', 'seperate-plugin-form');
+        activate_loader('.loading-btn', 'loader', 'plugin-form');
         ?>
     </div>
 <?php

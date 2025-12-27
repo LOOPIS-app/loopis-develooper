@@ -113,8 +113,8 @@ function render_loopis_plugins_table() {
 
         echo '<form id="seperate-plugin-form" method="post">';
         echo '<td>';
-        echo '<button ' . $disable_install . ' class="button button-primary seperate-action-btn submit-btn" type="submit" name="develooper_plugin_install" value="' . $button_value . '">Install</button>';
-        echo '<button ' . $disable_uninstall . ' class="button button-primary seperate-action-btn cancel-btn" type="submit" name="develooper_plugin_install" value="' . $button_value . '">Uninstall</button>';
+        echo '<button ' . $disable_install . ' class="button button-primary seperate-action-btn loading-btn submit-btn" type="submit" name="develooper_plugin_install" value="' . $button_value . '">Install</button>';
+        echo '<button ' . $disable_uninstall . ' class="button button-primary seperate-action-btn loading-btn cancel-btn" type="submit" name="develooper_plugin_install" value="' . $button_value . '">Uninstall</button>';
         echo '</td>';
         echo '</form>';
         
@@ -122,8 +122,8 @@ function render_loopis_plugins_table() {
        
         echo '<form method="post">';
         echo '<td>';
-        echo '<button '. $disable_activate .' class="button button-primary activate-btn seperate-action-btn" type="submit" name="develooper_plugin_activate" value="' . $button_value . '">Activate</button>';
-        echo '<button '. $disable_deactivate .' class="button button-primary deactivate-btn seperate-action-btn" type="submit" name="develooper_plugin_activate" value="' . $button_value . '">Deactivate</button>';
+        echo '<button '. $disable_activate .' class="button button-primary activate-btn seperate-action-btn loading-btn" type="submit" name="develooper_plugin_activate" value="' . $button_value . '">Activate</button>';
+        echo '<button '. $disable_deactivate .' class="button button-primary deactivate-btn seperate-action-btn loading-btn" type="submit" name="develooper_plugin_activate" value="' . $button_value . '">Deactivate</button>';
         echo '</td>';
         echo '</form>';
         
