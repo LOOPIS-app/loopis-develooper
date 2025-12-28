@@ -39,7 +39,6 @@ function develooper_plugins_page() {
                 echo '<div class="notice notice-success is-dismissible"><p>❌ Plugins have been successfully deactivated!</p></div>';
             }
         }
-        default_button_color_style();
         ?>
 
         <!-- Page content-->

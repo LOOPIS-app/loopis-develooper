@@ -5,19 +5,10 @@
 
  /* Kritsadakorns plugin buttons */
 .bunch-action-btn {
+    width: 15% !important;
     margin: 0.2% !important;
-    width: 3% !important;
-    font-size: 0% !important;
-    height: 3% !important;
-    white-space: nowrap !important;
-    transition: width 0.5s ease-in-out !important;
 }
 
-.bunch-action-btn:hover { 
-    width: 10% !important;
-    overflow: hidden !important;
-    font-size: inherit !important;
-}
 
 .cancel-btn {
     background-color: red !important;

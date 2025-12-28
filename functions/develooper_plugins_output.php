@@ -114,6 +114,7 @@ function render_loopis_plugins_table() {
         echo '<form id="seperate-plugin-form" method="post">';
         echo '<td>';
         echo '<button ' . $disable_install . ' class="button button-primary seperate-action-btn loading-btn submit-btn" type="submit" name="develooper_plugin_install" value="' . $button_value . '">Install</button>';
+        echo '<br>';
         echo '<button ' . $disable_uninstall . ' class="button button-primary seperate-action-btn loading-btn cancel-btn" type="submit" name="develooper_plugin_install" value="' . $button_value . '">Uninstall</button>';
         echo '</td>';
         echo '</form>';
@@ -122,8 +123,9 @@ function render_loopis_plugins_table() {
        
         echo '<form method="post">';
         echo '<td>';
-        echo '<button '. $disable_activate .' class="button button-primary activate-btn seperate-action-btn loading-btn" type="submit" name="develooper_plugin_activate" value="' . $button_value . '">Activate</button>';
-        echo '<button '. $disable_deactivate .' class="button button-primary deactivate-btn seperate-action-btn loading-btn" type="submit" name="develooper_plugin_activate" value="' . $button_value . '">Deactivate</button>';
+        echo '<button '. $disable_activate .' class="button button-primary seperate-action-btn activate-btn loading-btn" type="submit" name="develooper_plugin_activate" value="' . $button_value . '">Activate</button>';
+        echo '<br>';
+        echo '<button '. $disable_deactivate .' class="button button-primary seperate-action-btn deactivate-btn loading-btn" type="submit" name="develooper_plugin_activate" value="' . $button_value . '">Deactivate</button>';
         echo '</td>';
         echo '</form>';
         
@@ -162,19 +164,9 @@ function plugin_table_style() {
         }
 
         .seperate-action-btn {
-            margin: 0.2% !important;
-            width: 30% !important;
-            font-size: 0% !important;
-            height: 3% !important;
-            white-space: nowrap !important;
-            transition: width 0.5s ease-in-out !important;
+            width: 80% !important;
         }
 
-        .seperate-action-btn:hover { 
-            width: 60% !important;
-            overflow: hidden !important;
-            font-size: inherit !important;
-        }
 
         /* Optional: add some basic styling */
         .responsive-table, .responsive-table th, .responsive-table td {
