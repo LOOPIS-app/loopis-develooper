@@ -13,7 +13,7 @@ if (!defined('ABSPATH')) {
 }
 
 // import plungin list
-require_once LOOPIS_DEVELOOPER_DIR . 'assets/plugins/labels/plugin_list.php';
+require_once LOOPIS_DEVELOOPER_DIR . 'assets/plugins/plugin_list.php';
 
 function develooper_plugin_activate_all() {
     loopis_elog_function_start('develooper_plugins_activate_all');

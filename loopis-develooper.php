@@ -2,11 +2,11 @@
 /*
 Plugin Name: LOOPIS Develooper
 Plugin URI: https://github.com/LOOPIS-app/loopis-develooper
-Description: Plugin providing tools for the developers of LOOPIS.app
-Version: 0.4
+Description: Plugin providing tools for developing LOOPIS.app
+Version: 0.51
 Author: The Develoopers
 Author URI: https://loopis.org
-Required Plugins: LOOPIS Config
+Required Plugins: LOOPIS Admin
 */
 
 // Prevent direct access
@@ -14,19 +14,32 @@ if (!defined('ABSPATH')) {
     exit; 
 }
 
+// Run only in admin area
+if (!is_admin()) {
+    return;
+}
+
 // Define plugin version
-define('LOOPIS_DEVELOOPER_VERSION', '0.4');
+define('LOOPIS_DEVELOOPER_VERSION', '0.51');
 
 // Define plugin folder path constants
 define('LOOPIS_DEVELOOPER_DIR', plugin_dir_path(__FILE__));    // Server-side path to /wp-content/plugins/loopis-develooper/
 define('LOOPIS_DEVELOOPER_URL', plugin_dir_url(__FILE__));     // Client-side path to https://site.com/wp-content/plugins/loopis-develooper/
 
-// Define folders to include (for admins in admin area)
-function develooper_load_files() {
-    if (!current_user_can('administrator') || !is_admin()) {
-        return; // Exit early
-    }
+// Enqueue temporary CSS
+add_action('admin_enqueue_scripts', 'loopis_develooper_enqueue_assets');
 
+function loopis_develooper_enqueue_assets() {
+    wp_enqueue_style(
+        'loopis-develooper-styles',
+        LOOPIS_DEVELOOPER_URL . 'assets/css/temporary.css',
+        array(),
+        filemtime(LOOPIS_DEVELOOPER_DIR . 'assets/css/temporary.css')
+    );
+}
+
+// Define folders to include
+function develooper_load_files() {
     develooper_include_folder('interface');
     develooper_include_folder('pages');
 }
@@ -39,7 +52,7 @@ function develooper_include_folder($folder_name) {
             include_once $file;
         }
     } else {
-        error_log("develooper-plugin: Failed to include folder from develooper-plugin.php: {$folder_name}");
+        error_log("Failed to include folder: {$folder_name}");
     }
 }
 

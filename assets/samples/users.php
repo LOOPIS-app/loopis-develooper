@@ -4,7 +4,6 @@
  * Sample user collections.
  */
 
-
 /**
  * Summary of get_sample_users
  * @return array[]
