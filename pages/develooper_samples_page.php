@@ -73,7 +73,7 @@ function develooper_samples_page() {
         ?>
 
         <!-- Page content-->
-        <?php insert_spacer(20) ?>
+        <?php insert_spacer_admin(20) ?>
         
         <h2>🎁 Sample posts</h2>
         <p>Click the buttons to configure the sample posts.</p>
@@ -86,7 +86,7 @@ function develooper_samples_page() {
 
         <p><i>[Fix: Grey out insert/delete depending on if posts are already inserted.]</i></p>
 
-        <?php insert_spacer(20) ?>
+        <?php insert_spacer_admin(20) ?>
         
         <h2>👥 Sample users</h2>
         <p>Click the buttons to configure the sample users.</p>
