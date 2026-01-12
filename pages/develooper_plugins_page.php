@@ -16,8 +16,7 @@ require_once LOOPIS_DEVELOOPER_DIR . 'functions/develooper_roles_output.php';
 require_once LOOPIS_DEVELOOPER_DIR . 'functions/develooper_plugins_activations.php';
 require_once LOOPIS_DEVELOOPER_DIR . 'assets/scripts/loader.php';
 
-add_action('admin_init', 'setup');
-
+setup();
 // Function to render the page
 function develooper_plugins_page()
 {
