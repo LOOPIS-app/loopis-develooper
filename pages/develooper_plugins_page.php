@@ -32,7 +32,7 @@ function develooper_plugins_page()
             if ($_GET['action'] === 'installed') {
                 echo '<div class="notice notice-success is-dismissible"><p>✅ Plugins have been successfully installed!</p></div>';
             } else if ($_GET['action'] === 'deleted') {
-                echo '<div class="notice notice-success is-dismissible"><p>❌ Plugins have been successfully uninstalled!</p></div>';
+                echo '<div class="notice notice-success is-dismissible"><p>❌ Plugins have been successfully deleted!</p></div>';
             } else if ($_GET['action'] === 'activated') {
                 echo '<div class="notice notice-success is-dismissible"><p>✅ Plugins have been successfully activated!</p></div>';
             } else if ($_GET['action'] === 'deactivated') {
@@ -86,7 +86,7 @@ function develooper_plugins_page()
 
         // Render plugin buttons for all plugins
         echo '<button ' . $disable_install . ' class="button button-primary bunch-action-btn loading-btn wp-blue" type="submit" name="develooper_plugins_install">Install all plugins</button>';
-        echo '<button ' . $disable_uninstall . ' class="button button-primary bunch-action-btn loading-btn wp-red" type="submit" name="develooper_plugins_delete">Uninstall all plugins</button>';
+        echo '<button ' . $disable_uninstall . ' class="button button-primary bunch-action-btn loading-btn wp-red" type="submit" name="develooper_plugins_delete">Delete all plugins</button>';
         echo '<button ' . $disable_activate . ' class="button button-primary bunch-action-btn loading-btn wp-green" type="submit" name="develooper_plugins_activate_all">Activate all plugins</button>';
         echo '<button ' . $disable_deactivate . ' class="button button-primary bunch-action-btn loading-btn wp-orange" type="submit" name="develooper_plugins_deactivate_all">Deactivate all plugins</button>';
         // loading display when buttons are clicked

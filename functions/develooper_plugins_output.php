@@ -88,10 +88,23 @@ function render_loopis_plugins_table()
         $plugin_dir = WP_PLUGIN_DIR . '/' . $get_plugin_slug;
         $has_plugin_installed = is_dir($plugin_dir);
         //Shift between ✅ and ❌ depending on ***$has_plugin_installed*** variable
-        $status = $has_plugin_installed ? '✅' : '❌';
+
+
+        //$status = $has_plugin_installed ? '✅' : '❌';
+
+        $status = '';
+
+        if (!$has_plugin_installed) {
+            $status = '❌';
+
+        } else {
+            $status = is_plugin_active($plugin['main']) ? '&#9654;' : '&#9208;';
+        }
+
+
         $class = $has_plugin_installed ? 'cap-granted' : 'cap-denied';
 
-        echo '<td><span class="capability-status ' . $class . '">' . $status . '</span></td>';
+        echo '<td><span class="capability-status ' . $class . ' symbol-size">' . $status . '</span></td>';
         echo '<td><span class="role-name">' . esc_html($get_plugin_slug) . '</span></td>';
 
         // Disable buttons based on installation and activation status
@@ -118,7 +131,7 @@ function render_loopis_plugins_table()
         echo '<form method="post">';
         echo '<td>';
         echo '<button ' . $disable_install . ' class="button button-primary seperate-action-btn loading-btn wp-blue" type="submit" name="develooper_plugin_install" value="' . $button_value . '">Install</button>';
-        echo '<button ' . $disable_uninstall . ' class="button button-primary seperate-action-btn loading-btn wp-red" type="submit" name="develooper_plugin_install" value="' . $button_value . '">Uninstall</button>';
+        echo '<button ' . $disable_uninstall . ' class="button button-primary seperate-action-btn loading-btn wp-red" type="submit" name="develooper_plugin_install" value="' . $button_value . '">Delete</button>';
         echo '<button ' . $disable_activate . ' class="button button-primary seperate-action-btn loading-btn wp-green" type="submit" name="develooper_plugin_activate" value="' . $button_value . '">Activate</button>';
         echo '<button ' . $disable_deactivate . ' class="button button-primary seperate-action-btn loading-btn wp-orange" type="submit" name="develooper_plugin_activate" value="' . $button_value . '">Deactivate</button>';
         echo '</td>';
@@ -165,6 +178,10 @@ function plugin_table_style()
         .expand-col {
             width: auto;
             /* Takes up the remaining available space */
+        }
+
+        .symbol-size {
+            font-size: 150%;
         }
 
         .seperate-action-btn {
