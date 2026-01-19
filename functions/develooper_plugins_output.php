@@ -8,19 +8,32 @@ if (!defined('ABSPATH')) {
 
 require_once LOOPIS_DEVELOOPER_DIR . 'assets/plugins/plugin_list.php';
 
+
+/**
+ * Install or delete a plugin based on its slug and main file.
+ * 
+ * @return void
+ */
 if (isset($_POST['develooper_plugin_install'])) {
+
     if (!current_user_can('activate_plugins')) {
         wp_die(__('Insufficient permissions', 'loopis'));
     }
 
+    // Sanitize and extract slug and main file
     $payload = sanitize_text_field(wp_unslash($_POST['develooper_plugin_install']));
+
+    // Split payload into slug and main file
     list($slug, $main) = array_pad(explode('||', $payload, 2), 2, '');
 
+    // Proceed only if both slug and main file are provided
     if ($slug && $main) {
         require_once LOOPIS_DEVELOOPER_DIR . 'functions/develooper_plugins_install.php';
         require_once LOOPIS_DEVELOOPER_DIR . 'functions/develooper_plugins_delete.php';
 
         $plugin_dir = WP_PLUGIN_DIR . '/' . $slug;
+
+        // Check if plugin is installed; if not, install it, else delete it
         if (!is_dir($plugin_dir)) {
             develooper_plugin_install($slug, $main);
         } else {
@@ -28,11 +41,20 @@ if (isset($_POST['develooper_plugin_install'])) {
         }
     }
 
+    // Redirect back to the referring page with action parameter
     wp_redirect(add_query_arg('action', 'installed', wp_get_referer()));
     exit;
 }
 
+
+/**
+ * Activate or deactivate a plugin based on its slug and main file.
+ * 
+ * @return void
+ */
 if (isset($_POST['develooper_plugin_activate'])) {
+    loopis_elog_function_start('develooper_plugin_activations');
+
     if (!current_user_can('activate_plugins')) {
         wp_die(__('Insufficient permissions', 'loopis'));
     }
@@ -41,16 +63,28 @@ if (isset($_POST['develooper_plugin_activate'])) {
     list($slug, $main) = array_pad(explode('||', $payload, 2), 2, '');
 
     if ($slug && $main) {
+
+        // Check if plugins activated. If not, activate. If yes, deactivate.
         if (!is_plugin_active($main)) {
+            loopis_elog_first_level(" Activating plugin: {$slug}...");
             activate_plugins($main);
         } else {
+            loopis_elog_first_level(" Deactivating plugin: {$slug}...");
             deactivate_plugins($main);
         }
     }
 
+    loopis_elog_function_end_success('develooper_plugin_activations');
+
     wp_redirect(add_query_arg('action', 'activated', wp_get_referer()));
     exit;
 }
+
+/**
+ * Render the plugins table with plugins from plugin_list()
+ * 
+ * @return void
+ */
 
 function render_loopis_plugins_table()
 {
@@ -58,6 +92,7 @@ function render_loopis_plugins_table()
 
     $installed_plugins = get_plugins();
 
+    // Fetch plugin lists from plugin_list() (at assets/plugins/plugin_list.php)
     $plugins = plugin_list();
 
 
@@ -77,20 +112,23 @@ function render_loopis_plugins_table()
     echo '<tbody>';
 
     foreach ($plugins as $plugin) {
-        //$role = get_role($role_key);
-        //if (!$role) continue;
 
         //get slug of a plugin
         $get_plugin_slug = $plugin['slug'];
         echo '<tr>';
 
-        //$has_capability = isset($role->capabilities[$cap]) && $role->capabilities[$cap];
+
         $plugin_dir = WP_PLUGIN_DIR . '/' . $get_plugin_slug;
         $has_plugin_installed = is_dir($plugin_dir);
-        //Shift between ✅ and ❌ depending on ***$has_plugin_installed*** variable
 
+        //Shift between ✅, ⏸ and ❌ depending on ***$has_plugin_installed*** variable
 
-        //$status = $has_plugin_installed ? '✅' : '❌';
+        /**
+         * Status symbols:
+         * ❌ - Not installed
+         * ✅ - Installed and active
+         * ⏸ or &#9208; - Installed but inactive
+         */
 
         $status = '';
 
@@ -98,7 +136,7 @@ function render_loopis_plugins_table()
             $status = '❌';
 
         } else {
-            $status = is_plugin_active($plugin['main']) ? '&#9654;' : '&#9208;';
+            $status = is_plugin_active($plugin['main']) ? '✅' : '&#9208;';
         }
 
 
@@ -128,7 +166,7 @@ function render_loopis_plugins_table()
         $button_value = esc_attr($plugin['slug'] . '||' . $plugin['main']);
 
         // Button form for individual plugins
-        echo '<form method="post">';
+        echo '<form method="post" id="plugin-form" onsubmit="return button_loading(this)">';
         echo '<td>';
         echo '<button ' . $disable_install . ' class="button button-primary seperate-action-btn loading-btn wp-blue" type="submit" name="develooper_plugin_install" value="' . $button_value . '">Install</button>';
         echo '<button ' . $disable_uninstall . ' class="button button-primary seperate-action-btn loading-btn wp-red" type="submit" name="develooper_plugin_install" value="' . $button_value . '">Delete</button>';
@@ -146,6 +184,7 @@ function render_loopis_plugins_table()
     echo '</div>';
 }
 
+/** Render the plugins table with plugins from plugin_list() */
 
 function plugin_table_style()
 {

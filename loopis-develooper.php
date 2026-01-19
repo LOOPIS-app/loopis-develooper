@@ -10,8 +10,8 @@ Required Plugins: LOOPIS Admin
 */
 
 // Prevent direct access
-if (!defined('ABSPATH')) { 
-    exit; 
+if (!defined('ABSPATH')) {
+    exit;
 }
 
 // Run only in admin area
@@ -29,23 +29,32 @@ define('LOOPIS_DEVELOOPER_URL', plugin_dir_url(__FILE__));     // Client-side pa
 // Enqueue temporary CSS
 add_action('admin_enqueue_scripts', 'loopis_develooper_enqueue_assets');
 
-function loopis_develooper_enqueue_assets() {
+function loopis_develooper_enqueue_assets()
+{
     wp_enqueue_style(
         'loopis-develooper-styles',
         LOOPIS_DEVELOOPER_URL . 'assets/css/temporary.css',
         array(),
         filemtime(LOOPIS_DEVELOOPER_DIR . 'assets/css/temporary.css')
     );
+    wp_enqueue_script(
+        'loopis-develooper-scripts',
+        LOOPIS_DEVELOOPER_URL . 'assets/scripts/loader.js',
+        array('jquery'),
+        filemtime(LOOPIS_DEVELOOPER_DIR . 'assets/scripts/loader.js')
+    );
 }
 
 // Define folders to include
-function develooper_load_files() {
+function develooper_load_files()
+{
     develooper_include_folder('interface');
     develooper_include_folder('pages');
 }
 
 // Function to include all PHP files in a folder
-function develooper_include_folder($folder_name) {
+function develooper_include_folder($folder_name)
+{
     $absolute_path = LOOPIS_DEVELOOPER_DIR . '/' . $folder_name;
     if (is_dir($absolute_path)) {
         foreach (glob($absolute_path . '/*.php') as $file) {

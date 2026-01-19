@@ -14,7 +14,6 @@ if (!defined('ABSPATH')) {
 require_once LOOPIS_DEVELOOPER_DIR . 'functions/develooper_plugins_output.php';
 require_once LOOPIS_DEVELOOPER_DIR . 'functions/develooper_roles_output.php';
 require_once LOOPIS_DEVELOOPER_DIR . 'functions/develooper_plugins_activations.php';
-require_once LOOPIS_DEVELOOPER_DIR . 'assets/scripts/loader.php';
 
 setup();
 // Function to render the page
@@ -42,7 +41,7 @@ function develooper_plugins_page()
         ?>
         <!-- Page content-->
         <?php
-        echo '<form id="plugin-form" method="POST">';
+        echo '<form id="plugin-form" method="POST" onsubmit="return button_loading(this)">';
         $is_all_installed = false;
         $is_all_uninstalled = true;
 
@@ -101,7 +100,6 @@ function develooper_plugins_page()
         // Render the plugins table with plugins
         render_loopis_plugins_table();
         // loader display activations
-        activate_loader('.loading-btn', 'loader', 'plugin-form');
         ?>
     </div>
     <?php

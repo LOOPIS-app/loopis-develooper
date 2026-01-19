@@ -9,8 +9,8 @@
  */
 
 
-if (!defined('ABSPATH')) { 
-    exit; 
+if (!defined('ABSPATH')) {
+    exit;
 }
 
 require_once LOOPIS_DEVELOOPER_DIR . 'assets/plugins/plugin_list.php';
@@ -20,8 +20,9 @@ require_once LOOPIS_DEVELOOPER_DIR . 'assets/plugins/plugin_list.php';
  * 
  * @return void
  */
-function develooper_plugins_delete() {
-    
+function develooper_plugins_delete()
+{
+
     loopis_elog_function_start('develooper_plugins_delete');
 
     // Plugin main file in /wp-content/plugins
@@ -39,7 +40,7 @@ function develooper_plugins_delete() {
         }
 
         // Delete plugin if exists
-        $plugin_path = WP_PLUGIN_DIR . '/' . $plugin_slug; 
+        $plugin_path = WP_PLUGIN_DIR . '/' . $plugin_slug;
         if (file_exists($plugin_path)) {
             // Delete plugin
             $result = @delete_plugins([$plugin_main]);
@@ -50,14 +51,20 @@ function develooper_plugins_delete() {
                 loopis_elog_first_level(" Successfully uninstalled $plugin_slug");
             }
         } else {
-            loopis_elog_first_level(" File " . $plugin_path .  " does not exist ");
+            loopis_elog_first_level(" File " . $plugin_path . " does not exist ");
         }
     }
     loopis_elog_function_end_success('develooper_plugins_delete');
 }
 
-function develooper_plugin_delete($slug, $main) {
-    
+/**
+ * Delete an individual develooper-installed plugin from wp-content/plugins/
+ * 
+ * @return void
+ */
+function develooper_plugin_delete($slug, $main)
+{
+
     loopis_elog_function_start('develooper_plugin_delete');
 
     // Deactivate if active
@@ -66,7 +73,7 @@ function develooper_plugin_delete($slug, $main) {
     }
 
     // Delete plugin if exists
-    $plugin_path = WP_PLUGIN_DIR . '/' . $slug; 
+    $plugin_path = WP_PLUGIN_DIR . '/' . $slug;
     if (file_exists($plugin_path)) {
         loopis_elog_first_level(" File exist ");
         // Delete plugin
@@ -78,8 +85,8 @@ function develooper_plugin_delete($slug, $main) {
             loopis_elog_first_level(" Successfully uninstalled $slug");
         }
     } else {
-        loopis_elog_first_level(" File " . $plugin_path .  " does not exist ");
+        loopis_elog_first_level(" File " . $plugin_path . " does not exist ");
     }
-    
+
     loopis_elog_function_end_success('develooper_plugin_delete');
 }
