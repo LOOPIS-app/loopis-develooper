@@ -166,7 +166,7 @@ function render_loopis_plugins_table()
         $button_value = esc_attr($plugin['slug'] . '||' . $plugin['main']);
 
         // Button form for individual plugins
-        echo '<form method="post" id="plugin-form" onsubmit="return button_loading(this)">';
+        echo '<form method="post" id="plugin-form" onsubmit="button_loading(this)">';
         echo '<td>';
         echo '<button ' . $disable_install . ' class="button button-primary seperate-action-btn loading-btn wp-blue" type="submit" name="develooper_plugin_install" value="' . $button_value . '">Install</button>';
         echo '<button ' . $disable_uninstall . ' class="button button-primary seperate-action-btn loading-btn wp-red" type="submit" name="develooper_plugin_install" value="' . $button_value . '">Delete</button>';

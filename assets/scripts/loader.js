@@ -2,10 +2,13 @@
 
 function button_loading(form) {
     const loadingButtons = document.querySelectorAll('.loading-btn');
-    const loader = document.getElementById('loader');
+    const loader = document.querySelectorAll('.coin');
 
     console.log('Form submitting to:', form.action);
-    loader.style.display = 'inline-block';
+
+    loader.forEach(load => {
+        load.style.display = 'inline-block';
+    });
 
     setTimeout(() => {
         loadingButtons.forEach(button => {

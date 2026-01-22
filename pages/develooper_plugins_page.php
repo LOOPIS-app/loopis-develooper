@@ -41,7 +41,7 @@ function develooper_plugins_page()
         ?>
         <!-- Page content-->
         <?php
-        echo '<form id="plugin-form" method="POST" onsubmit="return button_loading(this)">';
+        echo '<form id="plugin-form" method="POST" onsubmit="button_loading(this)">';
         $is_all_installed = false;
         $is_all_uninstalled = true;
 
@@ -84,12 +84,13 @@ function develooper_plugins_page()
 
 
         // Render plugin buttons for all plugins
-        echo '<button ' . $disable_install . ' class="button button-primary bunch-action-btn loading-btn wp-blue" type="submit" name="develooper_plugins_install">Install all plugins</button>';
-        echo '<button ' . $disable_uninstall . ' class="button button-primary bunch-action-btn loading-btn wp-red" type="submit" name="develooper_plugins_delete">Delete all plugins</button>';
-        echo '<button ' . $disable_activate . ' class="button button-primary bunch-action-btn loading-btn wp-green" type="submit" name="develooper_plugins_activate_all">Activate all plugins</button>';
-        echo '<button ' . $disable_deactivate . ' class="button button-primary bunch-action-btn loading-btn wp-orange" type="submit" name="develooper_plugins_deactivate_all">Deactivate all plugins</button>';
+        echo '<button ' . $disable_install . ' class="button button-primary all-action-btn loading-btn wp-blue" type="submit" name="develooper_plugins_install">Install all plugins</button>';
+        echo '<button ' . $disable_uninstall . ' class="button button-primary all-action-btn loading-btn wp-red" type="submit" name="develooper_plugins_delete">Delete all plugins</button>';
+        echo '<button ' . $disable_activate . ' class="button button-primary all-action-btn loading-btn wp-green" type="submit" name="develooper_plugins_activate_all">Activate all plugins</button>';
+        echo '<button ' . $disable_deactivate . ' class="button button-primary all-action-btn loading-btn wp-orange" type="submit" name="develooper_plugins_deactivate_all">Deactivate all plugins</button>';
         // loading display when buttons are clicked
-        echo '<div class ="loader" id="loader"></div>';
+        echo '<div class="coin" id="coin"><img src="' . LOOPIS_DEVELOOPER_URL . 'assets/img/coin.png" alt="Loading..."></div>';
+        //echo '<div class ="loader" id="loader"></div>';
         echo '</form>';
 
 
