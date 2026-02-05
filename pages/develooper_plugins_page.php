@@ -13,7 +13,9 @@ if (!defined('ABSPATH')) {
 
 require_once LOOPIS_DEVELOOPER_DIR . 'functions/develooper_plugins_output.php';
 require_once LOOPIS_DEVELOOPER_DIR . 'functions/develooper_roles_output.php';
-require_once LOOPIS_DEVELOOPER_DIR . 'functions/develooper_plugins_activations.php';
+require_once LOOPIS_DEVELOOPER_DIR . 'functions/develooper_plugins_activate.php';
+require_once LOOPIS_DEVELOOPER_DIR . 'functions/develooper_plugins_deactivate.php';
+require_once LOOPIS_DEVELOOPER_DIR . 'functions/develooper_plugins_button_activation_handler.php';
 
 setup();
 // Function to render the page
@@ -44,6 +46,8 @@ function develooper_plugins_page()
         echo '<form id="plugin-form" method="POST" onsubmit="button_loading(this)">';
         $is_all_installed = false;
         $is_all_uninstalled = true;
+        $is_all_activated = false;
+        $is_all_deactivated = false;
 
         require_once LOOPIS_DEVELOOPER_DIR . 'assets/plugins/plugin_list.php';
 
@@ -51,37 +55,19 @@ function develooper_plugins_page()
         $plugins = plugin_list();
 
         // Determine button states
-        list($is_all_installed, $is_all_uninstalled) = button_activation_handler($is_all_installed, $is_all_uninstalled, $plugins, 'install', 'uninstall');
+        list($is_all_installed, $is_all_uninstalled) = button_activation_handler($is_all_installed, $is_all_uninstalled, $plugins, 'install');
 
+        if (!$is_all_uninstalled) {
+            list($is_all_activated, $is_all_deactivated) = button_activation_handler($is_all_activated, $is_all_deactivated, $plugins, 'activate');
+        }
         // Button display logic
         // If all installed, disable install button, opposite for uninstall. 
         $disable_install = $is_all_installed ? 'disabled ' : '';
         $disable_uninstall = $is_all_uninstalled ? 'disabled ' : '';
 
         // Logic for activate/deactivate buttons
-        $disable_activate = '';
-        $disable_deactivate = '';
-
-        // disable both activate and deactivate if all plugins aren't installed
-        if ($is_all_uninstalled) {
-            $disable_activate = 'disabled';
-            $disable_deactivate = 'disabled';
-            // if some of plugins are installed
-        } else {
-            //number or installed plugins
-            $install_counter = list_counter($plugins, 'install');
-            //number of activated plugins
-            $activate_counter = list_counter($plugins, 'activate');
-
-            //if all installed plugins are deactivated, disable Deactivate all plugins button
-            if ($activate_counter == 0) {
-                $disable_deactivate = 'disabled';
-                // if all installed plugins are activated, disable Activate all plugins button
-            } else if ($install_counter == $activate_counter) {
-                $disable_activate = 'disabled';
-            }
-        }
-
+        $disable_activate = $is_all_activated ? 'disabled ' : '';
+        $disable_deactivate = $is_all_deactivated ? 'disabled ' : '';
 
         // Render plugin buttons for all plugins
         echo '<button ' . $disable_install . ' class="button button-primary all-action-btn loading-btn wp-blue" type="submit" name="develooper_plugins_install">Install all plugins</button>';
@@ -142,75 +128,4 @@ function setup()
         wp_redirect(add_query_arg('action', 'deactivated', wp_get_referer()));
         exit;
     }
-}
-/**
- * Handle button activation status and summary display
- * 
- * @param bool $is_all_worked_1
- * @param bool $is_all_worked_2
- * @param array $lists
- * @param string $key1
- * @param string $key2
- * @return array Updated status of all worked variables
- */
-function button_activation_handler($is_all_worked_1, $is_all_worked_2, $lists, $key1, $key2)
-{
-    $all_active = $is_all_worked_1;
-    $all_inactive = $is_all_worked_2;
-
-    // Get count of installed plugins
-    $count = list_counter($lists, $key1);
-
-    // Get max count of plugins
-    $max_plugin_list_count = count($lists);
-
-    // Determine button states based on counts
-    // if count equals max, all are active(all installed/activated)
-    if ($count == $max_plugin_list_count) {
-        $all_active = true;
-        $all_inactive = false;
-
-    } // if count is lower than max but greater than 0, will both be false due to partial activation(some installed/activated)
-    else if ($count > 0 && $count < $max_plugin_list_count) {
-        $all_active = false;
-        $all_inactive = false;
-
-    } // if count is 0, all plugins are inactive(none installed/activated)
-    else {
-        $all_active = false;
-        $all_inactive = true;
-    }
-
-    return [$all_active, $all_inactive];
-
-}
-
-/**
- * Summary of counter. Counts amount of installed/activated plugins
- * @param array $lists
- * @return int
- */
-function list_counter($lists, $keywords)
-{
-    // Initialize counter
-    $counter = 0;
-
-    // Loop through each plugin in the list
-    foreach ($lists as $plugin) {
-        // if keywords is install, check if plugin directory exists
-        if ($keywords == 'install') {
-            $plugin_path = WP_PLUGIN_DIR . '/' . $plugin['slug'];
-            if (file_exists($plugin_path)) {
-                $counter++;
-            }
-        } // if keywords is activate, check if plugin is active
-        else if ($keywords == 'activate') {
-            $plugin_main = $plugin['main'];
-            if (is_plugin_active($plugin_main)) {
-                $counter++;
-            }
-        }
-    }
-
-    return $counter;
 }

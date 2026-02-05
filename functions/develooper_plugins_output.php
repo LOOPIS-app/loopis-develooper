@@ -59,6 +59,9 @@ if (isset($_POST['develooper_plugin_activate'])) {
         wp_die(__('Insufficient permissions', 'loopis'));
     }
 
+    require_once LOOPIS_DEVELOOPER_DIR . 'functions/develooper_plugins_activate.php';
+    require_once LOOPIS_DEVELOOPER_DIR . 'functions/develooper_plugins_deactivate.php';
+
     $payload = sanitize_text_field(wp_unslash($_POST['develooper_plugin_activate']));
     list($slug, $main) = array_pad(explode('||', $payload, 2), 2, '');
 
@@ -67,10 +70,11 @@ if (isset($_POST['develooper_plugin_activate'])) {
         // Check if plugins activated. If not, activate. If yes, deactivate.
         if (!is_plugin_active($main)) {
             loopis_elog_first_level(" Activating plugin: {$slug}...");
-            activate_plugins($main);
+            develooper_plugin_activate($slug, $main);
         } else {
             loopis_elog_first_level(" Deactivating plugin: {$slug}...");
-            deactivate_plugins($main);
+            develooper_plugin_deactivate($slug, $main);
+            //deactivate_plugins($main);
         }
     }
 

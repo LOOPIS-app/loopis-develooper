@@ -1,6 +1,6 @@
 <?php
 /**
- * Function to activate and deactivate develooper-installed plugins.
+ * Function to activate develooper-installed plugins for both all plugins and individual plugin.
  *
  * This file is included from the WP admin page with the same name. (When implemented. Copy from LOOPIS Config below.)
  * 
@@ -49,34 +49,29 @@ function develooper_plugin_activate_all()
 }
 
 /**
- * Deactivate all plugins. Used when "Deactivate all plugins" button is pressed.
+ * Activate an individual plugin based on its slug and main file.
  * 
  * @return void
  */
-function develooper_plugin_deactivate_all()
+
+function develooper_plugin_activate($slug, $main)
 {
-    loopis_elog_function_start('develooper_plugins_deactivate_all');
+    loopis_elog_function_start('develooper_plugin_activate');
 
-    // Fetch plugin list (assets/plugins/plugin_list.php)
-    $plugins = plugin_list();
+    // Full path to plugin
+    $plugin_path = WP_PLUGIN_DIR . '/' . $slug;
 
-    foreach ($plugins as $plugin) {
-        $plugin_slug = $plugin['slug'];
-        $plugin_main = $plugin['main'];
-
-        // Full path to plugin
-        $plugin_path = WP_PLUGIN_DIR . '/' . $plugin_slug;
-
-        // Check if plugin files exist
-        if (!file_exists($plugin_path)) {
-            loopis_elog_first_level(" File " . $plugin_path . " does not exist ");
-            continue;
-        }
-
-        // Deactivate if active
-        if (is_plugin_active($plugin_main)) {
-            deactivate_plugins($plugin_main);
-        }
+    // Check if plugin files exist
+    if (!file_exists($plugin_path)) {
+        loopis_elog_first_level(" File " . $plugin_path . " does not exist ");
+        return;
     }
-    loopis_elog_function_end_success('develooper_plugins_deactivate_all');
+
+    // Activate if not active
+    if (!is_plugin_active($main)) {
+        activate_plugins($main);
+    }
+
+    loopis_elog_function_end_success('develooper_plugin_activate');
 }
+
