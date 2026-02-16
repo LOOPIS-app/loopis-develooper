@@ -4,58 +4,13 @@
  */
 
  /* Kritsadakorns plugin buttons */
-.bunch-action-btn {
+.all-action-btn {
+    width: auto !important;
     margin: 0.2% !important;
-    width: 3% !important;
-    font-size: 0% !important;
-    height: 3% !important;
-    white-space: nowrap !important;
-    transition: width 0.5s ease-in-out !important;
-}
-
-.bunch-action-btn:hover { 
-    width: 10% !important;
-    overflow: hidden !important;
-    font-size: inherit !important;
-}
-
-.cancel-btn {
-    background-color: red !important;
-    border-color: red !important;
-    display: inline-block;
-    padding: 5px 10px;
-}
-
-.submit-btn {
-    background-color: #2271b1;
-    border-color: #2271b1;
-    display: inline-block;
-    padding: 5px 10px;
-}
-
-.activate-btn {
-    background-color: green !important;
-    border-color: green !important;
-    display: inline-block;
-    padding: 5px 10px;
-}
-
-.deactivate-btn {
-    background-color: orange !important;
-    border-color: orange !important;
-    display: inline-block;
-    padding: 5px 10px;
-}
-
-.cancel-btn:hover,
-.submit-btn:hover,
-.activate-btn:hover,
-.deactivate-btn:hover {
-    background-image: linear-gradient(rgb(0 0 0/40%) 0 0) !important;
 }
 
 /* HTML: <div class="loader"></div> */
-.loader {
+/*.loader {
     width: 30px;
     height: 30px;
     border: 5px solid;
@@ -64,6 +19,16 @@
     display: none;
     box-sizing: border-box;
     animation: rotation 1s linear infinite;
+}*/
+.coin {
+    display: none;
+    box-sizing: border-box;
+}
+
+.coin img {
+    width: 30px;
+    height: 30px;
+    animation: rotation 5s linear infinite;
 }
 
 @keyframes rotation {
