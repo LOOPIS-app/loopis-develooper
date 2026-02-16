@@ -1,0 +1,41 @@
+/**
+ * All CSS for the WP Admin area of LOOPIS.app should be located in "loopis-wp-admin.css" (plugin "LOOPIS Admin").
+ * You can temporarily add CSS here as suggestions.
+ */
+
+ /* Kritsadakorns plugin buttons */
+.all-action-btn {
+    width: auto !important;
+    margin: 0.2% !important;
+}
+
+/* HTML: <div class="loader"></div> */
+/*.loader {
+    width: 30px;
+    height: 30px;
+    border: 5px solid;
+    border-color: #FF3D00 transparent;
+    border-radius: 50%;
+    display: none;
+    box-sizing: border-box;
+    animation: rotation 1s linear infinite;
+}*/
+.coin {
+    display: none;
+    box-sizing: border-box;
+}
+
+.coin img {
+    width: 30px;
+    height: 30px;
+    animation: rotation 5s linear infinite;
+}
+
+@keyframes rotation {
+    0% {
+        transform: rotate(0deg);
+    }
+    100% {
+        transform: rotate(360deg);
+    }
+}

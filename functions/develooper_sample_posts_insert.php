@@ -21,6 +21,9 @@ if ( ! function_exists('get_user_by') ) {
     require_once ABSPATH . 'wp-includes/pluggable.php';
 }
 
+// Import sample-post lists
+require_once LOOPIS_DEVELOOPER_DIR . 'assets/samples/posts.php';
+
 /**
  * Insert posts into wp_posts
  * 
@@ -36,119 +39,26 @@ function develooper_sample_posts_insert() {
         $wp_rewrite = new WP_Rewrite();
     }
 
-    // Define sample posts
-    $sample_posts = [
-        [
-            'post_author' => 'gabby-giver',
-            'post_date' => '2023-10-22 17:00:00',
-            'post_title' => 'Känguru!',
-            'post_content' => 'Klassiskt plastdjur, made in China. 14 cm hög och 20 cm från nos- till svanstipp. Lite skavd på nosen men annars i gott skick. Ungen kan plockas ut ur pungen!',
-            'post_name' => 'kanguru',
-            'feature_image' => 'post-1',            
-        ],
-        [
-            'post_author' => 'fred-fetcher',
-            'post_date' => '2024-10-22 17:00:00',
-            'post_title' => 'Trästol',
-            'post_content' => 'Rejäl stol med hög rygg. Vadderad sits med fejkskinn. Bra skick men lite slitage, mest synligt på hörnet av sitsen, bild 2.',
-            'post_name' => 'trastol',
-            'feature_image' => 'post-2',            
-        ],
-        [
-            'post_author' => 'gabby-giver',
-            'post_date' => '2025-09-22 17:00:00',
-            'post_title' => 'Rivjärn tupperware',
-            'post_content' => 'Rivjärn på en behållare med handtag. Rymmer ca 600ml.',
-            'post_name' => 'rivjarn_tupperware',
-            'feature_image' => 'post-3',            
-        ],
-        [
-            'post_author' => 'gabby-giver',
-            'post_date' => '2025-10-15 17:00:00',
-            'post_title' => 'Myggspray',
-            'post_content' => 'Sprayflaska. Typ 90% full. Locket saknas tyvärr 🫤',
-            'post_name' => 'myggspray',
-            'feature_image' => 'post-4',            
-        ],
-        [
-            'post_author' => 'rebecca-raffle',
-            'post_date' => '2025-10-20 12:01:00',
-            'post_title' => '📒 Liftarens guide till galaxen',
-            'post_content' => 'Rensar i bokhyllan. Lite tjock och sliten pocket tryckt 1992.',
-            'post_name' => 'loftarens_guide_till_galaxen',
-            'feature_image' => 'post-5',            
-        ],
-        [
-            'post_author' => 'rebecca-raffle',
-            'post_date' => '2025-10-20 12:02:00',
-            'post_title' => '"Finns det liv på Mars?"',
-            'post_content' => 'Pocket från 2006 av Inger Edelfeldt. Om en ensamstående mamma med kärlek till David Bowie. Jag blev inte förtjust.',
-            'post_name' => 'finns_det_liv_pa_mars',
-            'feature_image' => 'post-6',           
-        ],
-        [
-            'post_author' => 'rebecca-raffle',
-            'post_date' => '2025-10-21 14:00:00',
-            'post_title' => 'Knausgårds kamp...',
-            'post_content' => 'Lång bok! Läste början och slutet bara för att förstå vad hans kamp handlar om… 😊',
-            'post_name' => 'knausgards_kamp',
-            'feature_image' => 'post-7',            
-        ],
-        [
-            'post_author' => 'gabby-giver',
-            'post_date' => '2025-10-21 14:01:00',
-            'post_title' => 'Klösbräda & kattmynta',
-            'post_content' => 'Har blivit liggandes hemma. Får se om kattmyntan har någon effekt fortfarande. 😊',
-            'post_name' => 'klosbrada_kattmynta',
-            'feature_image' => 'post-8',            
-        ],
-        [
-            'post_author' => 'fred-fetcher',
-            'post_date' => '2025-10-21 14:02:00',
-            'post_title' => 'Rejäl kontorsstol',
-            'post_content' => 'Okänt märke men känns som en äldre modell av någon ergonomisk klassiker. Den har fyra reglage som kan ta lite tid att förstå men alla verkar fungera. Den cykelventil som sitter på baksidan verkar dock inte ha någon effekt. Vikt cirka 20 kg.',
-            'post_name' => 'rejal_kontorsstol',
-            'feature_image' => 'post-9',            
-        ],
-        [
-            'post_author' => 'gabby-giver',
-            'post_date' => '2025-10-21 14:03:00',
-            'post_title' => 'Papplåda',
-            'post_content' => 'Hopfällbar kartong klädd med mörkgrå yta, förutom i botten. Lite skavanker men hel och ren. 30x30x30 cm.',
-            'post_name' => 'papplada',  
-            'feature_image' => 'post-10',          
-        ],
-        [
-            'post_author' => 'gabby-giver',
-            'post_date' => '2025-10-22 00:01:00',
-            'post_title' => 'Pennfodral',
-            'post_content' => 'Praktiskt och ihopfällbart med dragkedja. Plats för 40 pennor 2 sudd – men de på bilden ingår ej. 🙂',
-            'post_name' => 'pennfodral', 
-            'feature_image' => 'post-11',           
-        ],
-        [
-            'post_author' => 'gabby-giver',
-            'post_date' => '2025-10-22 00:02:00',
-            'post_title' => 'Tuschpennor',
-            'post_content' => '18 stycken av ganska fin kvalité. Det finns en tjock och en tunn spets på varje penna. De tunna har torkat men de tjocka funkar fint!',
-            'post_name' => 'tuschpennor',
-            'feature_image' => 'post-12',            
-        ],
-        [
-            'post_author' => 'gabby-giver',
-            'post_date' => '2025-10-22 00:03:00',
-            'post_title' => 'Vattenkanna',
-            'post_content' => '10 liter i klassisk modell',
-            'post_name' => 'vattenkanna',
-            'feature_image' => 'post-13',            
-        ],
-    ];
+    // Wordpress WP_Query to prevent running too early
+    global $wp_query;
+    if ( ! $wp_query ) {
+        $wp_query = new WP_Query();
+    }
+
+    // Fetch sample posts from sample-posts.php
+    $sample_posts = get_sample_posts();
+
+    // Current time for post date calculations
+    $current_time = new DateTime(current_time('mysql'));
 
     foreach($sample_posts as $post) {
 
-        // 1. If post is already exist, skip it.
-        if (post_exists($post['post_title'], $post['post_content'], $post['post_date'])) {
-            loopis_elog_first_level('Post already exists: ' . $post['post_title']);
+        // 1. Fetch existing post by slug.
+        $post_name = $post['post_name'];
+        $existed_post = get_page_by_path($post_name, OBJECT, 'post');
+        // If post is already exist, skip it.
+        if ($existed_post) {
+            loopis_elog_first_level('Post already exists: ' . $post['post_title'] . ' (Slug: ' . $post['post_name'] . ')');
             continue;
         }
 
@@ -161,10 +71,21 @@ function develooper_sample_posts_insert() {
             continue; 
         }
 
+        // Prepare post date and time
+        $post_date = clone $current_time; 
+        // if post_date is specified, modify it, else use current date
+        if ($post['post_date'] != '') {
+            $post_date->modify($post['post_date']);
+        }
+        // divide post_time value into hour, minute, second from hh:mm:ss.
+        list($hour, $minute, $second) = explode(':', $post['post_time']);
+
+        // set time
+        $post_date->setTime((int)$hour, (int)$minute, (int)$second);
         // 4. Insert post.
         $post_id = wp_insert_post([
             'post_author' => $user_id->ID,
-            'post_date' => $post['post_date'],
+            'post_date' => $post_date->format('Y-m-d H:i:s'),
             'post_title' => $post['post_title'],
             'post_content' => $post['post_content'],
             'post_name' => $post['post_name'],
@@ -179,11 +100,16 @@ function develooper_sample_posts_insert() {
             loopis_elog_first_level('Failed to create post "' . $post['post_title'] . '": ' . $post_id->get_error_message());
             continue;
         } else {
+            // report success
             loopis_elog_first_level('Successfully created post "' . $post['post_title'] . '" (ID: ' . $post_id . ')');
         }
 
+        // Set taxonomies (post tags and categories)
+        wp_set_post_tags($post_id, $post['post_tags'], false);
+        develooper_insert_sample_posts_category($post_id, $post['post_categories']);
+
         // 6. Retrieve local image file.
-        $img_path = LOOPIS_DEVELOOPER_DIR . "assets/img/sample_posts/{$post['feature_image']}.jpg";
+        $img_path = LOOPIS_DEVELOOPER_DIR . "assets/samples/img/{$post['feature_image']}.jpg";
 
         // 7. Check if the file exists
         if (file_exists($img_path)) { 
@@ -192,6 +118,7 @@ function develooper_sample_posts_insert() {
             // 7.1. If yes, add image to the post.
             $attached_img = develooper_add_image_to_inserted_post($post_id, $img_path);
 
+            // if $attached_img is WP_Error, show error log and skip adding featured image
             if (is_wp_error($attached_img)) {
                 loopis_elog_first_level('Failed to attach image to post "' . $post['post_title'] . '": ' . $attached_img->get_error_message());
             } else {
@@ -209,6 +136,7 @@ function develooper_sample_posts_insert() {
     // Flush rewrite rules after inserting posts
     flush_rewrite_rules(false);
 
+    // final log
     loopis_elog_function_end_success('develooper_sample_posts_insert');
 }
 
@@ -221,9 +149,11 @@ function develooper_sample_posts_insert() {
  */
 function develooper_add_image_to_inserted_post($post_id, $image_path) {
     
+    // Include required WP files for handling media
     require_once ABSPATH . 'wp-admin/includes/image.php';
     require_once ABSPATH . 'wp-admin/includes/file.php';
 
+    // Check if file exists
     if (!file_exists($image_path)) {
         return new WP_Error('file_not_found', 'Image file does not exist: ' . $image_path);
     }
@@ -262,6 +192,7 @@ function develooper_add_image_to_inserted_post($post_id, $image_path) {
         'post_status'    => 'inherit'
     ), $new_file_path, $post_id);
 
+    //unlink on error
     if (is_wp_error($attachment_id)) {
         @unlink($new_file_path);
         return $attachment_id;
@@ -272,4 +203,29 @@ function develooper_add_image_to_inserted_post($post_id, $image_path) {
     wp_update_attachment_metadata($attachment_id, $attach_data);
 
     return $attachment_id;
+}
+
+/**
+ * Function to assign categories to the inserted post
+ * 
+ * @param int $post_id
+ * @param array $categories Array of category slugs
+ * @return void
+ */
+function develooper_insert_sample_posts_category($post_id, $categories) {
+
+    // Assign categories to the post
+    foreach ($categories as $category) {
+        
+        // get category term by slug
+        $category_term = get_term_by( 'slug', $category, 'category' );
+
+        // if term exists, assign to post
+        if ( ! is_wp_error( $category_term ) && term_exists( $category_term->term_id, 'category' ) ) {
+            wp_set_post_categories( $post_id, [ $category_term->term_id ], false );
+            // else report non-existence
+        } else {
+            loopis_elog_first_level('Category does not exist: ' . $category);
+        }
+    }
 }
