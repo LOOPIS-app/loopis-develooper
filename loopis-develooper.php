@@ -1,12 +1,12 @@
 <?php
-/*
-Plugin Name: LOOPIS Develooper
-Plugin URI: https://github.com/LOOPIS-app/loopis-develooper
-Description: Plugin providing tools for developing LOOPIS.app
-Version: 0.51
-Author: The Develoopers
-Author URI: https://loopis.org
-Required Plugins: LOOPIS Admin
+/**
+ * Plugin Name:     LOOPIS Develooper (beta)
+ * Plugin URI:      https://github.com/LOOPIS-app/loopis-develooper
+ * Description:     Plugin providing tools for developing LOOPIS.app
+ * Version:         0.51
+ * Author:          The Develoopers
+ * Author URI:      https://loopis.org
+ * Text Domain:     loopis-develooper
 */
 
 // Prevent direct access
