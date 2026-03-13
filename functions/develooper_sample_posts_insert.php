@@ -14,10 +14,10 @@ if (!defined('ABSPATH')) {
 }
 
 // Include WP functions
-if ( ! function_exists( 'post_exists' ) ) {
+if (!function_exists('post_exists')) {
     require_once ABSPATH . 'wp-admin/includes/post.php';
 }
-if ( ! function_exists('get_user_by') ) {
+if (!function_exists('get_user_by')) {
     require_once ABSPATH . 'wp-includes/pluggable.php';
 }
 
@@ -29,7 +29,8 @@ require_once LOOPIS_DEVELOOPER_DIR . 'assets/samples/posts.php';
  * 
  * @return void
  */
-function develooper_sample_posts_insert() {
+function develooper_sample_posts_insert()
+{
 
     loopis_elog_function_start('develooper_sample_posts_insert');
 
@@ -41,7 +42,7 @@ function develooper_sample_posts_insert() {
 
     // Wordpress WP_Query to prevent running too early
     global $wp_query;
-    if ( ! $wp_query ) {
+    if (!$wp_query) {
         $wp_query = new WP_Query();
     }
 
@@ -51,7 +52,7 @@ function develooper_sample_posts_insert() {
     // Current time for post date calculations
     $current_time = new DateTime(current_time('mysql'));
 
-    foreach($sample_posts as $post) {
+    foreach ($sample_posts as $post) {
 
         // 1. Fetch existing post by slug.
         $post_name = $post['post_name'];
@@ -68,11 +69,11 @@ function develooper_sample_posts_insert() {
         // 3. Check if the user exists, if not, skip.
         if (!$user_id) {
             loopis_elog_first_level('User does not exist: ' . $post['post_author']);
-            continue; 
+            continue;
         }
 
         // Prepare post date and time
-        $post_date = clone $current_time; 
+        $post_date = clone $current_time;
         // if post_date is specified, modify it, else use current date
         if ($post['post_date'] != '') {
             $post_date->modify($post['post_date']);
@@ -81,7 +82,7 @@ function develooper_sample_posts_insert() {
         list($hour, $minute, $second) = explode(':', $post['post_time']);
 
         // set time
-        $post_date->setTime((int)$hour, (int)$minute, (int)$second);
+        $post_date->setTime((int) $hour, (int) $minute, (int) $second);
         // 4. Insert post.
         $post_id = wp_insert_post([
             'post_author' => $user_id->ID,
@@ -112,9 +113,9 @@ function develooper_sample_posts_insert() {
         $img_path = LOOPIS_DEVELOOPER_DIR . "assets/samples/img/{$post['feature_image']}.jpg";
 
         // 7. Check if the file exists
-        if (file_exists($img_path)) { 
+        if (file_exists($img_path)) {
             loopis_elog_first_level('Found image file: ' . basename($img_path));
-            
+
             // 7.1. If yes, add image to the post.
             $attached_img = develooper_add_image_to_inserted_post($post_id, $img_path);
 
@@ -147,8 +148,9 @@ function develooper_sample_posts_insert() {
  * @param string $image_path Local file path to the image
  * @return int|WP_Error Attachment ID on success, WP_Error on failure
  */
-function develooper_add_image_to_inserted_post($post_id, $image_path) {
-    
+function develooper_add_image_to_inserted_post($post_id, $image_path)
+{
+
     // Include required WP files for handling media
     require_once ABSPATH . 'wp-admin/includes/image.php';
     require_once ABSPATH . 'wp-admin/includes/file.php';
@@ -159,7 +161,7 @@ function develooper_add_image_to_inserted_post($post_id, $image_path) {
     }
 
     // Temporarily disable organized uploads (no year/month folders)
-    add_filter('upload_dir', function($upload_dir) {
+    add_filter('upload_dir', function ($upload_dir) {
         $upload_dir['subdir'] = '';
         $upload_dir['path'] = $upload_dir['basedir'];
         $upload_dir['url'] = $upload_dir['baseurl'];
@@ -168,10 +170,10 @@ function develooper_add_image_to_inserted_post($post_id, $image_path) {
 
     // Get upload directory (with filter applied)
     $upload_dir = wp_upload_dir();
-    
+
     // Remove the filter immediately after getting the directory
     remove_all_filters('upload_dir');
-    
+
     // Generate unique filename
     $filename = wp_unique_filename($upload_dir['path'], basename($image_path));
     $new_file_path = $upload_dir['path'] . '/' . $filename;
@@ -187,9 +189,9 @@ function develooper_add_image_to_inserted_post($post_id, $image_path) {
     // Insert attachment
     $attachment_id = wp_insert_attachment(array(
         'post_mime_type' => $filetype['type'],
-        'post_title'     => preg_replace('/\.[^.]+$/', '', $filename),
-        'post_content'   => '',
-        'post_status'    => 'inherit'
+        'post_title' => preg_replace('/\.[^.]+$/', '', $filename),
+        'post_content' => '',
+        'post_status' => 'inherit'
     ), $new_file_path, $post_id);
 
     //unlink on error
@@ -212,20 +214,34 @@ function develooper_add_image_to_inserted_post($post_id, $image_path) {
  * @param array $categories Array of category slugs
  * @return void
  */
-function develooper_insert_sample_posts_category($post_id, $categories) {
+function develooper_insert_sample_posts_category($post_id, $categories)
+{
 
     // Assign categories to the post
     foreach ($categories as $category) {
-        
+
         // get category term by slug
-        $category_term = get_term_by( 'slug', $category, 'category' );
+        $category_term = get_term_by('slug', $category, 'category');
 
         // if term exists, assign to post
-        if ( ! is_wp_error( $category_term ) && term_exists( $category_term->term_id, 'category' ) ) {
-            wp_set_post_categories( $post_id, [ $category_term->term_id ], false );
+        if (!is_wp_error($category_term) && term_exists($category_term->term_id, 'category')) {
+            wp_set_post_categories($post_id, [$category_term->term_id], false);
             // else report non-existence
         } else {
             loopis_elog_first_level('Category does not exist: ' . $category);
         }
     }
+}
+
+function develooper_add_sample_post_meta($post_id, $post)
+{
+    loopis_elog_function_start('develooper_add_sample_post_meta');
+    if (!post_exists($post['post_title'])) {
+        loopis_elog_first_level('This post does not exist, cannot add meta. Post Title: ' . $post['post_title']);
+        return new WP_Error('post_not_found', 'Post does not exist: ' . $post['post_title']);
+    }
+
+    update_post_meta($post_id, 'sample_meta_key', 'sample_meta_value');
+
+    loopis_elog_function_end_success('develooper_sample_posts_insert');
 }
