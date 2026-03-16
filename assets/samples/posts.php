@@ -21,6 +21,55 @@ function get_sample_posts()
             'feature_image' => 'post-01',
             'post_tags' => ['leksaker', 'inredning'],
             'post_categories' => ['old'],
+            'post_meta' => [
+                'location' => 'Skåpet',
+                'custom_location' => '',
+                'locker_number' => '',
+                'image_2' => '',
+                'participants' => [],
+                'fetcher' => '',
+                'queue' => [],
+                'raffle_date' => [
+                    'date' => '',
+                    'time' => '',
+                ],
+                'book_date' => [
+                    'date' => '',
+                    'time' => '',
+                ],
+                'locker_date' => [
+                    'date' => '',
+                    'time' => '',
+                ],
+                'fetch_date' => [
+                    'date' => '',
+                    'time' => '',
+                ],
+                'forward_date' => [
+                    'date' => '',
+                    'time' => '',
+                ],
+                'remove_date' => [
+                    'date' => '',
+                    'time' => '',
+                ],
+                'pause_date' => [
+                    'date' => '',
+                    'time' => '',
+                ],
+                'archive_date' => [
+                    'date' => '',
+                    'time' => '',
+                ],
+                'extend_date' => [
+                    'date' => '-7 days',
+                    'time' => '07:00:00',
+                ],
+                'forward_post' => '',
+                'previous_post' => '',
+                'reminder_leave' => '',
+                'reminder_fetch' => '',
+            ],
         ],
         [
             'post_author' => 'gabby-giver',
@@ -32,6 +81,55 @@ function get_sample_posts()
             'feature_image' => 'post-02',
             'post_tags' => ['mobler'],
             'post_categories' => ['booked_custom'],
+            'post_meta' => [
+                'location' => 'Emågatan 24',
+                'custom_location' => 'Emågatan 24',
+                'locker_number' => '',
+                'image_2' => '',
+                'participants' => ['fred-fetcher', 'rebecca-raffle', 'monica-manager'],
+                'fetcher' => 'fred-fetcher',
+                'queue' => ['rebecca-raffle', 'monica-manager'],
+                'raffle_date' => [
+                    'date' => '-6 days',
+                    'time' => '12:00:00',
+                ],
+                'book_date' => [
+                    'date' => '-6 days',
+                    'time' => '12:00:00',
+                ],
+                'locker_date' => [
+                    'date' => '',
+                    'time' => '',
+                ],
+                'fetch_date' => [
+                    'date' => '',
+                    'time' => '',
+                ],
+                'forward_date' => [
+                    'date' => '',
+                    'time' => '',
+                ],
+                'remove_date' => [
+                    'date' => '',
+                    'time' => '',
+                ],
+                'pause_date' => [
+                    'date' => '',
+                    'time' => '',
+                ],
+                'archive_date' => [
+                    'date' => '',
+                    'time' => '',
+                ],
+                'extend_date' => [
+                    'date' => '',
+                    'time' => '',
+                ],
+                'forward_post' => '',
+                'previous_post' => '',
+                'reminder_leave' => '',
+                'reminder_fetch' => '1',
+            ],
         ],
         [
             'post_author' => 'gabby-giver',
@@ -43,6 +141,55 @@ function get_sample_posts()
             'feature_image' => 'post-03',
             'post_tags' => ['kok', 'hushall'],
             'post_categories' => ['fetched'],
+            'post_meta' => [
+                'location' => 'Skåpet',
+                'custom_location' => '',
+                'locker_number' => '',
+                'image_2' => '',
+                'participants' => [],
+                'fetcher' => 'fred-fetcher',
+                'queue' => ['rebecca-raffle'],
+                'raffle_date' => [
+                    'date' => '',
+                    'time' => '',
+                ],
+                'book_date' => [
+                    'date' => '-3 days',
+                    'time' => '07:00:00',
+                ],
+                'locker_date' => [
+                    'date' => '-3 days',
+                    'time' => '08:00:00',
+                ],
+                'fetch_date' => [
+                    'date' => '-3 days',
+                    'time' => '09:00:00',
+                ],
+                'forward_date' => [
+                    'date' => '',
+                    'time' => '',
+                ],
+                'remove_date' => [
+                    'date' => '',
+                    'time' => '',
+                ],
+                'pause_date' => [
+                    'date' => '',
+                    'time' => '',
+                ],
+                'archive_date' => [
+                    'date' => '',
+                    'time' => '',
+                ],
+                'extend_date' => [
+                    'date' => '',
+                    'time' => '',
+                ],
+                'forward_post' => '',
+                'previous_post' => '',
+                'reminder_leave' => '',
+                'reminder_fetch' => '',
+            ],
         ],
         [
             'post_author' => 'gabby-giver',
@@ -54,6 +201,55 @@ function get_sample_posts()
             'feature_image' => 'post-04',
             'post_tags' => ['sport-fritid'],
             'post_categories' => ['old'],
+            'post_meta' => [
+                'location' => 'Skåpet',
+                'custom_location' => '',
+                'locker_number' => '',
+                'image_2' => '',
+                'participants' => [],
+                'fetcher' => '',
+                'queue' => [],
+                'raffle_date' => [
+                    'date' => '',
+                    'time' => '',
+                ],
+                'book_date' => [
+                    'date' => '',
+                    'time' => '',
+                ],
+                'locker_date' => [
+                    'date' => '',
+                    'time' => '',
+                ],
+                'fetch_date' => [
+                    'date' => '',
+                    'time' => '',
+                ],
+                'forward_date' => [
+                    'date' => '',
+                    'time' => '',
+                ],
+                'remove_date' => [
+                    'date' => '',
+                    'time' => '',
+                ],
+                'pause_date' => [
+                    'date' => '',
+                    'time' => '',
+                ],
+                'archive_date' => [
+                    'date' => '',
+                    'time' => '',
+                ],
+                'extend_date' => [
+                    'date' => '',
+                    'time' => '',
+                ],
+                'forward_post' => '',
+                'previous_post' => '',
+                'reminder_leave' => '',
+                'reminder_fetch' => '',
+            ],
         ],
         [
             'post_author' => 'gabby-giver',
@@ -65,6 +261,55 @@ function get_sample_posts()
             'feature_image' => 'post-05',
             'post_tags' => ['bocker'],
             'post_categories' => ['booked'],
+            'post_meta' => [
+                'location' => 'Skåpet',
+                'custom_location' => '',
+                'locker_number' => '',
+                'image_2' => '',
+                'participants' => ['fred-fetcher', 'rebecca-raffle'],
+                'fetcher' => 'fred-fetcher',
+                'queue' => ['rebecca-raffle'],
+                'raffle_date' => [
+                    'date' => '-1 days',
+                    'time' => '12:00:00',
+                ],
+                'book_date' => [
+                    'date' => '-1 days',
+                    'time' => '12:00:00',
+                ],
+                'locker_date' => [
+                    'date' => '',
+                    'time' => '',
+                ],
+                'fetch_date' => [
+                    'date' => '',
+                    'time' => '',
+                ],
+                'forward_date' => [
+                    'date' => '',
+                    'time' => '',
+                ],
+                'remove_date' => [
+                    'date' => '',
+                    'time' => '',
+                ],
+                'pause_date' => [
+                    'date' => '',
+                    'time' => '',
+                ],
+                'archive_date' => [
+                    'date' => '',
+                    'time' => '',
+                ],
+                'extend_date' => [
+                    'date' => '',
+                    'time' => '',
+                ],
+                'forward_post' => '',
+                'previous_post' => '',
+                'reminder_leave' => '',
+                'reminder_fetch' => '',
+            ],
         ],
         [
             'post_author' => 'gabby-giver',
@@ -76,6 +321,55 @@ function get_sample_posts()
             'feature_image' => 'post-06',
             'post_tags' => ['bocker'],
             'post_categories' => ['locker'],
+            'post_meta' => [
+                'location' => 'Skåpet',
+                'custom_location' => '',
+                'locker_number' => '',
+                'image_2' => '',
+                'participants' => ['fred-fetcher', 'rebecca-raffle'],
+                'fetcher' => 'fred-fetcher',
+                'queue' => ['rebecca-raffle'],
+                'raffle_date' => [
+                    'date' => '-1 days',
+                    'time' => '12:00:00',
+                ],
+                'book_date' => [
+                    'date' => '-1 days',
+                    'time' => '12:00:00',
+                ],
+                'locker_date' => [
+                    'date' => '-1 days',
+                    'time' => '13:00:00',
+                ],
+                'fetch_date' => [
+                    'date' => '',
+                    'time' => '',
+                ],
+                'forward_date' => [
+                    'date' => '',
+                    'time' => '',
+                ],
+                'remove_date' => [
+                    'date' => '',
+                    'time' => '',
+                ],
+                'pause_date' => [
+                    'date' => '',
+                    'time' => '',
+                ],
+                'archive_date' => [
+                    'date' => '',
+                    'time' => '',
+                ],
+                'extend_date' => [
+                    'date' => '',
+                    'time' => '',
+                ],
+                'forward_post' => '',
+                'previous_post' => '',
+                'reminder_leave' => '',
+                'reminder_fetch' => '',
+            ],
         ],
         [
             'post_author' => 'gabby-giver',
@@ -87,6 +381,55 @@ function get_sample_posts()
             'feature_image' => 'post-07',
             'post_tags' => ['bocker'],
             'post_categories' => ['new'],
+            'post_meta' => [
+                'location' => 'Skåpet',
+                'custom_location' => '',
+                'locker_number' => '',
+                'image_2' => '',
+                'participants' => ['fred-fetcher'],
+                'fetcher' => '',
+                'queue' => [],
+                'raffle_date' => [
+                    'date' => '',
+                    'time' => '',
+                ],
+                'book_date' => [
+                    'date' => '',
+                    'time' => '',
+                ],
+                'locker_date' => [
+                    'date' => '',
+                    'time' => '',
+                ],
+                'fetch_date' => [
+                    'date' => '',
+                    'time' => '',
+                ],
+                'forward_date' => [
+                    'date' => '',
+                    'time' => '',
+                ],
+                'remove_date' => [
+                    'date' => '',
+                    'time' => '',
+                ],
+                'pause_date' => [
+                    'date' => '',
+                    'time' => '',
+                ],
+                'archive_date' => [
+                    'date' => '',
+                    'time' => '',
+                ],
+                'extend_date' => [
+                    'date' => '',
+                    'time' => '',
+                ],
+                'forward_post' => '',
+                'previous_post' => '',
+                'reminder_leave' => '',
+                'reminder_fetch' => '',
+            ],
         ],
         [
             'post_author' => 'gabby-giver',
@@ -98,6 +441,55 @@ function get_sample_posts()
             'feature_image' => 'post-08',
             'post_tags' => ['djursaker'],
             'post_categories' => ['new'],
+            'post_meta' => [
+                'location' => 'Skåpet',
+                'custom_location' => '',
+                'locker_number' => '',
+                'image_2' => '',
+                'participants' => ['fred-fetcher', 'rebecca-raffle', 'monica-manager'],
+                'fetcher' => '',
+                'queue' => [],
+                'raffle_date' => [
+                    'date' => '',
+                    'time' => '',
+                ],
+                'book_date' => [
+                    'date' => '',
+                    'time' => '',
+                ],
+                'locker_date' => [
+                    'date' => '',
+                    'time' => '',
+                ],
+                'fetch_date' => [
+                    'date' => '',
+                    'time' => '',
+                ],
+                'forward_date' => [
+                    'date' => '',
+                    'time' => '',
+                ],
+                'remove_date' => [
+                    'date' => '',
+                    'time' => '',
+                ],
+                'pause_date' => [
+                    'date' => '',
+                    'time' => '',
+                ],
+                'archive_date' => [
+                    'date' => '',
+                    'time' => '',
+                ],
+                'extend_date' => [
+                    'date' => '',
+                    'time' => '',
+                ],
+                'forward_post' => '',
+                'previous_post' => '',
+                'reminder_leave' => '',
+                'reminder_fetch' => '',
+            ],
         ],
         [
             'post_author' => 'gabby-giver',
@@ -109,6 +501,55 @@ function get_sample_posts()
             'feature_image' => 'post-09',
             'post_tags' => ['mobler', 'kontor'],
             'post_categories' => ['new'],
+            'post_meta' => [
+                'location' => 'Emågatan 24',
+                'custom_location' => 'Emågatan 24',
+                'locker_number' => '',
+                'image_2' => '',
+                'participants' => ['fred-fetcher', 'rebecca-raffle', 'monica-manager'],
+                'fetcher' => '',
+                'queue' => [],
+                'raffle_date' => [
+                    'date' => '',
+                    'time' => '',
+                ],
+                'book_date' => [
+                    'date' => '',
+                    'time' => '',
+                ],
+                'locker_date' => [
+                    'date' => '',
+                    'time' => '',
+                ],
+                'fetch_date' => [
+                    'date' => '',
+                    'time' => '',
+                ],
+                'forward_date' => [
+                    'date' => '',
+                    'time' => '',
+                ],
+                'remove_date' => [
+                    'date' => '',
+                    'time' => '',
+                ],
+                'pause_date' => [
+                    'date' => '',
+                    'time' => '',
+                ],
+                'archive_date' => [
+                    'date' => '',
+                    'time' => '',
+                ],
+                'extend_date' => [
+                    'date' => '',
+                    'time' => '',
+                ],
+                'forward_post' => '',
+                'previous_post' => '',
+                'reminder_leave' => '',
+                'reminder_fetch' => '',
+            ],
         ],
         [
             'post_author' => 'gabby-giver',
@@ -122,6 +563,55 @@ function get_sample_posts()
             'feature_image' => 'post-10',
             'post_tags' => ['forvaring'],
             'post_categories' => ['new'],
+            'post_meta' => [
+                'location' => 'Skåpet',
+                'custom_location' => '',
+                'locker_number' => '',
+                'image_2' => '',
+                'participants' => ['fred-fetcher', 'rebecca-raffle'],
+                'fetcher' => '',
+                'queue' => [],
+                'raffle_date' => [
+                    'date' => '',
+                    'time' => '',
+                ],
+                'book_date' => [
+                    'date' => '',
+                    'time' => '',
+                ],
+                'locker_date' => [
+                    'date' => '',
+                    'time' => '',
+                ],
+                'fetch_date' => [
+                    'date' => '',
+                    'time' => '',
+                ],
+                'forward_date' => [
+                    'date' => '',
+                    'time' => '',
+                ],
+                'remove_date' => [
+                    'date' => '',
+                    'time' => '',
+                ],
+                'pause_date' => [
+                    'date' => '',
+                    'time' => '',
+                ],
+                'archive_date' => [
+                    'date' => '',
+                    'time' => '',
+                ],
+                'extend_date' => [
+                    'date' => '',
+                    'time' => '',
+                ],
+                'forward_post' => '',
+                'previous_post' => '',
+                'reminder_leave' => '',
+                'reminder_fetch' => '',
+            ],
         ],
         [
             'post_author' => 'gabby-giver',
@@ -134,6 +624,55 @@ Plats för 40 pennor 2 sudd – men de på bilden ingår ej. 🙂',
             'feature_image' => 'post-11',
             'post_tags' => ['barnsaker', 'kontor'],
             'post_categories' => ['new'],
+            'post_meta' => [
+                'location' => 'Skåpet',
+                'custom_location' => '',
+                'locker_number' => '',
+                'image_2' => '',
+                'participants' => ['fred-fetcher'],
+                'fetcher' => '',
+                'queue' => [],
+                'raffle_date' => [
+                    'date' => '',
+                    'time' => '',
+                ],
+                'book_date' => [
+                    'date' => '',
+                    'time' => '',
+                ],
+                'locker_date' => [
+                    'date' => '',
+                    'time' => '',
+                ],
+                'fetch_date' => [
+                    'date' => '',
+                    'time' => '',
+                ],
+                'forward_date' => [
+                    'date' => '',
+                    'time' => '',
+                ],
+                'remove_date' => [
+                    'date' => '',
+                    'time' => '',
+                ],
+                'pause_date' => [
+                    'date' => '',
+                    'time' => '',
+                ],
+                'archive_date' => [
+                    'date' => '',
+                    'time' => '',
+                ],
+                'extend_date' => [
+                    'date' => '',
+                    'time' => '',
+                ],
+                'forward_post' => '',
+                'previous_post' => '',
+                'reminder_leave' => '',
+                'reminder_fetch' => '',
+            ],
         ],
         [
             'post_author' => 'gabby-giver',
@@ -147,6 +686,55 @@ Det finns en tjock och en tunn spets på varje penna. De tunna har torkat men de
             'feature_image' => 'post-12',
             'post_tags' => ['barnsaker', 'hobby-pyssel'],
             'post_categories' => ['new'],
+            'post_meta' => [
+                'location' => 'Skåpet',
+                'custom_location' => '',
+                'locker_number' => '',
+                'image_2' => '',
+                'participants' => ['fred-fetcher'],
+                'fetcher' => '',
+                'queue' => [],
+                'raffle_date' => [
+                    'date' => '',
+                    'time' => '',
+                ],
+                'book_date' => [
+                    'date' => '',
+                    'time' => '',
+                ],
+                'locker_date' => [
+                    'date' => '',
+                    'time' => '',
+                ],
+                'fetch_date' => [
+                    'date' => '',
+                    'time' => '',
+                ],
+                'forward_date' => [
+                    'date' => '',
+                    'time' => '',
+                ],
+                'remove_date' => [
+                    'date' => '',
+                    'time' => '',
+                ],
+                'pause_date' => [
+                    'date' => '',
+                    'time' => '',
+                ],
+                'archive_date' => [
+                    'date' => '',
+                    'time' => '',
+                ],
+                'extend_date' => [
+                    'date' => '',
+                    'time' => '',
+                ],
+                'forward_post' => '',
+                'previous_post' => '',
+                'reminder_leave' => '',
+                'reminder_fetch' => '',
+            ],
         ],
         [
             'post_author' => 'gabby-giver',
@@ -158,6 +746,55 @@ Det finns en tjock och en tunn spets på varje penna. De tunna har torkat men de
             'feature_image' => 'post-13',
             'post_tags' => ['odling', 'hushall'],
             'post_categories' => ['new'],
+            'post_meta' => [
+                'location' => 'Skåpet',
+                'custom_location' => '',
+                'locker_number' => '',
+                'image_2' => '',
+                'participants' => [],
+                'fetcher' => '',
+                'queue' => [],
+                'raffle_date' => [
+                    'date' => '',
+                    'time' => '',
+                ],
+                'book_date' => [
+                    'date' => '',
+                    'time' => '',
+                ],
+                'locker_date' => [
+                    'date' => '',
+                    'time' => '',
+                ],
+                'fetch_date' => [
+                    'date' => '',
+                    'time' => '',
+                ],
+                'forward_date' => [
+                    'date' => '',
+                    'time' => '',
+                ],
+                'remove_date' => [
+                    'date' => '',
+                    'time' => '',
+                ],
+                'pause_date' => [
+                    'date' => '',
+                    'time' => '',
+                ],
+                'archive_date' => [
+                    'date' => '',
+                    'time' => '',
+                ],
+                'extend_date' => [
+                    'date' => '',
+                    'time' => '',
+                ],
+                'forward_post' => '',
+                'previous_post' => '',
+                'reminder_leave' => '',
+                'reminder_fetch' => '',
+            ],
         ],
         [
             'post_author' => 'gabby-giver',
@@ -169,6 +806,55 @@ Det finns en tjock och en tunn spets på varje penna. De tunna har torkat men de
             'feature_image' => 'post-14',
             'post_tags' => ['halsa', 'barnsaker'],
             'post_categories' => ['removed'],
+            'post_meta' => [
+                'location' => 'Skåpet',
+                'custom_location' => '',
+                'locker_number' => '',
+                'image_2' => '',
+                'participants' => [],
+                'fetcher' => '',
+                'queue' => [],
+                'raffle_date' => [
+                    'date' => '',
+                    'time' => '',
+                ],
+                'book_date' => [
+                    'date' => '',
+                    'time' => '',
+                ],
+                'locker_date' => [
+                    'date' => '',
+                    'time' => '',
+                ],
+                'fetch_date' => [
+                    'date' => '',
+                    'time' => '',
+                ],
+                'forward_date' => [
+                    'date' => '',
+                    'time' => '',
+                ],
+                'remove_date' => [
+                    'date' => '-59 days',
+                    'time' => '07:00:00',
+                ],
+                'pause_date' => [
+                    'date' => '',
+                    'time' => '',
+                ],
+                'archive_date' => [
+                    'date' => '',
+                    'time' => '',
+                ],
+                'extend_date' => [
+                    'date' => '',
+                    'time' => '',
+                ],
+                'forward_post' => '',
+                'previous_post' => '',
+                'reminder_leave' => '',
+                'reminder_fetch' => '',
+            ],
         ],
         [
             'post_author' => 'gabby-giver',
@@ -180,6 +866,55 @@ Det finns en tjock och en tunn spets på varje penna. De tunna har torkat men de
             'feature_image' => 'post-15',
             'post_tags' => ['elektronik', 'kontor'],
             'post_categories' => ['archived'],
+            'post_meta' => [
+                'location' => 'Skåpet',
+                'custom_location' => '',
+                'locker_number' => '',
+                'image_2' => '',
+                'participants' => [],
+                'fetcher' => '',
+                'queue' => [],
+                'raffle_date' => [
+                    'date' => '',
+                    'time' => '',
+                ],
+                'book_date' => [
+                    'date' => '',
+                    'time' => '',
+                ],
+                'locker_date' => [
+                    'date' => '',
+                    'time' => '',
+                ],
+                'fetch_date' => [
+                    'date' => '',
+                    'time' => '',
+                ],
+                'forward_date' => [
+                    'date' => '',
+                    'time' => '',
+                ],
+                'remove_date' => [
+                    'date' => '',
+                    'time' => '',
+                ],
+                'pause_date' => [
+                    'date' => '',
+                    'time' => '',
+                ],
+                'archive_date' => [
+                    'date' => '-59 days',
+                    'time' => '01:00:00',
+                ],
+                'extend_date' => [
+                    'date' => '',
+                    'time' => '',
+                ],
+                'forward_post' => '',
+                'previous_post' => '',
+                'reminder_leave' => '',
+                'reminder_fetch' => '',
+            ],
         ],
         [
             'post_author' => 'gabby-giver',
@@ -191,6 +926,55 @@ Det finns en tjock och en tunn spets på varje penna. De tunna har torkat men de
             'feature_image' => 'post-16',
             'post_tags' => ['bygg-fix', 'hobby-pyssel'],
             'post_categories' => ['disappeared'],
+            'post_meta' => [
+                'location' => 'Skåpet',
+                'custom_location' => '',
+                'locker_number' => '',
+                'image_2' => '',
+                'participants' => [],
+                'fetcher' => '',
+                'queue' => [],
+                'raffle_date' => [
+                    'date' => '',
+                    'time' => '',
+                ],
+                'book_date' => [
+                    'date' => '',
+                    'time' => '',
+                ],
+                'locker_date' => [
+                    'date' => '',
+                    'time' => '',
+                ],
+                'fetch_date' => [
+                    'date' => '',
+                    'time' => '',
+                ],
+                'forward_date' => [
+                    'date' => '',
+                    'time' => '',
+                ],
+                'remove_date' => [
+                    'date' => '',
+                    'time' => '',
+                ],
+                'pause_date' => [
+                    'date' => '',
+                    'time' => '',
+                ],
+                'archive_date' => [
+                    'date' => '',
+                    'time' => '',
+                ],
+                'extend_date' => [
+                    'date' => '',
+                    'time' => '',
+                ],
+                'forward_post' => '',
+                'previous_post' => '',
+                'reminder_leave' => '',
+                'reminder_fetch' => '',
+            ],
         ],
         [
             'post_author' => 'gabby-giver',
@@ -202,6 +986,55 @@ Det finns en tjock och en tunn spets på varje penna. De tunna har torkat men de
             'feature_image' => 'post-17',
             'post_tags' => ['odling'],
             'post_categories' => ['paused'],
+            'post_meta' => [
+                'location' => 'Skåpet',
+                'custom_location' => '',
+                'locker_number' => '',
+                'image_2' => '',
+                'participants' => [],
+                'fetcher' => '',
+                'queue' => [],
+                'raffle_date' => [
+                    'date' => '',
+                    'time' => '',
+                ],
+                'book_date' => [
+                    'date' => '',
+                    'time' => '',
+                ],
+                'locker_date' => [
+                    'date' => '',
+                    'time' => '',
+                ],
+                'fetch_date' => [
+                    'date' => '',
+                    'time' => '',
+                ],
+                'forward_date' => [
+                    'date' => '',
+                    'time' => '',
+                ],
+                'remove_date' => [
+                    'date' => '',
+                    'time' => '',
+                ],
+                'pause_date' => [
+                    'date' => '-59 days',
+                    'time' => '07:00:00',
+                ],
+                'archive_date' => [
+                    'date' => '',
+                    'time' => '',
+                ],
+                'extend_date' => [
+                    'date' => '',
+                    'time' => '',
+                ],
+                'forward_post' => '',
+                'previous_post' => '',
+                'reminder_leave' => '',
+                'reminder_fetch' => '',
+            ],
         ],
         [
             'post_author' => 'gabby-giver',
@@ -213,6 +1046,55 @@ Det finns en tjock och en tunn spets på varje penna. De tunna har torkat men de
             'feature_image' => 'post-18',
             'post_tags' => ['hushall', 'kok'],
             'post_categories' => ['locker'],
+            'post_meta' => [
+                'location' => 'Skåpet',
+                'custom_location' => '',
+                'locker_number' => '',
+                'image_2' => '',
+                'participants' => ['fred-fetcher'],
+                'fetcher' => 'fred-fetcher',
+                'queue' => ['rebecca-raffle'],
+                'raffle_date' => [
+                    'date' => '-59 days',
+                    'time' => '12:00:00',
+                ],
+                'book_date' => [
+                    'date' => '-59 days',
+                    'time' => '12:00:00',
+                ],
+                'locker_date' => [
+                    'date' => '-59 days',
+                    'time' => '13:00:00',
+                ],
+                'fetch_date' => [
+                    'date' => '',
+                    'time' => '',
+                ],
+                'forward_date' => [
+                    'date' => '',
+                    'time' => '',
+                ],
+                'remove_date' => [
+                    'date' => '',
+                    'time' => '',
+                ],
+                'pause_date' => [
+                    'date' => '',
+                    'time' => '',
+                ],
+                'archive_date' => [
+                    'date' => '',
+                    'time' => '',
+                ],
+                'extend_date' => [
+                    'date' => '-7 days',
+                    'time' => '07:00:00',
+                ],
+                'forward_post' => '',
+                'previous_post' => '',
+                'reminder_leave' => '',
+                'reminder_fetch' => '3',
+            ],
         ],
         [
             'post_author' => 'gabby-giver',
@@ -227,6 +1109,55 @@ https://ikeamuseum.com/sv/utforska/historien-bakom-produkterna/jules-skrivbordss
             'feature_image' => 'post-19',
             'post_tags' => ['mobler', 'barnsaker', 'kontor'],
             'post_categories' => ['old'],
+            'post_meta' => [
+                'location' => 'Emågatan 24',
+                'custom_location' => 'Emågatan 24',
+                'locker_number' => '',
+                'image_2' => '',
+                'participants' => [],
+                'fetcher' => '',
+                'queue' => [],
+                'raffle_date' => [
+                    'date' => '',
+                    'time' => '',
+                ],
+                'book_date' => [
+                    'date' => '',
+                    'time' => '',
+                ],
+                'locker_date' => [
+                    'date' => '',
+                    'time' => '',
+                ],
+                'fetch_date' => [
+                    'date' => '',
+                    'time' => '',
+                ],
+                'forward_date' => [
+                    'date' => '',
+                    'time' => '',
+                ],
+                'remove_date' => [
+                    'date' => '',
+                    'time' => '',
+                ],
+                'pause_date' => [
+                    'date' => '',
+                    'time' => '',
+                ],
+                'archive_date' => [
+                    'date' => '',
+                    'time' => '',
+                ],
+                'extend_date' => [
+                    'date' => '-7 days',
+                    'time' => '07:00:00',
+                ],
+                'forward_post' => '',
+                'previous_post' => '',
+                'reminder_leave' => '',
+                'reminder_fetch' => '',
+            ],
         ],
         [
             'post_author' => 'gabby-giver',
@@ -242,6 +1173,55 @@ Modellen: https://auctionet.com/sv/1351180-pinnstolar-4-st-1900-talets-mitt',
             'feature_image' => 'post-20',
             'post_tags' => ['mobler', 'kok', 'inredning'],
             'post_categories' => ['fetched'],
+            'post_meta' => [
+                'location' => 'Emågatan 24',
+                'custom_location' => 'Emågatan 24',
+                'locker_number' => '',
+                'image_2' => '',
+                'participants' => ['fred-fetcher', 'rebecca-raffle'],
+                'fetcher' => 'fred-fetcher',
+                'queue' => ['rebecca-raffle'],
+                'raffle_date' => [
+                    'date' => '-29 days',
+                    'time' => '12:00:00',
+                ],
+                'book_date' => [
+                    'date' => '-29 days',
+                    'time' => '12:00:00',
+                ],
+                'locker_date' => [
+                    'date' => '',
+                    'time' => '',
+                ],
+                'fetch_date' => [
+                    'date' => '-28 days',
+                    'time' => '09:00:00',
+                ],
+                'forward_date' => [
+                    'date' => '',
+                    'time' => '00:04:00',
+                ],
+                'remove_date' => [
+                    'date' => '',
+                    'time' => '',
+                ],
+                'pause_date' => [
+                    'date' => '',
+                    'time' => '',
+                ],
+                'archive_date' => [
+                    'date' => '',
+                    'time' => '',
+                ],
+                'extend_date' => [
+                    'date' => '',
+                    'time' => '',
+                ],
+                'forward_post' => 'pinnstol_2',
+                'previous_post' => '',
+                'reminder_leave' => '',
+                'reminder_fetch' => '',
+            ],
         ],
         [
             'post_author' => 'fred-fetcher',
@@ -257,6 +1237,55 @@ Modellen: https://auctionet.com/sv/1351180-pinnstolar-4-st-1900-talets-mitt',
             'feature_image' => 'post-14',
             'post_tags' => ['mobler', 'kok', 'inredning'],
             'post_categories' => ['new'],
+            'post_meta' => [
+                'location' => 'Stångåvägen 14',
+                'custom_location' => 'Stångåvägen 14',
+                'locker_number' => '',
+                'image_2' => '',
+                'participants' => [],
+                'fetcher' => '',
+                'queue' => [],
+                'raffle_date' => [
+                    'date' => '',
+                    'time' => '',
+                ],
+                'book_date' => [
+                    'date' => '',
+                    'time' => '',
+                ],
+                'locker_date' => [
+                    'date' => '',
+                    'time' => '',
+                ],
+                'fetch_date' => [
+                    'date' => '',
+                    'time' => '',
+                ],
+                'forward_date' => [
+                    'date' => '',
+                    'time' => '',
+                ],
+                'remove_date' => [
+                    'date' => '',
+                    'time' => '',
+                ],
+                'pause_date' => [
+                    'date' => '',
+                    'time' => '',
+                ],
+                'archive_date' => [
+                    'date' => '',
+                    'time' => '',
+                ],
+                'extend_date' => [
+                    'date' => '',
+                    'time' => '',
+                ],
+                'forward_post' => '',
+                'previous_post' => 'pinnstol',
+                'reminder_leave' => '',
+                'reminder_fetch' => '',
+            ],
         ],
     ];
 
@@ -274,3 +1303,37 @@ Modellen: https://auctionet.com/sv/1351180-pinnstolar-4-st-1900-talets-mitt',
      * ],
      */
 }
+
+
+/* 
+'post_meta' => [
+    'location' => '',
+    'custom_location' => '',
+    'locker_number' => '',
+    'image_2' => '',
+    'participants' => [],
+    'fetcher' => '',
+    'queue' => [],
+    'raffle_date' => '',
+    'raflle_time' => '',
+    'book_date' => '',
+    'book_time' => '',
+    'locker_date' => '',
+    'locker_time' => '',
+    'fetch_date' => '',
+    'fetch_time' => '',
+    'forward_date' => '',
+    'forward_time' => '',
+    'remove_date' => '',
+    'remove_time' => '',
+    'pause_date' => '',
+    'pause_time' => '',
+    'archive_date' => '',
+    'archive_time' => '',
+    'extend_date' => '',
+    'extend_time' => '',
+    'forward_post' => '',
+    'previous_post' => '',
+    'reminder_leave' => '',
+    'reminder_fetch' => '',
+],*/
