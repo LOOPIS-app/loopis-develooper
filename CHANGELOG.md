@@ -2,10 +2,12 @@
 
 ## 0.51 (beta)
 - Moved changelog to CHANGELOG.md
+- Insert of postmeta for sample posts (+ more posts!)
+- Configuration of sample posts and users merged to one set of buttons
 
 ## 0.5 (2025-12-27)
 - Configuration of sample posts and users merged to one page
-- Configuration of plugins (work in process)
+- Automatic installation of developer plugins
 
 ## 0.4 (2025-10-28)
 - Sample posts inserted in `wp_posts`
