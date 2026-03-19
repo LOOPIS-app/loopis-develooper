@@ -132,6 +132,14 @@ function develooper_sample_posts_insert()
             // 7.2. Otherwise, throw error_log.
             loopis_elog_first_level('Image file does not exist: ' . $img_path);
         }
+
+        // 8. Add post meta
+        $add_meta_result = develooper_postmeta_insert($post_id, $post);
+        if (is_wp_error($add_meta_result)) {
+            loopis_elog_first_level('Failed to add post meta for post "' . $post['post_title'] . '": ' . $add_meta_result->get_error_message());
+        } else {
+            loopis_elog_first_level('Successfully added post meta for post "' . $post['post_title'] . '"');
+        }
     }
 
     // Flush rewrite rules after inserting posts
@@ -233,15 +241,152 @@ function develooper_insert_sample_posts_category($post_id, $categories)
     }
 }
 
-function develooper_add_sample_post_meta($post_id, $post)
+/**
+ * Insert post meta for the inserted post
+ *
+ * @param int $post_id
+ * @param array $post
+ * @return void
+ */
+function develooper_postmeta_insert($post_id, $post)
 {
-    loopis_elog_function_start('develooper_add_sample_post_meta');
+    loopis_elog_function_start('develooper_postmeta_insert');
     if (!post_exists($post['post_title'])) {
         loopis_elog_first_level('This post does not exist, cannot add meta. Post Title: ' . $post['post_title']);
         return new WP_Error('post_not_found', 'Post does not exist: ' . $post['post_title']);
     }
 
-    update_post_meta($post_id, 'sample_meta_key', 'sample_meta_value');
+    // loop through post meta and add to the post
+    foreach ($post['post_meta'] as $meta_key => $meta_value) {
 
-    loopis_elog_function_end_success('develooper_sample_posts_insert');
+        // Handle datetime meta: 
+        // if meta key ends with '_date' and value is an array with 'date' and 'time' keys, convert to datetime format.
+        // If time value is empty, set meta value to empty string to skip adding meta.
+        if (str_ends_with($meta_key, '_date') && is_array($meta_value) && isset($meta_value['date']) && isset($meta_value['time'])) {
+            // If time is specified, convert to datetime format, else set null to skip adding meta.
+            $meta_value['time'] != '' ? $meta_value = sample_post_datetime_handler($meta_value) : $meta_value = '';
+        }
+
+        // Handle user-related meta:
+        if ($meta_key == 'participants' || $meta_key == 'queue' && is_array($meta_value) && !empty($meta_value)) {
+            // Convert participant logins to user IDs, filter out non-existing users
+            $meta_value = fetch_user_by_login_array($meta_value, $meta_key);
+        } else if ($meta_key == 'fetcher' && is_string($meta_value) && $meta_value != '') {
+            // Convert fetcher value to user display name if user exists, else keep original value
+            $meta_value = fetch_user_by_login($meta_value, $meta_key);
+        }
+
+        // Handle post meta value
+        if (($meta_key == 'forward_post' || $meta_key == 'previous_post') && is_string($meta_value) && $meta_value != '') {
+            // Get post by slug of forward_post and previous_post from meta value to convert post_name to id.
+            $get_sample_post = get_page_by_path($meta_value, OBJECT, 'post');
+            if ($get_sample_post) {
+                $meta_value = $get_sample_post->ID;
+                loopis_elog_first_level('Post title found: ' . $get_sample_post->post_title);
+            } else {
+                loopis_elog_first_level('Forward post does not exist: ' . $meta_value);
+                $meta_value = '';
+            }
+
+            // if current meta key is previous_post, also add forward_post postmeta as id to the previous post with current post id as value to link the two posts.
+            if ($meta_key == 'previous_post' && $get_sample_post) {
+                update_post_meta($meta_value, 'forward_post', $post_id);
+                loopis_elog_first_level('Updated forward_post meta for post ID: ' . $meta_value . ' with value: ' . $post_id);
+
+            }
+        }
+
+        //update_post_meta will update postmeta if exist, add postmeta automatically if not exist. (To prevent duplication when run multiple times)
+        update_post_meta($post_id, $meta_key, $meta_value);
+        loopis_elog_first_level('Added post meta: ' . $meta_key . ' = ' . $meta_value);
+    }
+
+    loopis_elog_function_end_success('develooper_postmeta_insert');
 }
+
+/**
+ * Fetch user IDs by logins, if users do not exist, log the info and return null for those users
+ * 
+ * @param array $login_array Array of user logins
+ * @param string $key_context Context for logging (e.g. meta key name)
+ * @return array Array of user IDs
+ */
+
+function fetch_user_by_login_array(array $login_array, string $key_context = '')
+{
+    // Array to hold user IDs
+    $user_ids = [];
+    // Loop through each login and fetch user ID
+    foreach ($login_array as $login) {
+        $user_id = fetch_user_by_login($login, $key_context);
+        if ($user_id) {
+            $user_ids[] = $user_id;
+        }
+    }
+    return $user_ids;
+}
+
+/**
+ * Fetch user ID by login, if user does not exist, log the info and return null
+ * 
+ * @param string $login User login
+ * @param string $key_context Context for logging (e.g. meta key name)
+ * @return int|null User ID if exists, null if not exists
+ */
+
+function fetch_user_by_login($login, string $key_context = '')
+{
+    $user = get_user_by('login', $login);
+    if ($user) {
+        return $user->ID;
+    } else {
+        loopis_elog_first_level('User login: ' . $login . ', does not found under ' . $key_context . '.');
+        return null;
+    }
+}
+
+/**
+ * Handle datetime from seperate date and time fields, convert to 'Y-m-d H:i:s' format
+ * 
+ * @param array $datetime Array with 'date' and 'time' keys
+ * @return string Datetime in 'Y-m-d H:i:s' format
+ */
+
+function sample_post_datetime_handler($datetime)
+{
+    $current_time = new DateTime(current_time('mysql'));
+
+    $date = $datetime['date'];
+    $time = $datetime['time'];
+
+    // Prepare date and time
+    $post_date = clone $current_time;
+    // if date is specified, modify it, else use current date
+    if ($date != '') {
+        $post_date->modify($date);
+    }
+    // divide post_time value into hour, minute, second from hh:mm:ss.
+    list($hour, $minute, $second) = explode(':', $time);
+
+    // set time
+    $post_date->setTime((int) $hour, (int) $minute, (int) $second);
+    return $post_date->format('Y-m-d H:i:s');
+}
+
+
+/* datetime handling example for post meta (for future reference or revert change if needed)
+
+$current_time = new DateTime(current_time('mysql'));
+// Prepare post date and time
+$post_date = clone $current_time;
+// if post_date is specified, modify it, else use current date
+if ($post['post_date'] != '') {
+    $post_date->modify($post['post_date']);
+}
+// divide post_time value into hour, minute, second from hh:mm:ss.
+list($hour, $minute, $second) = explode(':', $post['post_time']);
+
+// set time
+$post_date->setTime((int) $hour, (int) $minute, (int) $second);
+
+*/
