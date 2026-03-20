@@ -14,17 +14,19 @@ if (!defined('ABSPATH')) {
 }
 
 // Import sample lists
-require_once LOOPIS_DEVELOOPER_DIR .'assets/samples/users.php';
+require_once LOOPIS_DEVELOOPER_DIR . 'assets/samples/users.php';
 
 // Include WP functions
-require_once(ABSPATH.'wp-admin/includes/user.php');
+require_once(ABSPATH . 'wp-admin/includes/user.php');
+require_once(ABSPATH . 'wp-admin/includes/ms.php'); // Included for wpmu_delete_user function   
 
 /**
  * Delete all LOOPIS users but admin from wp_users
  * 
  * @return array
  */
-function loopis_users_delete() {
+function loopis_users_delete()
+{
     loopis_elog_function_start('loopis_users_delete');
 
     //Deleted user collection for message display
@@ -45,7 +47,8 @@ function loopis_users_delete() {
         // If user exists, delete
         if (!empty($users)) {
             // Delete each user
-            wp_delete_user($users->ID);
+            //wp_delete_user($users->ID);
+            wpmu_delete_user($users->ID); // Use wpum_delete_user to ensure usermeta is also deleted for multisite compatibility
             $delete_user_list['deleted'][] = $sample_user['user_login'];
             loopis_elog_first_level('Deleted user: ' . $sample_user['user_login'] . ' (ID: ' . $users->ID . ')');
         } else {
