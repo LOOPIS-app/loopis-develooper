@@ -263,7 +263,7 @@ function develooper_postmeta_insert($post_id, $post)
         // if meta key ends with '_date' and value is an array with 'date' and 'time' keys, convert to datetime format.
         // If time value is empty, set meta value to empty string to skip adding meta.
         if (str_ends_with($meta_key, '_date') && is_array($meta_value) && isset($meta_value['date']) && isset($meta_value['time'])) {
-            // If time is specified, convert to datetime format, else set null to skip adding meta.
+            // If time is specified, convert to datetime format, else set null to skip adding specific value.
             $meta_value['time'] != '' ? $meta_value = sample_post_datetime_handler($meta_value) : $meta_value = '';
         }
 
@@ -276,7 +276,7 @@ function develooper_postmeta_insert($post_id, $post)
             $meta_value = fetch_user_by_login($meta_value, $meta_key);
         }
 
-        // Handle post meta value
+        // Handle post-related meta:
         if (($meta_key == 'forward_post' || $meta_key == 'previous_post') && is_string($meta_value) && $meta_value != '') {
             // Get post by slug of forward_post and previous_post from meta value to convert post_name to id.
             $get_sample_post = get_page_by_path($meta_value, OBJECT, 'post');
