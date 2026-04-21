@@ -21,31 +21,19 @@ require_once LOOPIS_DEVELOOPER_DIR . 'functions/develooper_sample_users_delete.p
 include_once(ABSPATH . 'wp-includes/pluggable.php'); // Included for user management
 
 // Handle form submissions
-if (isset($_POST['insert_sample_posts'])) {
+if (isset($_POST['insert_samples'])) {
+    develooper_users_insert();
     develooper_sample_posts_insert();
     // Redirect to prevent form resubmission
-    wp_redirect(add_query_arg('action', 'posts_inserted', wp_get_referer()));
+    wp_redirect(add_query_arg('action', 'samples_inserted', wp_get_referer()));
     exit;
 }
 
-if (isset($_POST['delete_sample_posts'])) {
+if (isset($_POST['delete_samples'])) {
     develooper_sample_posts_delete();
-    // Redirect to prevent form resubmission
-    wp_redirect(add_query_arg('action', 'posts_deleted', wp_get_referer()));
-    exit;
-}
-
-if (isset($_POST['insert_sample_users'])) {
-    develooper_users_insert();
-    // Redirect to prevent form resubmission
-    wp_redirect(add_query_arg('action', 'users_inserted', wp_get_referer()));
-    exit;
-}
-
-if (isset($_POST['delete_sample_users'])) {
     loopis_users_delete();
     // Redirect to prevent form resubmission
-    wp_redirect(add_query_arg('action', 'users_deleted', wp_get_referer()));
+    wp_redirect(add_query_arg('action', 'samples_deleted', wp_get_referer()));
     exit;
 }
 
@@ -62,14 +50,10 @@ function develooper_samples_page()
         <?php
         // Show success messages
         if (isset($_GET['action'])) {
-            if ($_GET['action'] === 'posts_inserted') {
-                echo '<div class="notice notice-success is-dismissible"><p>✅ Sample posts have been successfully inserted!</p></div>';
-            } elseif ($_GET['action'] === 'posts_deleted') {
-                echo '<div class="notice notice-success is-dismissible"><p>❌ Sample posts have been successfully deleted!</p></div>';
-            } elseif ($_GET['action'] === 'users_inserted') {
-                echo '<div class="notice notice-success is-dismissible"><p>✅ Sample users have been successfully inserted!</p></div>';
-            } elseif ($_GET['action'] === 'users_deleted') {
-                echo '<div class="notice notice-success is-dismissible"><p>❌ Sample users have been successfully deleted!</p></div>';
+            if ($_GET['action'] === 'samples_inserted') {
+                echo '<div class="notice notice-success is-dismissible"><p>✅ Sample users and posts have been successfully inserted!</p></div>';
+            } elseif ($_GET['action'] === 'samples_deleted') {
+                echo '<div class="notice notice-success is-dismissible"><p>❌ Sample users and posts have been successfully deleted!</p></div>';
             }
         }
         ?>
@@ -82,35 +66,14 @@ function develooper_samples_page()
         echo '</div>';
         ?>
 
-        <h2>🎁 Sample posts</h2>
-        <p>Click the buttons to configure the sample posts.</p>
+        <h2>🎁 Samples</h2>
+        <p>Click the buttons to configure the sample user and posts.</p>
 
         <form method="POST" onsubmit="button_loading(this)">
-            <button class="button button-primary wp-green loading-btn" type="submit"
-                name="insert_sample_posts">Insert</button>
-            <button class="button button-primary wp-blue loading-btn" type="submit" name="reset_sample_posts">Reset</button>
-            <button class="button button-primary wp-red loading-btn" type="submit"
-                name="delete_sample_posts">Delete</button>
+            <button class="button button-primary wp-green loading-btn" type="submit" name="insert_samples">Insert</button>
+            <button class="button button-primary wp-blue loading-btn" type="submit" name="reset_samples">Reset</button>
+            <button class="button button-primary wp-red loading-btn" type="submit" name="delete_samples">Delete</button>
         </form>
-
-        <p><i>[Fix: Grey out insert/delete depending on if posts are already inserted.]</i></p>
-
-        <?php insert_spacer(20) ?>
-
-        <h2>👥 Sample users</h2>
-        <p>Click the buttons to configure the sample users.</p>
-
-        <p>
-        <form method="POST" onsubmit="button_loading(this)">
-            <button class="button button-primary wp-green loading-btn" type="submit"
-                name="insert_sample_users">Insert</button>
-            <button class="button button-primary wp-blue loading-btn" type="submit" name="reset_sample_users">Reset</button>
-            <button class="button button-primary wp-red loading-btn" type="submit"
-                name="delete_sample_users">Delete</button>
-        </form>
-        </p>
-
-        <p><i>[Fix: Grey out insert/delete depending on if users are already inserted.]</i></p>
 
     </div>
     <?php
