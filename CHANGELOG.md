@@ -1,12 +1,13 @@
 # 📋 Changelog for "LOOPIS Develooper"
 
-## 0.51 (beta)
+## 0.51 (2026-04-21)
+- Insert of sample posts and users merged to one set of buttons
+- Insert of sample posts increase to 20 posts
+- Insert of postmeta for sample posts
 - Moved changelog to CHANGELOG.md
-- Insert of postmeta for sample posts (+ more posts!)
-- Configuration of sample posts and users merged to one set of buttons
 
 ## 0.5 (2025-12-27)
-- Configuration of sample posts and users merged to one page
+- Insert of sample posts and users merged to one page
 - Automatic installation of developer plugins
 
 ## 0.4 (2025-10-28)

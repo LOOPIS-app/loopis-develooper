@@ -1,13 +1,24 @@
 <?php
 /**
- * Plugin Name:     LOOPIS Develooper (beta)
- * Plugin URI:      https://github.com/LOOPIS-app/loopis-develooper
- * Description:     Plugin providing tools for developing LOOPIS.app
- * Version:         0.51
- * Author:          The Develoopers
- * Author URI:      https://loopis.org
- * Text Domain:     loopis-develooper
-*/
+ * Plugin Name: LOOPIS Develooper
+ * Plugin URI:  https://github.com/LOOPIS-app/loopis-develooper
+ * Description: Plugin providing tools for developing LOOPIS.app
+ * Version:     0.51
+ * Author:      The Develoopers
+ * Author URI:  https://loopis.org
+ * License:     GPL-3.0-or-later
+ * License URI: https://www.gnu.org/licenses/gpl-3.0.html
+ * Text Domain: loopis-develooper
+ */
+
+/*
+ * Copyright (C) 2026 LOOPIS
+ * 
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ */
 
 // Prevent direct access
 if (!defined('ABSPATH')) {
