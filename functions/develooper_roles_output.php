@@ -73,8 +73,7 @@ function render_loopis_capabilities_table() {
         'loopis_admin' => 'Admin Access',
         'loopis_support' => 'Support Access', 
         'loopis_economy' => 'Economy Access',
-        'loopis_storage_book' => 'Storage Booking',
-        'loopis_storage_fetch' => 'Storage Fetching'
+        'loopis_storage' => 'Storage Access',
     ];
     
     echo '<div class="roles-section">';
