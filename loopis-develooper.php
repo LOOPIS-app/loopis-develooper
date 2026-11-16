@@ -3,21 +3,12 @@
  * Plugin Name: LOOPIS Develooper
  * Plugin URI:  https://github.com/LOOPIS-app/loopis-develooper
  * Description: Plugin providing tools for developing LOOPIS.app
- * Version:     0.51
+ * Version:     0.52
  * Author:      The Develoopers
  * Author URI:  https://loopis.org
  * License:     GPL-3.0-or-later
  * License URI: https://www.gnu.org/licenses/gpl-3.0.html
  * Text Domain: loopis-develooper
- */
-
-/*
- * Copyright (C) 2026 LOOPIS
- * 
- * This program is free software: you can redistribute it and/or modify
- * it under the terms of the GNU General Public License as published by
- * the Free Software Foundation, either version 3 of the License, or
- * (at your option) any later version.
  */
 
 // Prevent direct access
@@ -30,54 +21,43 @@ if (!is_admin()) {
     return;
 }
 
-// Define plugin version
-define('LOOPIS_DEVELOOPER_VERSION', '0.51');
-
-// Define plugin folder path constants
-define('LOOPIS_DEVELOOPER_DIR', plugin_dir_path(__FILE__));    // Server-side path to /wp-content/plugins/loopis-develooper/
-define('LOOPIS_DEVELOOPER_URL', plugin_dir_url(__FILE__));     // Client-side path to https://site.com/wp-content/plugins/loopis-develooper/
-
-// Enqueue temporary CSS
-add_action('admin_enqueue_scripts', 'loopis_develooper_enqueue_assets');
-
-function loopis_develooper_enqueue_assets()
+// Check the current user's capability after WordPress has initialized.
+function loopis_develooper_init()
 {
-    wp_enqueue_style(
-        'loopis-develooper-styles',
-        LOOPIS_DEVELOOPER_URL . 'assets/css/temporary.css',
-        array(),
-        filemtime(LOOPIS_DEVELOOPER_DIR . 'assets/css/temporary.css')
-    );
-    wp_enqueue_script(
-        'loopis-develooper-scripts',
-        LOOPIS_DEVELOOPER_URL . 'assets/scripts/loader.js',
-        array('jquery'),
-        filemtime(LOOPIS_DEVELOOPER_DIR . 'assets/scripts/loader.js')
-    );
-}
-
-// Define folders to include
-function develooper_load_files()
-{
-    develooper_include_folder('interface');
-    develooper_include_folder('pages');
-}
-
-// Function to include all PHP files in a folder
-function develooper_include_folder($folder_name)
-{
-    $absolute_path = LOOPIS_DEVELOOPER_DIR . '/' . $folder_name;
-    if (is_dir($absolute_path)) {
-        foreach (glob($absolute_path . '/*.php') as $file) {
-            include_once $file;
-        }
-    } else {
-        error_log("Failed to include folder: {$folder_name}");
+    if (!current_user_can('manage_options')) {
+        return;
     }
+
+    require_once __DIR__ . '/includes/samples/functions.php';
+    require_once __DIR__ . '/includes/samples/page.php';
+    require_once __DIR__ . '/includes/roles/functions.php';
+    require_once __DIR__ . '/includes/roles/page.php';
+    if (is_super_admin()) {
+        require_once __DIR__ . '/includes/logs/functions.php';
+        require_once __DIR__ . '/includes/logs/page.php';
+        require_once __DIR__ . '/includes/logs/widget.php';
+        add_action('wp_dashboard_setup', 'loopis_develooper_register_debug_dashboard_widget');
+    }
+    add_action('admin_menu', 'develooper_admin_menu');
 }
+add_action('init', 'loopis_develooper_init');
 
-// Admin menu hook
-add_action('admin_menu', 'develooper_admin_menu');
-
-// Load files when all plugins are loaded
-add_action('plugins_loaded', 'develooper_load_files');
+/** Register the Develooper menu and its tools. */
+function develooper_admin_menu()
+{
+    add_menu_page(
+        'LOOPIS Develooper',
+        'Develooper',
+        'manage_options',
+        'loopis_dev_main',
+        '',
+        plugins_url('assets/loopis-icon.png', __FILE__)
+    );
+    add_submenu_page('loopis_dev_main', 'Samples', 'Samples', 'manage_options', 'develooper_samples', 'develooper_samples_page');
+    add_submenu_page('loopis_dev_main', 'Roles', 'Roles', 'manage_options', 'develooper_roles', 'develooper_roles_page');
+    if (is_super_admin()) {
+        add_submenu_page('loopis_dev_main', 'debug.log', 'debug.log', 'manage_options', 'loopis-debug-log', 'loopis_develooper_render_debug_log');
+        add_submenu_page('loopis_dev_main', 'error_log', 'error_log', 'manage_options', 'loopis-error-log', 'loopis_develooper_render_error_log');
+    }
+    remove_submenu_page('loopis_dev_main', 'loopis_dev_main');
+}

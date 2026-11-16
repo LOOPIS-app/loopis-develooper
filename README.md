@@ -4,11 +4,8 @@
 ## 💡 Status
 New developer tools and content are added here when needed.
 
-## 📋 Changelog
-See [CHANGELOG.md](CHANGELOG.md)
-
-## 💾 Installation
-Installation & updates are managed by plugin "LOOPIS Config".
+## 🚧 Access
+This plugin loads only in the WordPress admin area for users with the `manage_options` capability.
 
 ## 👤 Contributors
-Kritsadakorn Moonmai, Johan Hagvil, Johan Linger
+Johan Hagvil, Johan Linger, Kritsadakorn Moonmai, Copilot
