@@ -1,5 +1,11 @@
 # 📋 Changelog for "LOOPIS Develooper"
 
+## 0.52 (2026-11-16)
+- Revised overall interface and structure
+- Added page and widget for viewing debug.log
+- Added extra images to sample posts
+- Added regression tests for Admin, Develooper, Webmaster and Theme functionality.
+
 ## 0.51 (2026-04-21)
 - Insert of sample posts and users merged to one set of buttons
 - Insert of sample posts increase to 20 posts
