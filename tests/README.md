@@ -10,9 +10,10 @@ LOOPIS plugins, mu-plugins and themes.
   sample images. See [test commands](./loopis-develooper/README.md).
 - **Admin:** plugin loading across frontend, main-site and subsite contexts.
   See [test commands](./loopis-develooper/README.md#plugin-tests).
-- **Webmaster:** plugin loading, image migration, WebP metadata, Move User
+- **Webmaster:** plugin loading, image conversion and cleanup, WebP metadata, Move User
   and the table editor. See [test commands and prerequisites](./loopis-webmaster/README.md).
-- **Theme:** forwarded-post image reuse. See [test commands](./loopis-develooper/README.md#plugin-tests).
+- **Theme:** forwarded-post image reuse and gift-form image selection. See
+  [test commands](./loopis-develooper/README.md#plugin-tests).
 
 There are currently no mu-plugin tests in this folder.
 

@@ -26,13 +26,14 @@ foreach ($GLOBALS['webmaster_test_hooks']['init'] ?? array() as $hook) {
     call_user_func($hook['callback']);
 }
 
-$loaded = function_exists('loopis_image_migration_scan') && function_exists('loopis_image_migration_render_page')
+$loaded = function_exists('loopis_image_conversion_scan') && function_exists('loopis_image_conversion_render_page')
+    && function_exists('loopis_image_cleanup_scan') && function_exists('loopis_image_cleanup_render_page')
     && function_exists('move_user') && function_exists('loopis_move_user_page') && function_exists('loopis_handle_move_user')
     && function_exists('loopis_qr_codes_render_stats') && class_exists('table_menu');
 if ($loaded !== ($context === 'admin')) {
     throw new RuntimeException('Tool loading did not match the admin capability.');
 }
-foreach (array('admin_init', 'admin_menu', 'admin_post_loopis_image_migration_scan', 'admin_post_loopis_image_migration_process', 'wp_ajax_loopis_image_migration_process_ajax', 'admin_post_loopis_move_user') as $hook) {
+foreach (array('admin_init', 'admin_menu', 'admin_post_loopis_image_tools_reset', 'wp_ajax_loopis_image_tools_scan', 'admin_post_loopis_image_conversion_scan', 'admin_post_loopis_image_conversion_process', 'wp_ajax_loopis_image_conversion_process_ajax', 'admin_post_loopis_image_cleanup_scan', 'admin_post_loopis_image_cleanup_review', 'admin_post_loopis_image_cleanup_process', 'admin_post_loopis_image_cleanup_directories', 'wp_ajax_loopis_image_cleanup_process_ajax', 'admin_post_loopis_move_user') as $hook) {
     if (isset($GLOBALS['webmaster_test_hooks'][$hook]) !== ($context === 'admin')) {
         throw new RuntimeException('Unexpected registration for ' . $hook);
     }
@@ -49,16 +50,18 @@ if ($context === 'admin') {
     if ($menu[1] !== 'Webmaster' || $menu[2] !== 'manage_options' || $menu[3] !== 'loopis-webmaster'
         || $menu[4] !== '' || $menu[5] !== 'https://example.test/plugins/loopis-webmaster/assets/loopis-icon.png'
         || !is_file(dirname(__DIR__, 3) . '/loopis-webmaster/assets/loopis-icon.png')
-        || $submenu[0] !== 'loopis-webmaster' || $submenu[2] !== 'Image Migration'
-        || $submenu[3] !== 'manage_options' || $submenu[4] !== 'loopis-image-migration'
-        || $submenu[5] !== 'loopis_image_migration_render_page'
+        || $submenu[0] !== 'loopis-webmaster' || $submenu[2] !== 'Image Conversion'
+        || $submenu[3] !== 'manage_options' || $submenu[4] !== 'loopis-image-conversion'
+        || $submenu[5] !== 'loopis_image_conversion_render_page'
         || $GLOBALS['webmaster_test_removed_submenu'] !== array('loopis-webmaster', 'loopis-webmaster')) {
         throw new RuntimeException('Webmaster menu configuration is incorrect.');
     }
-    if (count($submenus) !== 3 || $submenus[1][0] !== 'loopis-webmaster' || $submenus[1][2] !== 'Move User'
-        || $submenus[1][3] !== 'manage_options' || $submenus[1][4] !== 'move-user' || $submenus[1][5] !== 'loopis_move_user_page'
-        || $submenus[2][0] !== 'loopis-webmaster' || $submenus[2][2] !== 'QR codes'
-        || $submenus[2][3] !== 'manage_options' || $submenus[2][4] !== 'loopis-qrs'
+    if (count($submenus) !== 4 || $submenus[1][0] !== 'loopis-webmaster' || $submenus[1][2] !== 'Image Cleanup'
+        || $submenus[1][3] !== 'manage_options' || $submenus[1][4] !== 'loopis-image-cleanup' || $submenus[1][5] !== 'loopis_image_cleanup_render_page'
+        || $submenus[2][0] !== 'loopis-webmaster' || $submenus[2][2] !== 'Move User'
+        || $submenus[2][3] !== 'manage_options' || $submenus[2][4] !== 'move-user' || $submenus[2][5] !== 'loopis_move_user_page'
+        || $submenus[3][0] !== 'loopis-webmaster' || $submenus[3][2] !== 'QR codes'
+        || $submenus[3][3] !== 'manage_options' || $submenus[3][4] !== 'loopis-qrs'
         || !isset($GLOBALS['webmaster_test_hooks']['loopis_qr_codes_after_page'])
         || $GLOBALS['webmaster_test_hooks']['loopis_qr_codes_after_page'][0]['callback'] !== 'loopis_qr_codes_render_stats'
         || function_exists('loopis_webmaster_render_debug_log') || function_exists('loopis_webmaster_render_error_log')) {

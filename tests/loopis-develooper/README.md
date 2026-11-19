@@ -17,6 +17,10 @@ php tests/loopis-develooper/sample-page.php failure
 php tests/loopis-develooper/sample-page.php post-failure
 php tests/loopis-develooper/sample-page.php both-failure
 php tests/loopis-theme/post-forward.php
+php tests/loopis-theme/gift-form-images.php
+for mode in create reorder rotate upload-failure invalid stale; do
+    php tests/loopis-theme/gift-form-submit.php "$mode"
+done
 for context in frontend unauthorized site-admin super-no-cap admin; do
     php tests/loopis-develooper/plugin-loading.php "$context"
 done
